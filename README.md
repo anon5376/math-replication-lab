@@ -36,3 +36,9 @@ For every prime power below 17, both gamma quadratics instead have positive coef
 Can one find a much smaller rank-five counterexample, with a lattice that can be enumerated and cross-checked directly? Compare against other published constructions before asserting novelty.
 
 For the **ordinary dual Chow polynomial** (not the augmented version), rank five is the first possible rank for a failure. Indeed, the original paper proves gamma-positivity for geometric lattices. For a loopless matroid of rank 1–4, its polynomial has the form `(1+x)^d a` for d=0 or 1, or `(1+x)^(d-2) [a(1+x)^2 + b x]` for d=2 or 3, with a>0 and b≥0. The quadratic has discriminant b(4a+b)≥0, product of roots 1, and negative sum of roots. All roots are therefore real and negative. Loops can be removed without changing the lattice of flats. This is a direct consequence of the original theorem, not a priority claim.
+
+### 002 · Fewer auxiliary families at q=17
+
+Keep all projective points but retain only m of the auxiliary points, together with all graph blocks of each retained family. The intersection bound is hereditary under this selection. Each retained point contributes q^12 blocks, so the same count applies with b=m q^12; unretained auxiliary points do not enter the starting lattice. Counts depend only on m.
+
+The exact scan found the first negative discriminant for the dual right augmented polynomial at m=61,775 and for the dual Chow polynomial at m=61,777. Both are negative at 61,777, using 21,744 fewer auxiliary points than the quoted witness (m=83,521). The main projective part is unchanged, so this is not a substantially smaller ground set. These are first negatives for this restricted construction and q value only, not worldwide minimums or a priority claim.

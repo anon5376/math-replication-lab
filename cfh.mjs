@@ -1,7 +1,8 @@
-export function result(q) {
+export function result(q, m = q**4n) {
+if (m < 0n || m > q**4n) throw RangeError("m must be in [0,q^4]");
 const nCk=(n,k)=>{if(k<0||BigInt(k)>n)return 0n; let a=1n;for(let j=1;j<=k;j++)a=a*(n-BigInt(j-1))/BigInt(j);return a};
 const G=(n,k)=>{if(k<0||k>n)return 0n;let a=1n,b=1n;for(let j=0;j<k;j++){a*=q**BigInt(n-j)-1n;b*=q**BigInt(k-j)-1n;}if(a%b)throw Error("bad Gaussian");return a/b};
-const m=q**4n,b=q**16n;
+const b=m*q**12n;
 const chain=(d,t,rs,i=0,p=0,s=0)=>{
  if(i===rs.length)return 1n;
  let v=0n, delta=rs[i]-p-s;

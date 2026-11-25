@@ -15,3 +15,11 @@ test('smaller prime powers in this construction have positive coefficients and d
     assert.ok([...h,...f,...D].every(x => x > 0n), `q=${q}`);
   }
 });
+test('q=17: exact first negative discriminants among retained-family counts', () => {
+  const first = [null, null];
+  for (let m=1n; m<=61777n; m++) {
+    result(17n,m).D.forEach((d,i) => { if (first[i]===null && d<0n) first[i]=m; });
+  }
+  assert.deepEqual(first,[61777n,61775n]);
+  assert.ok(result(17n,61777n).D.every(d => d<0n));
+});
