@@ -1,0 +1,32 @@
+Verification of the eventual 132 theorem
+
+Local source commit e54517c2f5c845f3a63ac43d2a90e306a4bcd2e6
+Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
+mathlib c44e0c8ee63ca166450922a373c7409c5d26b00b
+
+Run the commands from math/big-descents-132 with the pinned tools.
+Each log is the combined standard output and standard error from the named command.
+
+clean-build.log
+  lake clean big-descents-132 && lake build
+  Exit 0
+
+axioms.log
+  lake env lean Axioms.lean
+  Exit 0
+
+leanchecker-fresh.log
+  lake env leanchecker --fresh BigDescents132.Eventual
+  Exit 255
+
+kernel-replay.log
+  lake env lean --run Replay.lean
+  Exit 0
+
+finite-replay.log
+  python3 replay52.py --lean
+  Exit 0
+
+The pinned Linux toolchain has no standalone leanchecker executable.
+kernel-replay.log records the separate Lean.Environment.replay check of the local modules.
+The theorem is eventual. The rank-52 check is an independent finite certificate.

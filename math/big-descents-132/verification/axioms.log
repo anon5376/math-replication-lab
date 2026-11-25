@@ -1,0 +1,175 @@
+def BigDescents132.EventualSimpleNegative : Prop :=
+∃ N,
+  ∀ n ≥ N,
+    (BigDescents132.B n).natDegree = BigDescents132.expectedDegree n ∧
+      BigDescents132.SimpleNegative (BigDescents132.B n)
+BigDescents132.A_recurrence (k : ℕ) :
+  BigDescents132.A (k + 2) = BigDescents132.A (k + 1) + Polynomial.X * BigDescents132.C (k + 1)
+BigDescents132.C_recurrence (k : ℕ) :
+  BigDescents132.C (k + 2) =
+    BigDescents132.B (k + 1) + Polynomial.X * ∑ i ∈ Finset.range k, BigDescents132.B (i + 1) * BigDescents132.B (k - i)
+BigDescents132.B_eq_row_through52 (n : ℕ) (hn : n ≤ 52) :
+  BigDescents132.B n = BigDescents132.ofRow (BigDescents132.Certificate52.table n).total
+BigDescents132.finite52_simple_negative (n : ℕ) (hn : n ≤ 52) :
+  (BigDescents132.B n).natDegree = BigDescents132.expectedDegree n ∧ BigDescents132.SimpleNegative (BigDescents132.B n)
+BigDescents132.finite_simple_negative (n : ℕ) (hn : n ≤ 10) :
+  (BigDescents132.B n).natDegree = BigDescents132.expectedDegree n ∧ BigDescents132.SimpleNegative (BigDescents132.B n)
+BigDescents132.eventual_of_phase_certificates
+  (h :
+    ∃ N, ∀ n ≥ N, Nonempty (BigDescents132.PhaseCertificate (BigDescents132.B n) (BigDescents132.expectedDegree n))) :
+  BigDescents132.EventualSimpleNegative
+'BigDescents132.B_eq_A_add_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.A_recurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.C_recurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.B_eq_row_through52' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.finite52_simple_negative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.mem_words' depends on axioms: [propext, Quot.sound]
+'BigDescents132.words_nodup' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.insertMinimum_eq' depends on axioms: [propext, Quot.sound]
+'BigDescents132.B_eq_branchRow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.finite_simple_negative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.checked_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.radicand_simple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.one_real_critical_point' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.real_branch_points' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.vieta_excludes_collision' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.smallEdge_first_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.eventual_of_phase_certificates' depends on axioms: [propext, Classical.choice, Quot.sound]
+BigDescents132.degree_all (n : ℕ) : (BigDescents132.B n).natDegree = BigDescents132.expectedDegree n
+BigDescents132.small_endpoint_limit (u : ℝ) :
+  Filter.Tendsto (fun n => Polynomial.eval (u / ↑n ^ 3) (BigDescents132.B n) / ↑n) Filter.atTop
+    (nhds (BigDescents132.smallLimit u))
+BigDescents132.Series.far_endpoint_limit (e : Fin 3) (y : ℝ) :
+  Filter.Tendsto
+    (fun p =>
+      let n := 3 * p + 2 * ↑e + 1;
+      let d := 2 * p + ↑e;
+      Polynomial.eval (y / ↑n ^ 3) (BigDescents132.B n).reverse / (BigDescents132.B n).coeff d)
+    Filter.atTop (nhds (BigDescents132.Far.farLimit (↑e) y))
+BigDescents132.eventually_many_negative_roots (K : ℕ) (T : ℝ) :
+  ∀ᶠ (n : ℕ) in Filter.atTop, ∃ s, s.card = K ∧ ∀ x ∈ s, x < T ∧ x < 0 ∧ (BigDescents132.B n).IsRoot x
+BigDescents132.Cut.moving_complex_cut_bound {n : ℕ} (hn : 8 ≤ n) {h K : ℝ} (hh : 0 < h) (hK : 0 ≤ K) (hm : 7 ≤ ↑n * h)
+  (U : ℝ → ℂ) (hU : ContinuousOn U (Set.Ioi 0))
+  (pointwise : ∀ v ∈ Set.Ioi 0, ‖U v - 1‖ ≤ K * (v / h) * (1 + v / h) ^ 2) :
+  ‖(∫ (v : ℝ) in Set.Ioi 0, BigDescents132.Cut.kernel n v • U v) - ↑(BigDescents132.Cut.moment n 0)‖ /
+      BigDescents132.Cut.moment n 0 ≤
+    28 * K / (↑n * h)
+'BigDescents132.degree_all' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.quadratic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.discriminant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.positive_coefficient_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.small_coefficient_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.small_endpoint_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.eventual_four_small_roots' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.defect_quadratic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.leading_coefficient_mod_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.diagonal_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.reciprocal_coefficient_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.coefficient_envelope' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.far_endpoint_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Far.farLimit_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.eventually_many_negative_roots' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Branch.dominant_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Branch.compact_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Branch.small_phase_geometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Branch.far_phase_geometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Cut.ray_beta' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Cut.cut_multiplier_change' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Cut.moving_complex_cut_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Cut.real_cut_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Cut.regular_real_cut_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+BigDescents132.Cut.moving_cut_cosine {n : ℕ} (hn : 8 ≤ n) {h E K D c θ b T : ℝ} (hE : 0 < E) (hEh : E ≤ h) (hK : 0 ≤ K)
+  (hD : 0 ≤ D) (hc : 0 < c) (hu : 7 ≤ ↑n * E) (q : ℂ) (hq : ‖q‖ = 1) (hphase : q.re = Real.cos θ) (U V : ℝ → ℂ)
+  (hU : ContinuousOn U (Set.Ioi 0)) (complexBound : ∀ v ∈ Set.Ioi 0, ‖U v - 1‖ ≤ K * (v / h) * (1 + v / h) ^ 2)
+  (realBound :
+    (h = E ∧ ∀ v ∈ Set.Ioo 0 T, ‖V v‖ ≤ K * (h / v) * (1 + v / h) ^ 2) ∨ ∀ v ∈ Set.Ioo 0 T, ‖V v‖ ≤ K * (1 + v / h) ^ 2)
+  (damping : |b| ≤ D * Real.exp (-(c * (↑n * E)))) :
+  |BigDescents132.Cut.normalizedCuts n q b T U V - Real.cos θ| ≤ (28 * K + 6 * D * K / c ^ 2) / (↑n * E)
+'BigDescents132.Cut.moving_cut_cosine' depends on axioms: [propext, Classical.choice, Quot.sound]
+BigDescents132.Series.cauchy_coefficient (t : ℝ) :
+  ∃ r,
+    0 < r ∧
+      ∀ (n : ℕ),
+        ↑(Polynomial.eval t (BigDescents132.B (n + 1))) =
+          (2 * ↑Real.pi * Complex.I)⁻¹ *
+            ∮ (z : ℂ) in C(0, r), z⁻¹ ^ (n + 1) * BigDescents132.Branch.regularBranch (1 - ↑t) z
+'BigDescents132.Series.at_one_catalan' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Branch.regular_on_segment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Branch.regular_at_pole' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.series_eq_regular_near_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Series.cauchy_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+BigDescents132.Slit.Points.coefficient_from_cuts {s : ℝ} (g : BigDescents132.Slit.Points s) (n : ℕ) :
+  ↑(Polynomial.eval (1 - s) (BigDescents132.B (n + 1))) =
+    (2 * ↑Real.pi * Complex.I)⁻¹ *
+      (BigDescents132.Slit.wholeCut n (↑g.r) g.realJump + BigDescents132.Slit.wholeCut n g.u (g.complexJump g.u) +
+        BigDescents132.Slit.wholeCut n ((starRingEnd ℂ) g.u) (g.complexJump ((starRingEnd ℂ) g.u)))
+BigDescents132.Slit.uniform_moving_interior :
+  ∃ C,
+    0 ≤ C ∧
+      ∀ (p : BigDescents132.Slit.Param) (n : ℕ),
+        8 ≤ n + 1 →
+          7 ≤ ↑(n + 1) * BigDescents132.Slit.edgeScale p →
+            BigDescents132.Slit.coefficientError p n ≤ C / (↑(n + 1) * BigDescents132.Slit.edgeScale p)
+BigDescents132.Slit.small_phase_offset :
+  Filter.Tendsto (fun d => (BigDescents132.Slit.pointsAt (BigDescents132.Slit.nearParam d)).phaseOffset)
+    (nhdsWithin 0 (Set.Ioi 0)) (nhds (5 * Real.pi / 6))
+BigDescents132.Slit.far_phase_offset :
+  Filter.Tendsto (fun e => (BigDescents132.Slit.pointsAt (BigDescents132.Slit.farParam e)).phaseOffset)
+    (nhdsWithin 0 (Set.Ioi 0)) (nhds (2 * Real.pi / 3))
+BigDescents132.Slit.eventual_of_endpoint_grids
+  (ends : ∀ (L : ℝ), 0 < L → ∀ᶠ (N : ℕ) in Filter.atTop, Nonempty (BigDescents132.Slit.EndpointGrid N L)) :
+  BigDescents132.EventualSimpleNegative
+'BigDescents132.Slit.points_exist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.product_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.branch_diff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.pole_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.complex_jump' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.real_jump' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.real_no_jump_after' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.annular_deformation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.outer_vanishes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.cut_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.coefficient_from_cuts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.complex_cut' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.real_cut' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.normalized_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.scaled_real_size' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.geometry_cosine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.fixed_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.points_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.compact_interior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.small_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.small_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.far_geometry' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.Points.amplitude_sq_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.small_moving' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.far_moving' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.uniform_moving_interior' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.phase_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.interior_phase_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.small_phase_offset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.far_phase_offset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.small_phase_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.far_phase_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.certificate_of_endpoint_grid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Slit.eventual_of_endpoint_grids' depends on axioms: [propext, Classical.choice, Quot.sound]
+theorem BigDescents132.eventual_simple_negative : BigDescents132.EventualSimpleNegative :=
+BigDescents132.Slit.eventual_of_endpoint_grids fun L x => BigDescents132.Peak.all_endpoint_grids L
+'BigDescents132.Peak.catalan_moment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.smallLimit_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.ray_lap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.remainder_small' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.remainder_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.err_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.sqrt_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.peak_approx' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.error_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.witness_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.near_grid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.far_grid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.phase_left_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.phase_right_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.residue_endpoint_grids' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.Peak.all_endpoint_grids' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BigDescents132.eventual_simple_negative' depends on axioms: [propext, Classical.choice, Quot.sound]
