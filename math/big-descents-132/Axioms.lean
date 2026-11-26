@@ -166,3 +166,16 @@ import BigDescents132
 #print axioms BigDescents132.Packing.table_sound
 #print axioms BigDescents132.Packing.homogeneous_spec
 #print axioms BigDescents132.finite127_simple_negative
+
+#check BigDescents132.all_ranks_simple_negative
+#print BigDescents132.all_ranks_simple_negative
+#print axioms BigDescents132.AllRanks.coefficient_eq_binomialCount
+#print axioms BigDescents132.AllRanks.endpoint_tail
+#print axioms BigDescents132.AllRanks.six_endpoint_grid
+#print axioms BigDescents132.AllRanks.actual_pole_bound
+#print axioms BigDescents132.AllRanks.actual_amplitude_bound
+#print axioms BigDescents132.AllRanks.four_ranges
+#print axioms BigDescents132.AllRanks.left_phase_bound
+#print axioms BigDescents132.AllRanks.far_right_phase
+#print axioms BigDescents132.all_large_simple_negative
+#print axioms BigDescents132.all_ranks_simple_negative

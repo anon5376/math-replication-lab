@@ -23,13 +23,13 @@ structure EndpointGrid (N : ℕ) (L : ℝ) where
   right_sign : AlternatesAt (B N) (start+middle+1) (b.val-1)
   right_grid : Grid (B N) (-(b.val-1)) far tail
 
-private noncomputable def atMagnitude (x : ℝ) : Param := parameter (1+x)
-private theorem val_magnitude {x : ℝ} (hx : 0<x) : (atMagnitude x).val=1+x := by
+noncomputable def atMagnitude (x : ℝ) : Param := parameter (1+x)
+theorem val_magnitude {x : ℝ} (hx : 0<x) : (atMagnitude x).val=1+x := by
   simp only [atMagnitude,parameter,dif_pos (lt_add_of_pos_right _ hx)]
-private theorem at_parameter (p : Param) : atMagnitude (p.val-1)=p := by
+theorem at_parameter (p : Param) : atMagnitude (p.val-1)=p := by
   exact Subtype.ext (by rw [val_magnitude (sub_pos.mpr p.property)]; ring)
 
-private theorem phase_on (N : ℕ) (a b : Param) :
+theorem phase_on (N : ℕ) (a b : Param) :
     ContinuousOn (fun x => phase (atMagnitude x) N/Real.pi) (Icc (a.val-1) (b.val-1)) := by
   rw [continuousOn_iff_continuous_restrict]
   let f : Icc (a.val-1) (b.val-1) → Param := fun x => ⟨1+x.val,

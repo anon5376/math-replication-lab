@@ -1,6 +1,14 @@
 # Big descents in 132-avoiding permutations
 
-For every rank, the polynomial that counts 132-avoiding permutations by big descents has only simple, strictly negative roots. The computer-assisted proof gives an analytic cutoff of 128 and an exact finite certificate through rank 127. The pinned Lean theorem proves the eventual statement. New Lean modules identify the actual quartic roots, prove explicit separation, slope and scale bounds, check eleven Bernstein inequalities, and verify the complex and real integral estimates. The all-rank assembly and integer certificates are given with the proof. The full all-rank theorem is not yet formalized in Lean. [All-rank proof and replay](ALL_RANKS.md).
+For every natural rank, Lean proves that the polynomial counting 132-avoiding permutations by big descents has exactly its degree many distinct, strictly negative real roots. The degree is zero at rank zero and $\lfloor 2(n-1)/3\rfloor$ at positive rank. This settles the singleton 132 case of Conjecture 4.4. [Elizalde, Rivera and Zhuang](https://arxiv.org/html/2408.15111v2#S4.SS2).
+
+```lean
+theorem BigDescents132.all_ranks_simple_negative (n : ℕ) :
+    (BigDescents132.B n).natDegree = BigDescents132.expectedDegree n ∧
+      BigDescents132.SimpleNegative (BigDescents132.B n)
+```
+
+The proof uses exact finite certificates through rank 127. From rank 128, six strict sign changes near zero join the ordered crossings of a continuous phase. Lean derives the signed truncated polynomials from the literal permutation sum, bounds the discarded tail by $1/256$, and checks positivity at each of the six radii by kernel reduction. The four contour estimates are uniform in rank and in their specified parameter intervals. [All-rank declaration](BigDescents132/AllRanks.lean) · [Endpoint grid](BigDescents132/EndpointSigns.lean) · [Uniform contour bound](BigDescents132/AllRankUniform.lean) · [Mathematical proof](ALL_RANKS.md).
 
 ## What Lean counts
 
@@ -29,7 +37,7 @@ The proof splits each word at its maximum. If the left block has length `i` and 
 
 ## Large-rank results
 
-The main declaration takes no hypotheses.
+The earlier asymptotic declaration is also available.
 
 ```lean
 theorem BigDescents132.eventual_simple_negative :
@@ -122,7 +130,9 @@ lake exe cache get
 lake clean big-descents-132
 lake build
 lake env lean Axioms.lean
+lake env lean verification/all-ranks/Target.lean
 python3 all_ranks_certificate.py
+python3 verification/all-ranks/verify_paper_table.py
 python3 all_ranks_independent.py
 python3 generate_geometry_lean.py
 python3 generate127.py

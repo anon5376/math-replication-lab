@@ -2,7 +2,7 @@
 
 ## Big descents in 132-avoiding permutations
 
-[All-rank proof and exact certificate](math/big-descents-132/ALL_RANKS.md) for the classical 132-only case of Elizalde–Rivera–Zhuang, Conjecture 4.4. For every length, the big-descent polynomial has only simple, strictly negative roots. The computer-assisted proof covers lengths at least 128 by explicit estimates and checks lengths 0–127 by exact arithmetic. Lean verifies the finite range, the earlier eventual theorem, and parts of the explicit estimates; the final all-rank theorem is not yet formalized in Lean.
+[All-rank proof and exact certificate](math/big-descents-132/ALL_RANKS.md) for the classical 132-only case of Elizalde–Rivera–Zhuang, Conjecture 4.4. For every length, the big-descent polynomial has only simple, strictly negative roots. The computer-assisted proof covers lengths at least 128 by explicit estimates and checks lengths 0–127 by exact arithmetic. The complete statement is also [formalized in Lean](math/big-descents-132/BigDescents132/AllRanks.lean) as `BigDescents132.all_ranks_simple_negative`, with no cutoff or unproved estimates in the theorem's hypotheses.
 
 ```sh
 cd math/big-descents-132
