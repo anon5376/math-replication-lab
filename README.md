@@ -1,5 +1,14 @@
 # Math Replication Lab
 
+## Big descents in 132-avoiding permutations
+
+[All-rank proof and exact certificate](math/big-descents-132/ALL_RANKS.md) for the classical 132-only case of Elizalde–Rivera–Zhuang, Conjecture 4.4. For every length, the big-descent polynomial has only simple, strictly negative roots. The computer-assisted proof covers lengths at least 128 by explicit estimates and checks lengths 0–127 by exact arithmetic. Lean verifies the finite range, the earlier eventual theorem, and parts of the explicit estimates; the final all-rank theorem is not yet formalized in Lean.
+
+```sh
+cd math/big-descents-132
+python3 all_ranks_certificate.py
+```
+
 ## 001 · Caiolo–Ferroni–Hoster, Conjecture 7.3
 
 **Status: exact arithmetic reproduced for one witness.** This is not a new disproof, a Lean replay, or a claim of priority. The matroid construction is credited to [Cinna Davis and GPT-6.2 Astra](https://github.com/1337isnot1337/solved-conjectures/pull/326), adapting [Bérczi, Coron, Eur and Li](https://arxiv.org/html/2610.17135v1). The statement and flag-to-polynomial formula are from [Caiolo, Ferroni and Hoster, Conjecture 7.3 and Theorem 4.9](https://arxiv.org/html/2605.28474v1).

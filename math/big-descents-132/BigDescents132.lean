@@ -14,3 +14,6 @@ import BigDescents132.MovingCuts
 import BigDescents132.Cauchy
 import BigDescents132.EndpointGrid
 import BigDescents132.Eventual
+import BigDescents132.AllRankMoments
+import BigDescents132.AllRankScale
+import BigDescents132.Through127
