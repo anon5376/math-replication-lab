@@ -1,12 +1,14 @@
 # Big descents in 132-avoiding permutations
 
-For every natural rank, Lean proves that the polynomial counting 132-avoiding permutations by big descents has exactly its degree many distinct, strictly negative real roots. The degree is zero at rank zero and $\lfloor 2(n-1)/3\rfloor$ at positive rank. This settles the singleton 132 case of Conjecture 4.4. [Elizalde, Rivera and Zhuang](https://arxiv.org/html/2408.15111v2#S4.SS2).
+For every natural rank, Lean proves that the polynomial counting 132-avoiding permutations by big descents has exactly its degree many distinct, strictly negative real roots. The degree is zero at rank zero and $\lfloor 2(n-1)/3\rfloor$ at positive rank. This is an end-to-end Lean formalization of the singleton 132 case of [Elizalde, Rivera and Zhuang, Conjecture 4.4](https://arxiv.org/html/2408.15111v2#S4.SS2). Per Alexandersson’s RealRooted project previously posted [a computer-assisted proof of the same result](https://github.com/PerAlexandersson/RealRooted/blob/3599edd18d47d7fbc3253cdcba46982f1538261b/research/big-descents-132/README.md).
 
 ```lean
 theorem BigDescents132.all_ranks_simple_negative (n : ℕ) :
     (BigDescents132.B n).natDegree = BigDescents132.expectedDegree n ∧
       BigDescents132.SimpleNegative (BigDescents132.B n)
 ```
+
+Import `BigDescents132` to use this unconditional theorem. [`Axioms.lean`](Axioms.lean) checks that it depends only on `propext`, `Classical.choice` and `Quot.sound`.
 
 The proof uses exact finite certificates through rank 127. From rank 128, six strict sign changes near zero join the ordered crossings of a continuous phase. Lean derives the signed truncated polynomials from the literal permutation sum, bounds the discarded tail by $1/256$, and checks positivity at each of the six radii by kernel reduction. The four contour estimates are uniform in rank and in their specified parameter intervals. [All-rank declaration](BigDescents132/AllRanks.lean) · [Endpoint grid](BigDescents132/EndpointSigns.lean) · [Uniform contour bound](BigDescents132/AllRankUniform.lean) · [Mathematical proof](ALL_RANKS.md).
 
@@ -59,15 +61,15 @@ theorem eventually_many_negative_roots (K : ℕ) (T : ℝ) :
 ### The two endpoint limits
 
 - `small_endpoint_limit` identifies the real pointwise limit of $B_n(u/n^3)/n$ at every fixed $u$. The coefficient of $u^k$ in that limit is $C_k/(3k+1)!$, where $C_k$ is the Catalan number. The pole of each coefficient column gives the fixed-index limit. The recurrence gives the summable bound required to pass to the limit in the entire row. Rational alternating-series bounds give signs −, +, −, + at magnitudes 74, 271, 672 and 1348. Thus `eventual_small_grid` gives four disjoint sign changes between 0 and $-1348/n^3$.
-- `Series.far_endpoint_limit` identifies the limit of the normalized reversed polynomial for every real $y$. Write $n=3p+2e+1$, $d=2p+e$, $e\in\{0,1,2\}$, and $b_{n,d}=[t^d]B_n(t)$. Then $B_n^{\mathrm{rev}}(y/n^3)/b_{n,d}$ tends to $H_e(y)=\sum_{j\ge0}e!(y/2)^j/(3j+e)!$. This parametrization covers every sufficiently large rank. `Far.farLimit_witness` proves alternating signs at every indexed witness using the exponential series. Inverting the resulting intervals proves the fixed-$K$ root count below each real cutoff.
+- `Series.far_endpoint_limit` identifies the limit of the normalized reversed polynomial for every real $y$. Write $n=3p+2e+1$, $d=2p+e$, $e\in\{0,1,2\}$, and $b_{n,d}=[t^d]B_n(t)$. Then $B_n^{\mathrm{rev}}(y/n^3)/b_{n,d}$ tends to $H_e(y)=\sum_{j\ge0}e!(y/2)^j/(3j+e)!$. This parametrization covers every sufficiently large rank. `Far.farLimit_witness` proves alternating signs at every indexed witness using the exponential series. Inverting the resulting intervals proves the root count for fixed $K$ below each real cutoff.
 
 `Series.positive_coefficient_formula` proves the following exact identity. Its Lean argument $n$ is one less than the rank. Here $N$ denotes the rank itself.
 
-$$
+```math
 [t^k]B_N(t)=
 \sum_{\substack{m+b=k\\2m+h+b+\ell+1=N}}
  C_m\binom{2m+h}{h}\binom{m+h}{b}\binom{k+\ell}{k}.
-$$
+```
 
 All four summation indices are nonnegative. The proof substitutes into the Catalan generating function derived from the verified permutation recurrence. Reindexing by the defect $2(N-1)-3k$ gives an index set independent of $p$ for fixed defect. `Series.diagonal_limit` computes its limit, and `Series.coefficient_envelope` bounds the other terms uniformly as the defect varies. Together they justify the reciprocal limit. Separately, `Series.leading_coefficient_mod_one` gives the exact leading coefficient $C_m$ at rank $3m+1$.
 
@@ -83,11 +85,11 @@ The proof applies Cauchy's theorem on rectangles in logarithmic coordinates. The
 
 Let $E(s)=\min((s-1)^{1/3},s^{-1/3})$. Write $W_N$ for the complex coefficient at the upper cut and $M_N=\int_0^\infty v^{1/2}(1+v)^{-N-1}\,dv$. Lean proves $2|W_N|M_N>0$ and the following estimate with **one constant for all negative parameters**.
 
-$$
+```math
 \left|\frac{B_N(1-s)}{2|W_N|M_N}-\cos(\arg W_N)\right|
 \le \frac{C}{NE(s)}
 \qquad(s>1,\ N\ge 8,\ NE(s)\ge 7).
-$$
+```
 
 The theorem is `Slit.uniform_moving_interior`. Absorbing $|1-su|/|1-sr|$ into the real-cut multiplier makes the amplitude comparison uniform as $s$ approaches one. The proof verifies the scaled pole, radical and root separation estimates at both ends, then uses compactness between them. `Slit.compact_interior` gives a uniform $O(1/N)$ bound on any compact parameter subset.
 
@@ -97,15 +99,15 @@ The theorem is `Slit.uniform_moving_interior`. Absorbing $|1-su|/|1-sr|$ into th
 
 Write $F$ for the near-zero limit and $D(v)=v^{-1/2}\sqrt{1-v^3}$. The Catalan moment proved in `Peak.catalan_moment` is
 
-$$
+```math
 \int_0^1 D(v)v^{3k+1}\,dv=\frac{\pi C_k}{6\cdot4^k}.
-$$
+```
 
 Filtering the exponential series by exponents congruent to 1 modulo 3 and integrating gives `Peak.smallLimit_integral`. For $q>0$ it states
 
-$$
+```math
 F(-q^3/4)=\frac{2}{\pi q}\int_0^1 D(v)\left[2e^{qv/2}\cos(\sqrt{3}qv/2-\pi/3)-e^{-qv}\right]dv.
-$$
+```
 
 Reflecting the oscillatory integral at $v=1$ gives a leading complex Laplace integral and an error. `Peak.ray_lap` evaluates the leading term, and `Peak.peak_approx` bounds the error by integrating separately on $(0,1/2)$, $(1/2,1)$ and $(1,\infty)$. `Peak.error_strict` proves that the error is smaller than the leading amplitude for every real $q\ge20$. Consequently, for $w_i=2(i\pi+5\pi/6)/\sqrt 3$, `Peak.witness_sign` proves $(-1)^i F(-w_i^3/4)>0$ for every $i\ge5$. The four exact rational samples supply indices 1 through 4, and $F(0)=1$ supplies index 0.
 
