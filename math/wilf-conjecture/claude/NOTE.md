@@ -176,7 +176,7 @@ So in these ranges weight-minimality is not what makes the inequality true; the 
 
 ## 9. Bounded computations
 
-All exact integer arithmetic. "type ≥ 5" means the FGH criterion does not apply. C, C+ use minimal lengths. P is the hypothesis of C2 for e = 5 (at most two Apéry elements ≥ c). Φ is the conjectured shape bound. Counts are of semigroups with embedding dimension exactly 5 (redundant lists are discarded).
+All exact integer arithmetic. "type ≥ 5" means the FGH criterion does not apply. C, C+ use minimal lengths. P means at most two gaps in [c − m, c), the hypothesis of C2 for e = 5 apart from m ≥ 9. Φ is the conjectured shape bound. Counts are of semigroups with embedding dimension exactly 5 (redundant lists are discarded).
 
 | Exhaustive scan (`scan_criteria.c`) | semigroups | type ≥ 5 | P | P and type ≥ 5 | C fails, type ≥ 5 | C+ fails | Φ < 0 | least W |
 |---|---|---|---|---|---|---|---|---|
@@ -192,7 +192,7 @@ These scans are bounded and say nothing beyond their ranges. With c > 4m the lea
 
 Other checks:
 
-- The three identities (Lemma 2, A, B) and the bounds C, C+, C2 are asserted inside `apery_downset.stats` on every call and inside `scan_criteria.c` on every scanned semigroup; the invariants (m, e, c, g, n, W) agree with `../wilf.py` on 17 589 random semigroups with e from 2 to 7 under two tie-breaks (`test_claude.py`).
+- Lemma 2, Theorems A and B and the bounds C, C+, C2 are asserted inside `apery_downset.stats` on every call; `scan_criteria.c` asserts Theorem A, the bound C+ and Corollary C2 on every semigroup it counts. The invariants (m, e, c, g, n, W) agree with `../wilf.py` on 17 589 random semigroups with e from 2 to 7 under two tie-breaks (`test_claude.py`).
 - Repository baseline family (`baseline_family.py` reproduces its counts: 54 099 lists, 41 799 beyond its filters): all 41 799 satisfy the hypothesis of Theorem C; 26 717 of them have type ≥ 5; 14 010 are carry-free under one of the four orders (10 134 of type ≥ 5). The control [23, 47, 51, 78, 80] has type 10, no carries, and W = 86 + 9 − 0 = 95 by Theorem B.
 - `tree_check.py`, independent of everything else here: on all 258 581 numerical semigroups of genus ≤ 22 (any e; the per-genus counts 1, 2, 4, 7, 12, 23, …, 103 246 match the known sequence), the bounds of Theorem C and Corollary C2 hold, with every quantity computed from the definitions. The hypothesis of C2 (first two cases) holds for 15 485 of them.
 - `check_independent.py`: direct membership DP and an independent certificate checker agree with `../wilf.py verify` and with `apery_downset.py` on the control (m, e, c, g, n, W) = (23, 5, 170, 117, 53, 95) and on 18 further semigroups.
