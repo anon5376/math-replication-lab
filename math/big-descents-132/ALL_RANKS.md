@@ -2,7 +2,7 @@
 
 For every integer $N\ge0$, the big-descent polynomial $B_N$ of 132-avoiding permutations has degree $\lfloor2(N-1)/3\rfloor$ at positive rank and has that many distinct, strictly negative real roots. At rank zero it is the constant 1. This proof concerns the single forbidden pattern 132. The write-up and certificates were developed with AI assistance. No priority claim is made. On October 13, 2026, Per Alexandersson's RealRooted project posted [an earlier computer-assisted proof of the same all-rank result](https://github.com/PerAlexandersson/RealRooted/blob/3599edd18d47d7fbc3253cdcba46982f1538261b/research/big-descents-132/README.md), using a cutoff of 100 and exact Sturm counts for ranks 0–99. The present package gives an end-to-end Lean verification of the literal permutation polynomial, using the effective argument below with cutoff 128.
 
-Here $B_N(t)=\sum_{\pi}t^{\#\{i:\pi_i>\pi_{i+1}+1\}}$ over the actual 132-avoiders. The starting Lean commit proves the maximum decomposition for this definition, its exact degree and the three-cut integral for the same polynomial. Its earlier eventual theorem gives no numerical rank threshold. Below the analytic argument uses $N\ge128$. Integer certificates cover $0\le N\le127$. [Pinned starting commit](https://github.com/anon5376/math-replication-lab/tree/3b39ea25676433157c42bbfe36a2df1c18f33bd5/math/big-descents-132) · [Elizalde, Rivera and Zhuang, Conjecture 4.4](https://arxiv.org/html/2408.15111v2#S4.SS2).
+Here $`B_N(t)=\sum_{\pi}t^{\#\{i:\pi_i>\pi_{i+1}+1\}}`$ over the actual 132-avoiders. The starting Lean commit proves the maximum decomposition for this definition, its exact degree and the three-cut integral for the same polynomial. Its earlier eventual theorem gives no numerical rank threshold. Below the analytic argument uses $N\ge128$. Integer certificates cover $0\le N\le127$. [Pinned starting commit](https://github.com/anon5376/math-replication-lab/tree/3b39ea25676433157c42bbfe36a2df1c18f33bd5/math/big-descents-132) · [Elizalde, Rivera and Zhuang, Conjecture 4.4](https://arxiv.org/html/2408.15111v2#S4.SS2).
 
 ## A coordinate for the four branch points
 
@@ -21,7 +21,7 @@ r=\frac{(1-p)^2}{h^2},\quad R=\frac{(1+p)^2}{h^2},\quad
 u=\frac{z^2(1+i\sqrt3p)^2}{h^2},\quad \mu=|u|.
 ```
 
-The conic-in-$z$ identity above also gives $1-\eta=(1-z^2)p^2(1+3z^2)/h^4$, hence $s>1$. The four numbers $(p-1)/h,(p+1)/h,z(1\pm i\sqrt3p)/h$ are the roots of $w^4-2w^3+2\eta w-\eta$. To check, multiply their two quadratic factors and apply that same identity. Squaring $1-sw^4=2w(1-sw^2)$ proves their squares are precisely the roots of the required quartic
+The quadratic identity in $z$ above also gives $1-\eta=(1-z^2)p^2(1+3z^2)/h^4$, hence $s>1$. The four numbers $(p-1)/h,(p+1)/h,z(1\pm i\sqrt3p)/h$ are the roots of $w^4-2w^3+2\eta w-\eta$. To check, multiply their two quadratic factors and apply that same identity. Squaring $1-sw^4=2w(1-sw^2)$ proves their squares are precisely the roots of the required quartic
 
 ```math
 D_s(x)=(1-sx^2)^2-4x(1-sx)^2.
@@ -81,7 +81,7 @@ Fix $N\ge128$. Let $v>0$ have normalized density proportional to $v^{1/2}(1+v)^{
 
 ```math
 \mathbb E|U-1|+A(\mu/r)^{N+1}\,
-   \mathbb E\!\left[\mathbf1_{0<v<(R-r)/r}|V(v)|\right].
+   \mathbb{E}\!\left[\mathbf{1}_{0\lt v\lt (R-r)/r}|V(v)|\right].
 ```
 
 This is the triangle inequality in [`Points.scaled_coefficient` and `Points.scaled_real_size`](BigDescents132/Balanced.lean). On the real segment the existing [real-cut bounds](BigDescents132/RealBounds.lean) give
@@ -180,14 +180,14 @@ Fix $N\ge128$ and choose $p_L$ corresponding to $s=1+3800/N^3$. Since $3800/128^
 This is [`Points.offset_formula`](BigDescents132/PhaseEnds.lean). At $p_L$ we have $r>|u|$, so the two arguments in parentheses lie in $(-\pi/2,0)$, $\arg(\eta-u)<0$ and $\theta<\pi/2$. Hence $\phi>0$. Therefore
 
 ```math
- \Phi_N(p_L)<N\theta<2\sqrt3 Np_L<7\pi.
+ \Phi_N(p_L)\lt N\theta\lt 2\sqrt3 Np_L\lt 7\pi.
 ```
 
 The last comparison follows from $\sqrt3<26/15$ and $\pi>3.14$.
 
 As $p\uparrow1$, the upper argument tends to $2\pi/3$ and the verified far offset tends to $2\pi/3$. Thus $\Phi_N\to2(N-1)\pi/3\ge d\pi$, where $d=\lfloor2(N-1)/3\rfloor$. Choose $p_H$ sufficiently close to 1 that $\Phi_N(p_H)>(d-1)\pi$ and $(-1)^d B_N(1-s(p_H))>0$. The second assertion follows from the exact degree, the positive leading coefficient and $s(p)\to\infty$.
 
-The six left samples give the signs numbered $0,\ldots,6$ in order of increasing magnitude. On $[p_L,p_H]$, continuity of $\Phi_N$ gives ordered successive crossings of $7\pi,8\pi,\ldots,(d-1)\pi$ by the intermediate value theorem. At each crossing the total normalized error is strictly below 1. The sign there is $(-1)^j$. The last sample supplies sign $(-1)^d$. Increasing $p$ strictly decreases the real polynomial argument, so the $d$ intervening open intervals are disjoint and each contains a strictly negative root. A degree-$d$ polynomial with $d$ distinct roots has only simple roots and splits over the reals.
+The six left samples give the signs numbered $0,\ldots,6$ in order of increasing magnitude. On $[p_L,p_H]$, continuity of $\Phi_N$ gives ordered successive crossings of $7\pi,8\pi,\ldots,(d-1)\pi$ by the intermediate value theorem. At each crossing the total normalized error is strictly below 1. The sign there is $(-1)^j$. The last sample supplies sign $(-1)^d$. Increasing $p$ strictly decreases the real polynomial argument, so the $d$ intervening open intervals are disjoint and each contains a strictly negative root. A polynomial of degree $d$ with $d$ distinct roots has only simple roots and splits over the reals.
 
 ## Verification and finite ranks
 
@@ -199,7 +199,7 @@ python3 all_ranks_certificate.py
 
 The finite-rank portion proves the required sign changes through rank 127 by integer Horner evaluation at ordered rational points. It finds 5,292 disjoint open intervals across the 128 ranks, with exactly the degree-many intervals for every row. Lean also verifies these finite ranks through `finite127_simple_negative`. It proves the two radix evaluations determine the polynomial recurrence and checks the signs using integer Horner evaluation. [Finite Lean theorem](BigDescents132/Through127.lean).
 
-The computation of coefficients for the finite rows and for the Newton differences uses $G^2=D_{1-t}$ and $G(0)=1$, hence $2DG'=D'G$. If $D=\sum d_jx^j$, then $2n g_n=\sum_{j=1}^4(3j-2n)d_jg_{n-j}$ with absent terms zero. The signed formal germ gives $g_{N+1}=-2t(B_N-(1-t)B_{N-1})$ for $N\ge2$. Every row used, through 249, is independently checked against both subtraction-free first-maximum recurrences from the literal permutation definition. For that second check, packing in a radix larger than every row sum is injective. The row sum is the $N$th Catalan number by the same recurrence at $t=1$.
+The computation of coefficients for the finite rows and for the Newton differences uses $G^2=D_{1-t}$ and $G(0)=1$, hence $2DG'=D'G$. If $D=\sum d_jx^j$, then $2n g_n=\sum_{j=1}^4(3j-2n)d_jg_{n-j}$ with absent terms zero. The signed formal germ gives $g_{N+1}=-2t(B_N-(1-t)B_{N-1})$ for $N\ge2$. Every row used, through 249, is independently checked against both subtraction-free first-maximum recurrences from the literal permutation definition. For that second check, packing in a radix larger than every row sum is injective. The row sum is Catalan number $C_N$ by the same recurrence at $t=1$.
 
 Lean proves the all-rank statement for the defining permutation sum in `BigDescents132.all_ranks_simple_negative`. Its endpoint verification multiplies the truncated polynomials by $121!$ to clear denominators, expands at the shift $N=128+x$, and checks the nonnegative ordinary coefficients and positive constant via radix $2^{2048}$. The digit-sum bound verifies that addition introduces no carries. The uniform estimate $25\cdot20^k/(3k+1)!$ for the normalized coefficients suffices at all six radii. For the second parameter interval Lean bounds the exponential at $64/3$ by $1024$, which still gives a strict error below one. To pass to the polynomial argument, the intermediate value theorem gives a geometric parameter for every magnitude. The small-scale bound puts every such parameter in the range of the uniform estimate. [Formal certificate](BigDescents132/EndpointHeadCheck.lean) · [Four contour ranges](BigDescents132/AllRankUniform.lean) · [Root count](BigDescents132/AllRanks.lean) · [Axiom audit](Axioms.lean).
 
