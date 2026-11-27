@@ -1,6 +1,6 @@
 # Apéry factorization down-sets and Wilf's conjecture: an exact slack formula and the criteria it gives
 
-**Result type: THEOREM (sufficient criteria, fully proved). No counterexample. Wilf's conjecture for e = 5 is not settled here.**
+**Result type: THEOREM (sufficient criteria, fully proved), plus a computer-assisted proof of Wilf's inequality for e = 4 with m ≤ 63, e = 5 with m ≤ 37, e = 6 with m ≤ 26 and e = 7 with m ≤ 22 (§14.1; known before for m ≤ 19). No counterexample. Wilf's conjecture for e = 5 is not settled here.**
 
 Notation throughout: S ≠ ℕ is a numerical semigroup with multiplicity m ≥ 2, minimal generators m < a_1 < … < a_k (so e = k + 1 ≥ 2), conductor c, genus g, n = c − g, and W = e·n − c = k·n − g.
 
@@ -19,12 +19,15 @@ Notation throughout: S ≠ ℕ is a numerical semigroup with multiplicity m ≥ 
 | G1 | **Wilf holds if d(d−1) ≤ (e−2)(m+1−2d)**; with Eliahou's theorem (3e ≥ m), Wilf holds whenever [c−m, c) has at most e−1 gaps | proved (second part uses Eliahou's theorem) |
 | S | For k ≥ 2 and L ≥ 2 the simplex {x : x_1+…+x_k ≤ L} is not a lattice tile; a tile containing it has strictly more cells, by an explicit margin | proved |
 | – | Conjecture C: the right side of Theorem C is ≥ 0 for every numerical semigroup (it is 0 on both known W = 0 families) | **conjectured**; proved without wraps (C3) and under G1's condition; true for all 1 179 596 semigroups of genus ≤ 25 and every semigroup scanned in §9 (46.5 million with e = 5, 32.5 million with e from 3 to 9) |
-| – | Conjecture Φ: the right side of C+ with T replaced by all maximal cells is ≥ 0 for every Apéry down-set | **conjectured**; no counterexample in the scans of §9 |
+| – | Conjecture Φ: the right side of C+ with T replaced by all maximal cells is ≥ 0 for every Apéry down-set | **false** (§14.1): Φ = −4 for ⟨19, 20, 22, 31, 33, 34⟩; it holds on every tile with m ≤ 15 and every e = 5 semigroup of §9 |
 | – | Wilf-type inequality for weighted down-set *tiles* without Apéry minimality (the closing question of Hellus–Rechenauer–Waldi) | **open**; no counterexample in §8 |
 | T | W = Σ_t μ(t)·δ(t) + e(θ*) and **W ≥ w(B, r)**, a number computed from the tile alone (no generator sizes) | proved (§14) |
 | T1 | Wilf's inequality for every numerical semigroup of multiplicity m ≤ 15, by checking w ≥ 0 on all 7 693 362 tiles of those sizes | proved, computer-assisted (§14); **not new**: the literature has m ≤ 19 |
-| – | Strong tile inequality e(θ) ≥ 0 for all shifts θ (it would give W ≥ Σ δ(top), "anti-carries ≥ carries") | **false**: holds for all 476 792 tiles with m ≤ 13, fails for 3 tiles with m = 14 and 5 with m = 15, and for the semigroup ⟨14, 22, 23, 48, 49, 57, 61⟩ (§14) |
-| – | Conjecture T: w(B, r) ≥ 0 for every tile of every size (implies Wilf) | **conjectured**; true for m ≤ 15 |
+| T2 | Wilf's inequality for every numerical semigroup with e = 4 and m ≤ 63, e = 5 and m ≤ 37, e = 6 and m ≤ 26, e = 7 and m ≤ 22 | proved, computer-assisted (§14.1); for 20 ≤ m not in the sources checked, novelty not established |
+| N | Every chain top is a maximal cell iff B is a simplex Δ_L; for tiles with k ≥ 2 only Δ_1 | proved (§14.1) |
+| – | Hellus–Rechenauer–Waldi tile inequality for weights compatible with the tiling | proved for m ≤ 15, computer-assisted (§14.1); open beyond |
+| – | Strong tile inequality e(θ) ≥ 0 for all shifts θ (it would give W ≥ Σ δ(top), "anti-carries ≥ carries") | **false**: holds for all 476 792 tiles with m ≤ 13, fails for 3 tiles with m = 14 and 5 with m = 15, and for the semigroup ⟨14, 22, 23, 48, 49, 57, 61⟩ (§14); the failures deepen with m (least value −4 at k = 4, m = 29), but none occurs for k = 3 up to m = 63 |
+| – | Conjecture T: w(B, r) ≥ 0 for every tile of every size (implies Wilf) | **conjectured**; true for m ≤ 15, for k = 3, 4, 5, 6 up to m = 63, 37, 26, 22, and on 19.0 million ray semigroups with e = 4..7 (§14.1) |
 
 What the criteria reach (exact counts in §9): Theorem C certifies W ≥ 0 for every one of the 34 776 387 semigroups with e = 5 in the first three exhaustive scans, for 11 731 460 more on stabilized rays, and for every numerical semigroup of genus ≤ 25. Corollary G1, a closed formula in m, e and the number of gaps in the last window, certifies 34 685 075 of the 34 776 387. Of these semigroups 24 592 298 have type ≥ 5, where the classical criterion t ≤ e − 1 does not apply.
 
@@ -215,7 +218,7 @@ Consequence. For unit weights the slack in Lemma 2 is σ(B) = Σ_{x,i} (L − |t
 
 So in these ranges weight-minimality is not what makes the inequality true; the tiling is. This is evidence about an open question, not a theorem.
 
-**Conjecture Φ.** For a down-set B put N_max = Σ over maximal cells of μ, and Φ(B) = m(km − N_max) + R(B) − (k−1)m(m−1)/2. Since T ⊂ maximal cells, C+ gives m·W ≥ Φ(B). Conjecture: Φ(B) ≥ 0 for every Apéry normal-form down-set (`deglex`). This is a statement about the shape of a lattice tile with no weights in it, and it implies Wilf. It is an equality on both known equality families and fails for non-tiles (§7.3). Evidence: §9 (every scanned semigroup); the 16 down-sets with Φ < 0 of size ≤ 16 (k = 2) or ≤ 12 (k = 3) admit no bijective residue vector; and the graded tiles of ℤ/m for all generator triples with m ≤ 70 (854 694 tiles) and quadruples with m ≤ 34 (271 580 tiles) have Φ > 0 (`shape_tiles.py`). Heuristic limit: a tile sandwiched between Δ_{L−1} and Δ_L with L large would have Φ < 0, so the conjecture needs such near-perfect tiles not to exist. Lemma S shows they do not exist for L ≥ 5 when k = 4; it says nothing yet about tiles that are close to a weighted simplex with unequal weights.
+**Conjecture Φ.** For a down-set B put N_max = Σ over maximal cells of μ, and Φ(B) = m(km − N_max) + R(B) − (k−1)m(m−1)/2. Since T ⊂ maximal cells, C+ gives m·W ≥ Φ(B). Conjecture: Φ(B) ≥ 0 for every Apéry normal-form down-set (`deglex`). This is a statement about the shape of a lattice tile with no weights in it, and it implies Wilf. It is an equality on both known equality families and fails for non-tiles (§7.3). Evidence: §9 (every scanned semigroup); the 16 down-sets with Φ < 0 of size ≤ 16 (k = 2) or ≤ 12 (k = 3) admit no bijective residue vector; and the graded tiles of ℤ/m for all generator triples with m ≤ 70 (854 694 tiles) and quadruples with m ≤ 34 (271 580 tiles) have Φ > 0 (`shape_tiles.py`). Heuristic limit: a tile sandwiched between Δ_{L−1} and Δ_L with L large would have Φ < 0, so the conjecture needs such near-perfect tiles not to exist. Lemma S shows they do not exist for L ≥ 5 when k = 4; it says nothing yet about tiles that are close to a weighted simplex with unequal weights. **Refuted in §14.1:** the Apéry down-set of ⟨19, 20, 22, 31, 33, 34⟩ (Δ_2 minus two cells, k = 5) has Φ = −4.
 
 ## 9. Bounded computations
 
@@ -292,14 +295,18 @@ Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box boun
 
 14. *A weight-free inequality on tiles (§14).* Dropping δ from (A′) leaves a statement about the tile and one shift of its residues. The form for all shifts held on every tile with m ≤ 13 and on 13 500 random semigroups with m ≤ 150, and is false from m = 14 on, including for ⟨14, 22, 23, 48, 49, 57, 61⟩ at its own shift. Adding the term km − N_max (chain tops that are not maximal cells lie at least m below the top) gives the bound w of Proposition T, which is ≥ 0 on all tiles with m ≤ 15.
 
+15. *Shape only, on all tiles (Conjecture Φ).* Φ implies Conjecture T by rearrangement. It held on every tile with m ≤ 15 and fails at m = 19, k = 5, also for ⟨19, 20, 22, 31, 33, 34⟩ (§14.1).
+16. *A general proof of Conjecture T.* Reformulations tried: e(θ_z) = (m − 1)/2 + the mean of the walk j ↦ Σ (μ − k) over the j residues just above ρ(z); w ≥ 0 ⟺ carries ≤ anti-carries + N_nonmax; a per-direction form in which each i-chain contributes Σ_j (j·r_i mod m). Proved along the way: Lemma N. None of them gave a proof. Lemma S-type packing cannot be enough (§14.1, the down-set Δ_3 ∪ {4e_1, 4e_2}).
+17. *Looking for a tile with w < 0.* A simplex plus one extra generator per unused residue, and near-perfect additive bases of order 2 (tiles inside Δ_2): none found; the least ratio w/m seen is 0.26 (§14.1).
+
 ## 12. Open points
 
 1. First obstacle: Conjecture C. Equivalently, show that Σ_{t∈T} (|t| + k)(a·t − c + 1) ≤ m((k+1)m + k − 1)/2, i.e. that the Apéry elements of [c, c + m) cannot both carry most of the chain tops and crowd the top of that window. What is proved: the no-wrap case (C3), the case d(d−1) ≤ (e−2)(m + 1 − 2d) (Lemma 3), the bounds (C1), (C2) from distinct positions, and the non-existence of unit-weight near-simplices (Lemma S). What is missing is a weighted version of Lemma S: a quantitative statement that many nearly-equal-weight cells cannot have pairwise distinct residues packed into a short interval.
 2. Whether W ≥ (e − 1 − d)·m for d ≤ e − 1 (attempt 12).
-3. Conjecture Φ (the weight-free variant) and the Hellus–Rechenauer–Waldi tile question, with the data of §8.
+3. Conjecture Φ is false (§14.1). The Hellus–Rechenauer–Waldi tile question is settled here only for compatible weights and m ≤ 15 (§14.1); weights not tied to the tiling remain open beyond the data of §8.
 4. Whether Theorems A–G are in the literature in another form.
 5. No Lean formalization was attempted: no Lean toolchain is installed in this container.
-6. Conjecture T (§14), and how far the finite check of Corollary T1 can be pushed. The number of tiles grows by a factor between 3 and 5 per unit of m (5 951 619 at m = 15). A multiplicity beyond the published range (m ≥ 20, to be confirmed against the literature) would be a new case of Wilf's conjecture; it has not been run.
+6. Conjecture T (§14) is the remaining route to the general case: a statement about lattice tilings of ℤ^k by staircases with cyclic quotient, which would need a structure theorem for such tilings (§14.1, last paragraph). For all k the number of tiles grows by a factor between 3 and 5 per unit of m (5 951 619 at m = 15), so all-e multiplicities beyond the published m ≤ 19 are out of reach of this enumeration; for a fixed small number of directions it reaches much further (Theorem T2). Whether Theorem T2 is new needs a full literature check for e = 4, 5.
 
 ## 13. Reproduce
 
@@ -330,6 +337,9 @@ gcc -O2 -o scan_general scan_general.c
 gcc -O2 -o tile_shift tile_shift.c
 for m in $(seq 2 15); do for k in $(seq 1 $((m-1))); do ./tile_shift $m $k; done; done   # §14: every tile of size m (under a minute)
 python3 -B tile_check.py tiles 2 11 ; python3 -B tile_check.py brute 3 8 ; python3 -B tile_check.py semigroups 16   # independent re-check of §14
+for m in $(seq 16 63); do ./tile_shift $m 3; done ; for m in $(seq 16 37); do ./tile_shift $m 4; done   # §14.1 (k = 4: about an hour)
+for m in $(seq 16 26); do ./tile_shift $m 5; done ; for m in $(seq 16 22); do ./tile_shift $m 6; done   # §14.1 (several hours)
+python3 -B tile_check.py tiles 16 21 3                    # independent re-check of the k = 3 run, first sizes
 ```
 
 Outputs are in `results/`; `results/COMMANDS.txt` maps each file to the command that wrote it. Nothing was submitted or posted anywhere.
@@ -392,3 +402,53 @@ Its down-set is the triangle {i·e_1 + j·e_2 : i + j ≤ 3} on the generators 2
 
 **Conjecture T.** w(B, r) ≥ 0 for every tile of every size. By Proposition T it implies Wilf's conjecture; it is a statement about finitely many objects for each m. Proved for m ≤ 15 by the table. It is neither weaker nor stronger than Conjecture C in an obvious way: w credits a full m only to chain tops that are not maximal cells (plus their residue deficit), while Theorem C credits m to every chain top outside the last window but needs the generator sizes to know that window.
 
+### 14.1 Larger tiles, a refutation of Conjecture Φ, and what the general case needs
+
+**Φ implies T, and Φ is false.** For every maximal cell z, D̄_z is a bijection B → {0, …, m−1}, so Σ_t μ(t)·D̄_z(t) ≥ R(B) by the rearrangement inequality, and m·w(B, r) ≥ Φ(B). So Conjecture Φ of §8 would have implied Conjecture T. Φ holds on every tile with m ≤ 15 (it is 0 only for k = m − 1), but not beyond: for m = 19 and k = 5 there are 18 tiles with Φ = −4, and they occur in real semigroups. For
+
+    S = ⟨19, 20, 22, 31, 33, 34⟩:   c = 50, g = 37, n = 13, W = 28;   Φ = −4,   w = 5,   2m·(Theorem C bound) = 590
+
+(normal forms `deglex` and `lex`; the invariants agree with the direct membership program of `check_independent.py`), the down-set is Δ_2 without the two cells e_1 + e_4 and e_2 + e_3. Both have weight 53 = 34 + 19, which is not an Apéry element. **Conjecture Φ is false.** Every e = 5 semigroup scanned in §9 still has Φ ≥ 0, and so does every tile with k = 3, 4 or 6 in the runs below.
+
+**Lemma N.** Every chain top of a down-set B is a maximal cell (N_nonmax = 0) if and only if B = Δ_L for some L. With Lemma S, the only tiles with k ≥ 2 and N_nonmax = 0 are Δ_1 = {0, e_1, …, e_k} (the equality family m = k + 1).
+
+*Proof.* If N_nonmax = 0, every cell has either all or none of its k upper neighbours in B. Let L be the least degree of a maximal cell. Cells of degree below L are not maximal, so they have all their upper neighbours, and Δ_L ⊆ B by induction on the degree. Let x be maximal with |x| = L. For y = x − e_i + e_j (x_i > 0, j ≠ i) we have y ∈ Δ_L ⊆ B and y + e_i = x + e_j ∉ B, so y is maximal. These moves connect all cells of degree L, so all of them are maximal and B = Δ_L. The converse is clear. ∎
+
+So N_nonmax measures how far a tile is from a simplex, and Conjecture T says that this distance always pays for the crowding of residues measured by e(θ).
+
+**T answers the Hellus–Rechenauer–Waldi question for compatible weights, m ≤ 15.** Part 3 of Proposition T uses only that B is a down-set, that a·x mod m is a bijection on B, and that every a_i ≥ m. So for every such weighted tile the formal Wilf number of §8 is at least w(B, r). With the table of §14: for every down-set B of size m ≤ 15 and every a with all a_i > m and a·x mod m bijective on B,
+
+    k·Σ_{x∈B} ⌊(max_B a·y − a·x)/m⌋ ≥ Σ_{x∈B} ⌊a·x/m⌋.
+
+(If B misses a unit vector, drop that coordinate; the inequality with fewer directions is stronger.) Weights that are not compatible with the tiling are not covered.
+
+**Theorem T2 (computer-assisted).** `tile_shift.c` was also run with a fixed number of directions at larger sizes:
+
+| k (e = k + 1) | m | residue sets | tiles | w < 0 | least w (at m) | Φ < 0 | tiles with some e(θ) < 0 | least e(θ) |
+|---|---|---|---|---|---|---|---|---|
+| 3 (4) | 16..63 | 594 300 | 23 503 679 | 0 | 6 (16) | 0 | 0 | 0 |
+| 4 (5) | 16..37 | 432 894 | 79 871 954 | 0 | 11 (17) | 0 | 2 867 | −4 |
+| 5 (6) | 16..26 | 225 225 | 108 058 262 | 0 | 5 (19) | 18 | 3 471 | −3 |
+| 6 (7) | 16..22 | 164 109 | 193 590 181 | 0 | 11 (19) | 0 | 3 148 | −2 |
+
+By Corollary T1 and the table of §14, **Wilf's inequality holds for every numerical semigroup with e = 4 and m ≤ 63, with e = 5 and m ≤ 37, with e = 6 and m ≤ 26, and with e = 7 and m ≤ 22.** For fixed m and e each case is an infinite set of semigroups (the generators are unbounded). For m ≤ 19 this is already known (§10). For 20 ≤ m it is not in the sources of §10, and two web searches on 2026-11-27 (results read as snippets only, not full texts) found no proof for e = 4 and no multiplicity bound beyond 19. So novelty is not established. The proof rests on Proposition T, proved above, and on the completeness of the enumeration in `tile_shift.c`. The independent search of `tile_check.py` reproduces its lines exactly for every k with m ≤ 11, and for k = 3 with m = 16..21. Beyond that, the counts rest on the C program alone.
+
+For k = 3 the strong inequality also holds on every tile up to m = 63 (no tile has e(θ) < 0), and the least w per size grows roughly like 0.8m (49 at m = 63). For k ≥ 4 the strong inequality fails more often and more deeply as m grows (least e(θ) = −4 at k = 4, m = 29), while in these runs w stays at least 0.26m.
+
+**Ray scans of the bounds.** `scan_general.c` now also reports C'' = (km − N_T) + e(θ*) (W ≥ C'' ≥ Theorem C bound), w at the true largest Apéry element, and w(B, r):
+
+| e | m | Q | semigroups | C'' < 0 | w at x* < 0 | w(B, r) < 0 | least w(B, r)/m with m ≥ 2e |
+|---|---|---|---|---|---|---|---|
+| 4 | 4..120 | 40 | 7 627 637 | 0 | 0 | 0 | 0.22 (m = 9) |
+| 5 | 5..64 | 40 | 7 402 126 | 0 | 0 | 0 | 0.31 (m = 13) |
+| 6 | 6..36 | 40 | 1 928 298 | 0 | 0 | 0 | 0.26 (m = 19) |
+| 7 | 7..30 | 40 | 2 029 245 | 0 | 0 | 0 | 0.58 (m = 19) |
+
+**Searches aimed at Conjecture T.** These are samples, not proofs.
+
+- *A simplex plus single extra generators* (the shape of the m = 14 failure of the strong inequality): Δ_L in two or three directions, plus one unit vector for each unused residue. For every m ≤ 40 the least w is at least 0.29m. Every low cell of the simplex gets an exit in each extra direction, so N_nonmax is large.
+- *Tiles inside Δ_2.* A down-set B ⊆ Δ_2 is a tile exactly when every residue outside {0, r_1, …, r_k} is a sum r_i + r_j, i.e. {0, r_1, …, r_k} is an additive basis of order 2 of ℤ/m. The dangerous ones have m close to C(k+2, 2), since then there are few collisions and few non-maximal tops. Random search found 35 605 such tiles with k = 4..12. Hill climbing for k = 6, 7, 8 found none with m above 21, 30 and 35 respectively, i.e. 0.75, 0.83 and 0.78 of C(k+2, 2). The least w among all of them is 5 = 0.26m, attained by the m = 19, k = 5 tiles above.
+
+**Packing alone does not decide it.** Lemma S gives |P − Q| ≤ m whenever P + Q ⊆ B. For the interior I = {t : t + e_i ∈ B for all i} and Q = Δ_1 it says that every tile satisfies |I| + Σ_i |I ∩ {x_i = 0}| ≤ m, with equality for Δ_1. But these conditions do not characterize tiles. The 12-cell down-set Δ_3 ∪ {4e_1, 4e_2} ⊂ ℕ² satisfies |P − Q| ≤ 12 for every down-set Q ⊆ B (P = {t : t + Q ⊆ B}), has Φ = −2, and admits no bijective residue vector. So a proof of Conjecture T has to use the tiling itself, not only Lemma S-type counting.
+
+**What a general proof needs.** Conjecture T is a statement about lattice tilings of ℤ^k by staircases with cyclic quotient. It is tight near simplices (Lemma N), and there the data show two effects: such tiles are rare (Lemma S, and the thin-basis searches), and the residues of their top layer cannot all sit just below the residue of the top cell. A proof would need a structure theorem for these tilings that controls both effects at once. For k = 2 the Apéry staircases are known to have at most two maximal cells (3-generated semigroups have type at most 2), which fits the observed least value w = m − 3 for k = 2 and m = 4..15. For k ≥ 3 I know of no such theorem.

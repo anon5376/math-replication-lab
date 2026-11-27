@@ -1,4 +1,4 @@
-/* Theorem C (NOTE.md) for any embedding dimension e = k + 1, 2 <= k <= 8.  Exact 64-bit integers.
+/* Theorem C and the tile bounds (NOTE.md) for any embedding dimension e = k + 1, 2 <= k <= 8.  Exact 64-bit integers.
  *
  *   ./scan_general ray k m0 m1 Q    generators m and Q*m + b for every k-subset b of [1, m-1]
  *   ./scan_general box k m0 m1 K    every k-subset of (m, K*m] with no multiple of m
@@ -8,8 +8,15 @@
  * Theorem A (2mW = 2*sum D(top) - (k-1)m(m-1)) are asserted; then
  *     C = m((k+1)m + k - 1) - 2 * sum over Apéry w >= c of (l(w) + k)(w - c + 1)   (= 2m * Theorem C bound)
  *     G : d(d-1) <= (k-1)(m + 1 - 2d),  d = number of Apéry elements >= c          (Corollary G1)
- * and 2mW >= C is asserted.  Output per multiplicity: count, how many have G, how many have C < 0
- * (a failure of Conjecture C), W < 0 (a Wilf counterexample), least W, least C with its semigroup.
+ * and 2mW >= C is asserted.  Also (NOTE.md, Section 14), with N_T, N_nonmax the numbers of chain-top
+ * incidences on cells >= c and on non-maximal cells, and e(theta) the shift function of the tile:
+ *     PP    = 2m * [ (km - N_T) + e(theta*) ]        (C'': W >= this; Conjecture C implies PP >= 0)
+ *     Tstar = 2m * [ N_nonmax + e(theta*) ]          (the tile bound w at the true largest Apéry element)
+ *     Tmin  = 2m * min over maximal cells z of [ N_nonmax + e(theta_z) ]     (= 2m * w(B, r))
+ * with 2mW >= PP >= C and PP >= Tstar asserted (Tmin <= Tstar since z = x* is allowed).  Output per multiplicity:
+ * count, how many have G, how many have C < 0 (a failure of Conjecture C), W < 0 (a Wilf
+ * counterexample), least W, least C with its semigroup; then how many have PP, Tstar, Tmin < 0 and
+ * the least value of each with a semigroup attaining it.
  * Build: gcc -O2 -o scan_general scan_general.c        Requires m <= 255.
  */
 #include <stdio.h>
@@ -62,6 +69,9 @@ static int deglex_less(const int *x, const int *y) {
 }
 
 static long cnt, cntG, cntCneg, cntWneg, bestW, bestC, bestC_W;
+static long cntPP, cntTs, cntTm, bestPP, bestTs, bestTm, bestPP_W, bestTm_W;
+static long bestPPa[MAXK], bestTsa[MAXK], bestTma[MAXK];
+static long ee[MAXM];
 static long bestWa[MAXK], bestCa[MAXK];
 
 static void consider(const long *a) {
@@ -118,6 +128,41 @@ static void consider(const long *a) {
     }
     long C = (long)m * ((long)(k + 1) * m + k - 1) - 2 * sharp;
     if (2 * m * W < C) { fprintf(stderr, "Theorem C violated\n"); exit(1); }
+    /* C'' : 2m * [ (km - N_T) + e(theta*) ];  T* : 2m * [ N_nonmax + e(theta*) ];  Tmin: min over maximal z */
+    {
+        long NT = 0, Nnon = 0, sumMuDb = 0;
+        static int ismax[MAXM], resmu[MAXM];
+        long rstar = M % m;
+        for (int r = 0; r < m; r++) {
+            int t[MAXK]; memcpy(t, nf[r], sizeof t);
+            int ex = 0;
+            for (int i = 0; i < k; i++) { t[i]++; if (hget(pack(t)) < 0) ex++; t[i]--; }
+            ismax[r] = (ex == k);
+            if (!ismax[r]) Nnon += mu[r];
+            if (M - w[r] < m) NT += mu[r];
+            sumMuDb += (long)mu[r] * ((M - w[r]) % m);
+            resmu[r] = mu[r];            /* the cell of residue r */
+        }
+        long base = (long)(k - 1) * m * (m - 1);
+        long PP = 2 * ((long)m * ((long)k * m - NT) + sumMuDb) - base;
+        long Ts = 2 * ((long)m * Nnon + sumMuDb) - base;
+        if (!(2 * m * W >= PP && PP >= Ts && PP >= C)) { fprintf(stderr, "C'' ordering violated\n"); exit(1); }
+        /* e(theta), theta = 0..m-1, with m*e(theta) = (k+1)m(m-1)/2 - sum mu*((r+theta) mod m) */
+        long tot = 0; for (int r = 0; r < m; r++) tot += (long)resmu[r] * r;
+        long num = (long)(k + 1) * m * (m - 1) / 2 - tot;
+        if (num % m) { fprintf(stderr, "e(0) not integral\n"); exit(1); }
+        ee[0] = num / m;
+        for (int th = 1; th < m; th++) ee[th] = ee[th - 1] + resmu[m - th] - k;
+        if (2 * m * (Nnon + ee[m - 1 - rstar]) != Ts) { fprintf(stderr, "e(theta*) mismatch\n"); exit(1); }
+        long Tm = 1L << 60;
+        for (int r = 0; r < m; r++) if (ismax[r]) { long v = 2L * m * (Nnon + ee[m - 1 - r]); if (v < Tm) Tm = v; }
+        if (PP < 0) cntPP++;
+        if (Ts < 0) cntTs++;
+        if (Tm < 0) cntTm++;
+        if (PP < bestPP) { bestPP = PP; bestPP_W = W; memcpy(bestPPa, a, sizeof(long) * k); }
+        if (Ts < bestTs) { bestTs = Ts; memcpy(bestTsa, a, sizeof(long) * k); }
+        if (Tm < bestTm) { bestTm = Tm; bestTm_W = W; memcpy(bestTma, a, sizeof(long) * k); }
+    }
     if ((long)d * (d - 1) <= (long)(k - 1) * (m + 1 - 2 * d)) cntG++;
     if (C < 0) cntCneg++;
     if (W < 0) { cntWneg++; printf("WILF COUNTEREXAMPLE m=%d W=%ld gens:", m, W); for (int i = 0; i < k; i++) printf(" %ld", a[i]); printf("\n"); }
@@ -140,7 +185,7 @@ int main(int argc, char **argv) {
     if (k < 2 || k > MAXK || m0 < 2 || m1 > 255) { fprintf(stderr, "need 2 <= k <= 8 and 2 <= m <= 255\n"); return 2; }
     long T = 0, TG = 0, TC = 0, TW = 0;
     for (m = m0; m <= m1; m++) {
-        cnt = cntG = cntCneg = cntWneg = 0; bestW = bestC = 1L << 60;
+        cnt = cntG = cntCneg = cntWneg = cntPP = cntTs = cntTm = 0; bestW = bestC = bestPP = bestTs = bestTm = 1L << 60;
         npool = 0;
         if (mode == 'r') { for (int b = 1; b < m; b++) pool[npool++] = P * m + b; }
         else { for (long x = m + 1; x <= P * m; x++) if (x % m) pool[npool++] = x; }
@@ -151,6 +196,12 @@ int main(int argc, char **argv) {
             for (int i = 0; i < k; i++) printf(",%ld", bestWa[i]);
             printf("] min(2m*Cbound)=%ld (W=%ld) at [%d", bestC, bestC_W, m);
             for (int i = 0; i < k; i++) printf(",%ld", bestCa[i]);
+            printf("] PPneg=%ld Tsneg=%ld Tmneg=%ld min(2m*PP)=%ld (W=%ld) at [%d", cntPP, cntTs, cntTm, bestPP, bestPP_W, m);
+            for (int i = 0; i < k; i++) printf(",%ld", bestPPa[i]);
+            printf("] min(2m*Tstar)=%ld at [%d", bestTs, m);
+            for (int i = 0; i < k; i++) printf(",%ld", bestTsa[i]);
+            printf("] min(2m*Tmin)=%ld (W=%ld) at [%d", bestTm, bestTm_W, m);
+            for (int i = 0; i < k; i++) printf(",%ld", bestTma[i]);
             printf("]\n");
         } else printf("k=%d m=%d count=0\n", k, m);
         fflush(stdout);

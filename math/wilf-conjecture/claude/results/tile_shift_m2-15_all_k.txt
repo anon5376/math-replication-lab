@@ -1,113 +1,323 @@
+ARGMIN m=2 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)
+PHI m=2 k=1 phi_neg=0 phi_min=0
 m=2 k=1 part=0/1 candidates=2 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=3 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)
+PHI m=3 k=1 phi_neg=0 phi_min=0
 m=3 k=1 part=0/1 candidates=3 residue_sets=2 tiles=2 strong_fail=0 min_e=0 bound_fail=0 bound_zero=2 min_w=0
+ARGMIN m=3 k=2 w=0 min_e=0 N_nonmax=0 r=1 2 B=(0,0)(0,1)(1,0)
+PHI m=3 k=2 phi_neg=0 phi_min=0
 m=3 k=2 part=0/1 candidates=5 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=4 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)
+PHI m=4 k=1 phi_neg=0 phi_min=0
 m=4 k=1 part=0/1 candidates=4 residue_sets=3 tiles=2 strong_fail=0 min_e=0 bound_fail=0 bound_zero=2 min_w=0
+ARGMIN m=4 k=2 w=1 min_e=0 N_nonmax=1 r=1 3 B=(0,0)(0,1)(1,0)(0,2)
+PHI m=4 k=2 phi_neg=0 phi_min=3
 m=4 k=2 part=0/1 candidates=8 residue_sets=3 tiles=4 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=1
+ARGMIN m=4 k=3 w=0 min_e=0 N_nonmax=0 r=1 2 3 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)
+PHI m=4 k=3 phi_neg=0 phi_min=0
 m=4 k=3 part=0/1 candidates=13 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=5 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)
+PHI m=5 k=1 phi_neg=0 phi_min=0
 m=5 k=1 part=0/1 candidates=5 residue_sets=4 tiles=4 strong_fail=0 min_e=0 bound_fail=0 bound_zero=4 min_w=0
+ARGMIN m=5 k=2 w=2 min_e=0 N_nonmax=2 r=1 2 B=(0,0)(0,1)(1,0)(0,2)(1,1)
+PHI m=5 k=2 phi_neg=0 phi_min=8
 m=5 k=2 part=0/1 candidates=10 residue_sets=6 tiles=10 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=2
+ARGMIN m=5 k=3 w=2 min_e=0 N_nonmax=2 r=1 2 3 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,2,0)
+PHI m=5 k=3 phi_neg=0 phi_min=8
 m=5 k=3 part=0/1 candidates=16 residue_sets=4 tiles=8 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=2
+ARGMIN m=5 k=4 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)
+PHI m=5 k=4 phi_neg=0 phi_min=0
 m=5 k=4 part=0/1 candidates=23 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=6 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)
+PHI m=6 k=1 phi_neg=0 phi_min=0
 m=6 k=1 part=0/1 candidates=6 residue_sets=5 tiles=2 strong_fail=0 min_e=0 bound_fail=0 bound_zero=2 min_w=0
+ARGMIN m=6 k=2 w=3 min_e=0 N_nonmax=3 r=1 4 B=(0,0)(0,1)(1,0)(1,1)(2,0)(3,0)
+PHI m=6 k=2 phi_neg=0 phi_min=14
 m=6 k=2 part=0/1 candidates=14 residue_sets=10 tiles=14 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=3
+ARGMIN m=6 k=3 w=4 min_e=0 N_nonmax=4 r=1 2 3 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,1,1)(0,2,0)
+PHI m=6 k=3 phi_neg=0 phi_min=20
 m=6 k=3 part=0/1 candidates=25 residue_sets=10 tiles=21 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=4
+ARGMIN m=6 k=4 w=3 min_e=0 N_nonmax=3 r=1 2 3 5 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,0,2)
+PHI m=6 k=4 phi_neg=0 phi_min=15
 m=6 k=4 part=0/1 candidates=39 residue_sets=5 tiles=12 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=3
+ARGMIN m=6 k=5 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)
+PHI m=6 k=5 phi_neg=0 phi_min=0
 m=6 k=5 part=0/1 candidates=56 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=7 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)
+PHI m=7 k=1 phi_neg=0 phi_min=0
 m=7 k=1 part=0/1 candidates=7 residue_sets=6 tiles=6 strong_fail=0 min_e=0 bound_fail=0 bound_zero=6 min_w=0
+ARGMIN m=7 k=2 w=4 min_e=0 N_nonmax=4 r=1 2 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)
+PHI m=7 k=2 phi_neg=0 phi_min=22
 m=7 k=2 part=0/1 candidates=16 residue_sets=15 tiles=33 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=4
+ARGMIN m=7 k=3 w=2 min_e=0 N_nonmax=2 r=1 2 3 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,1,1)(0,2,0)
+PHI m=7 k=3 phi_neg=0 phi_min=8
 m=7 k=3 part=0/1 candidates=28 residue_sets=20 tiles=74 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=2
+ARGMIN m=7 k=4 w=6 min_e=0 N_nonmax=6 r=1 2 3 4 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,2,0)(0,1,1,0)
+PHI m=7 k=4 phi_neg=0 phi_min=36
 m=7 k=4 part=0/1 candidates=43 residue_sets=15 tiles=66 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=6
+ARGMIN m=7 k=5 w=4 min_e=0 N_nonmax=4 r=1 2 3 4 5 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,2,0,0)
+PHI m=7 k=5 phi_neg=0 phi_min=24
 m=7 k=5 part=0/1 candidates=61 residue_sets=6 tiles=18 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=4
+ARGMIN m=7 k=6 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)
+PHI m=7 k=6 phi_neg=0 phi_min=0
 m=7 k=6 part=0/1 candidates=82 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=8 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)
+PHI m=8 k=1 phi_neg=0 phi_min=0
 m=8 k=1 part=0/1 candidates=8 residue_sets=7 tiles=4 strong_fail=0 min_e=0 bound_fail=0 bound_zero=4 min_w=0
+ARGMIN m=8 k=2 w=5 min_e=0 N_nonmax=5 r=1 5 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)(0,4)
+PHI m=8 k=2 phi_neg=0 phi_min=31
 m=8 k=2 part=0/1 candidates=20 residue_sets=21 tiles=38 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=5
+ARGMIN m=8 k=3 w=4 min_e=0 N_nonmax=4 r=1 2 5 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,1,1)(0,2,0)(1,0,1)(1,1,0)
+PHI m=8 k=3 phi_neg=0 phi_min=22
 m=8 k=3 part=0/1 candidates=38 residue_sets=35 tiles=124 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=4
+ARGMIN m=8 k=4 w=4 min_e=0 N_nonmax=4 r=1 2 3 7 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,2,0)(0,1,1,0)(0,2,0,0)
+PHI m=8 k=4 phi_neg=0 phi_min=23
 m=8 k=4 part=0/1 candidates=63 residue_sets=35 tiles=198 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=4
+ARGMIN m=8 k=5 w=8 min_e=0 N_nonmax=8 r=1 2 3 4 5 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,1,1,0)(0,0,2,0,0)
+PHI m=8 k=5 phi_neg=0 phi_min=56
 m=8 k=5 part=0/1 candidates=96 residue_sets=21 tiles=129 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+ARGMIN m=8 k=6 w=5 min_e=0 N_nonmax=5 r=1 2 3 4 5 7 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,0,2)
+PHI m=8 k=6 phi_neg=0 phi_min=35
 m=8 k=6 part=0/1 candidates=138 residue_sets=7 tiles=24 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=5
+ARGMIN m=8 k=7 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)
+PHI m=8 k=7 phi_neg=0 phi_min=0
 m=8 k=7 part=0/1 candidates=190 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=9 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)(8)
+PHI m=9 k=1 phi_neg=0 phi_min=0
 m=9 k=1 part=0/1 candidates=9 residue_sets=8 tiles=6 strong_fail=0 min_e=0 bound_fail=0 bound_zero=6 min_w=0
+ARGMIN m=9 k=2 w=6 min_e=0 N_nonmax=6 r=1 2 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)(0,4)(1,3)
+PHI m=9 k=2 phi_neg=0 phi_min=42
 m=9 k=2 part=0/1 candidates=23 residue_sets=28 tiles=63 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=6
+ARGMIN m=9 k=3 w=2 min_e=0 N_nonmax=2 r=1 3 4 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,1,1)(0,2,0)(1,0,1)(2,0,0)
+PHI m=9 k=3 phi_neg=0 phi_min=7
 m=9 k=3 part=0/1 candidates=44 residue_sets=56 tiles=276 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=2
+ARGMIN m=9 k=4 w=7 min_e=0 N_nonmax=7 r=1 2 3 4 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,0,2)(0,0,1,1)(0,0,2,0)(0,1,1,0)
+PHI m=9 k=4 phi_neg=0 phi_min=49
 m=9 k=4 part=0/1 candidates=73 residue_sets=70 tiles=622 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=7
+ARGMIN m=9 k=5 w=6 min_e=0 N_nonmax=6 r=1 2 3 4 5 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,2,0)(0,0,1,1,0)(0,0,2,0,0)
+PHI m=9 k=5 phi_neg=0 phi_min=42
 m=9 k=5 part=0/1 candidates=111 residue_sets=56 tiles=652 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=6
+ARGMIN m=9 k=6 w=10 min_e=0 N_nonmax=10 r=1 2 3 4 5 6 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,2,0,0)(0,0,1,1,0,0)
+PHI m=9 k=6 phi_neg=0 phi_min=80
 m=9 k=6 part=0/1 candidates=159 residue_sets=28 tiles=258 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
+ARGMIN m=9 k=7 w=6 min_e=0 N_nonmax=6 r=1 2 3 4 5 6 7 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)(0,0,0,2,0,0,0)
+PHI m=9 k=7 phi_neg=0 phi_min=48
 m=9 k=7 part=0/1 candidates=218 residue_sets=8 tiles=32 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=6
+ARGMIN m=9 k=8 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 8 B=(0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,1)(0,0,0,0,0,0,1,0)(0,0,0,0,0,1,0,0)(0,0,0,0,1,0,0,0)(0,0,0,1,0,0,0,0)(0,0,1,0,0,0,0,0)(0,1,0,0,0,0,0,0)(1,0,0,0,0,0,0,0)
+PHI m=9 k=8 phi_neg=0 phi_min=0
 m=9 k=8 part=0/1 candidates=289 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=10 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)
+PHI m=10 k=1 phi_neg=0 phi_min=0
 m=10 k=1 part=0/1 candidates=10 residue_sets=9 tiles=4 strong_fail=0 min_e=0 bound_fail=0 bound_zero=4 min_w=0
+ARGMIN m=10 k=2 w=7 min_e=0 N_nonmax=7 r=1 3 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)(0,4)(0,5)(0,6)
+PHI m=10 k=2 phi_neg=0 phi_min=54
 m=10 k=2 part=0/1 candidates=27 residue_sets=36 tiles=68 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=7
+ARGMIN m=10 k=3 w=4 min_e=0 N_nonmax=4 r=1 3 4 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,1,1)(0,2,0)(1,0,1)(2,0,0)(0,3,0)
+PHI m=10 k=3 phi_neg=0 phi_min=23
 m=10 k=3 part=0/1 candidates=53 residue_sets=84 tiles=372 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=4
+ARGMIN m=10 k=4 w=5 min_e=0 N_nonmax=5 r=1 3 4 9 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,2,0)(0,1,1,0)(0,2,0,0)(1,0,1,0)(2,0,0,0)
+PHI m=10 k=4 phi_neg=0 phi_min=34
 m=10 k=4 part=0/1 candidates=89 residue_sets=126 tiles=1236 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=5
+ARGMIN m=10 k=5 w=10 min_e=0 N_nonmax=10 r=1 2 3 4 5 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,1,1)(0,0,0,2,0)(0,0,1,1,0)(0,0,2,0,0)
+PHI m=10 k=5 phi_neg=0 phi_min=82
 m=10 k=5 part=0/1 candidates=136 residue_sets=126 tiles=2076 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
+ARGMIN m=10 k=6 w=8 min_e=0 N_nonmax=8 r=1 2 3 4 5 9 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,2,0,0)(0,0,1,1,0,0)(0,0,2,0,0,0)
+PHI m=10 k=6 phi_neg=0 phi_min=65
 m=10 k=6 part=0/1 candidates=195 residue_sets=84 tiles=1568 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+ARGMIN m=10 k=7 w=12 min_e=0 N_nonmax=12 r=1 2 3 4 5 6 7 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)(0,0,0,1,1,0,0)(0,0,0,2,0,0,0)
+PHI m=10 k=7 phi_neg=0 phi_min=108
 m=10 k=7 part=0/1 candidates=267 residue_sets=36 tiles=434 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=12
+ARGMIN m=10 k=8 w=7 min_e=0 N_nonmax=7 r=1 2 3 4 5 6 7 9 B=(0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,1)(0,0,0,0,0,0,1,0)(0,0,0,0,0,1,0,0)(0,0,0,0,1,0,0,0)(0,0,0,1,0,0,0,0)(0,0,1,0,0,0,0,0)(0,1,0,0,0,0,0,0)(1,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,2)
+PHI m=10 k=8 phi_neg=0 phi_min=63
 m=10 k=8 part=0/1 candidates=353 residue_sets=9 tiles=40 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=7
+ARGMIN m=10 k=9 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 8 9 B=(0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,1,0,0)(0,0,0,0,0,1,0,0,0)(0,0,0,0,1,0,0,0,0)(0,0,0,1,0,0,0,0,0)(0,0,1,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0)
+PHI m=10 k=9 phi_neg=0 phi_min=0
 m=10 k=9 part=0/1 candidates=454 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=11 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)
+PHI m=11 k=1 phi_neg=0 phi_min=0
 m=11 k=1 part=0/1 candidates=11 residue_sets=10 tiles=10 strong_fail=0 min_e=0 bound_fail=0 bound_zero=10 min_w=0
+ARGMIN m=11 k=2 w=8 min_e=0 N_nonmax=8 r=1 2 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)(0,4)(1,3)(0,5)(1,4)
+PHI m=11 k=2 phi_neg=0 phi_min=68
 m=11 k=2 part=0/1 candidates=29 residue_sets=45 tiles=135 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+ARGMIN m=11 k=3 w=6 min_e=0 N_nonmax=6 r=1 3 4 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,1,1)(0,2,0)(1,0,1)(2,0,0)(0,2,1)(0,3,0)
+PHI m=11 k=3 phi_neg=0 phi_min=43
 m=11 k=3 part=0/1 candidates=56 residue_sets=120 tiles=920 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=6
+ARGMIN m=11 k=4 w=8 min_e=0 N_nonmax=8 r=1 2 3 5 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,0,2)(0,0,1,1)(0,0,2,0)(0,1,0,1)(0,2,0,0)(0,0,3,0)
+PHI m=11 k=4 phi_neg=0 phi_min=64
 m=11 k=4 part=0/1 candidates=93 residue_sets=210 tiles=3595 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+ARGMIN m=11 k=5 w=8 min_e=0 N_nonmax=8 r=1 2 3 4 5 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,0,2)(0,0,0,1,1)(0,0,0,2,0)(0,0,1,1,0)(0,0,2,0,0)
+PHI m=11 k=5 phi_neg=0 phi_min=66
 m=11 k=5 part=0/1 candidates=141 residue_sets=252 tiles=7594 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+ARGMIN m=11 k=6 w=13 min_e=0 N_nonmax=13 r=1 2 3 4 5 6 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,2,0)(0,0,0,1,1,0)(0,0,0,2,0,0)(0,0,1,1,0,0)
+PHI m=11 k=6 phi_neg=0 phi_min=121
 m=11 k=6 part=0/1 candidates=201 residue_sets=210 tiles=8185 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=13
+ARGMIN m=11 k=7 w=10 min_e=0 N_nonmax=10 r=1 2 3 4 5 6 7 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)(0,0,0,0,2,0,0)(0,0,0,1,1,0,0)(0,0,0,2,0,0,0)
+PHI m=11 k=7 phi_neg=0 phi_min=92
 m=11 k=7 part=0/1 candidates=274 residue_sets=120 tiles=3890 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
+ARGMIN m=11 k=8 w=14 min_e=0 N_nonmax=14 r=1 2 3 4 5 6 7 8 B=(0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,1)(0,0,0,0,0,0,1,0)(0,0,0,0,0,1,0,0)(0,0,0,0,1,0,0,0)(0,0,0,1,0,0,0,0)(0,0,1,0,0,0,0,0)(0,1,0,0,0,0,0,0)(1,0,0,0,0,0,0,0)(0,0,0,0,2,0,0,0)(0,0,0,1,1,0,0,0)
+PHI m=11 k=8 phi_neg=0 phi_min=140
 m=11 k=8 part=0/1 candidates=361 residue_sets=45 tiles=730 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=14
+ARGMIN m=11 k=9 w=8 min_e=0 N_nonmax=8 r=1 2 3 4 5 6 7 8 9 B=(0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,1,0,0)(0,0,0,0,0,1,0,0,0)(0,0,0,0,1,0,0,0,0)(0,0,0,1,0,0,0,0,0)(0,0,1,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0)(0,0,0,0,2,0,0,0,0)
+PHI m=11 k=9 phi_neg=0 phi_min=80
 m=11 k=9 part=0/1 candidates=463 residue_sets=10 tiles=50 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+ARGMIN m=11 k=10 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 8 9 10 B=(0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,1,0,0,0,0)(0,0,0,0,1,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0)
+PHI m=11 k=10 phi_neg=0 phi_min=0
 m=11 k=10 part=0/1 candidates=581 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=12 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)
+PHI m=12 k=1 phi_neg=0 phi_min=0
 m=12 k=1 part=0/1 candidates=12 residue_sets=11 tiles=4 strong_fail=0 min_e=0 bound_fail=0 bound_zero=4 min_w=0
+ARGMIN m=12 k=2 w=9 min_e=0 N_nonmax=9 r=1 7 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)(0,4)(1,3)(0,5)(1,4)(0,6)
+PHI m=12 k=2 phi_neg=0 phi_min=83
 m=12 k=2 part=0/1 candidates=35 residue_sets=55 tiles=96 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=9
+ARGMIN m=12 k=3 w=8 min_e=0 N_nonmax=8 r=1 3 4 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,1,1)(0,2,0)(1,0,1)(2,0,0)(0,1,2)(0,2,1)(0,3,0)
+PHI m=12 k=3 phi_neg=0 phi_min=65
 m=12 k=3 part=0/1 candidates=74 residue_sets=165 tiles=856 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+ARGMIN m=12 k=4 w=6 min_e=0 N_nonmax=6 r=1 3 5 6 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,1,1)(0,0,2,0)(0,1,0,1)(0,1,1,0)(1,0,0,1)(1,1,0,0)(2,0,0,0)
+PHI m=12 k=4 phi_neg=0 phi_min=46
 m=12 k=4 part=0/1 candidates=133 residue_sets=330 tiles=4558 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=6
+ARGMIN m=12 k=5 w=12 min_e=0 N_nonmax=12 r=1 2 3 4 7 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,1,1)(0,0,0,2,0)(0,0,1,0,1)(0,0,2,0,0)(0,1,0,0,1)(0,1,1,0,0)
+PHI m=12 k=5 phi_neg=0 phi_min=114
 m=12 k=5 part=0/1 candidates=216 residue_sets=462 tiles=14723 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=12
+ARGMIN m=12 k=6 w=11 min_e=0 N_nonmax=11 r=1 2 3 4 5 11 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,2,0)(0,0,0,1,1,0)(0,0,0,2,0,0)(0,0,1,1,0,0)(0,0,2,0,0,0)
+PHI m=12 k=6 phi_neg=0 phi_min=105
 m=12 k=6 part=0/1 candidates=327 residue_sets=462 tiles=26164 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=11
+ARGMIN m=12 k=7 w=16 min_e=0 N_nonmax=16 r=1 2 3 4 5 6 7 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)(0,0,0,0,1,1,0)(0,0,0,0,2,0,0)(0,0,0,1,1,0,0)(0,0,0,2,0,0,0)
+PHI m=12 k=7 phi_neg=0 phi_min=166
 m=12 k=7 part=0/1 candidates=470 residue_sets=330 tiles=21788 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=16
+ARGMIN m=12 k=8 w=12 min_e=0 N_nonmax=12 r=1 2 3 4 5 6 7 11 B=(0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,1)(0,0,0,0,0,0,1,0)(0,0,0,0,0,1,0,0)(0,0,0,0,1,0,0,0)(0,0,0,1,0,0,0,0)(0,0,1,0,0,0,0,0)(0,1,0,0,0,0,0,0)(1,0,0,0,0,0,0,0)(0,0,0,0,2,0,0,0)(0,0,0,1,1,0,0,0)(0,0,0,2,0,0,0,0)
+PHI m=12 k=8 phi_neg=0 phi_min=123
 m=12 k=8 part=0/1 candidates=649 residue_sets=165 tiles=7684 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=12
+ARGMIN m=12 k=9 w=16 min_e=0 N_nonmax=16 r=1 2 3 4 5 6 7 8 9 B=(0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,1,0,0)(0,0,0,0,0,1,0,0,0)(0,0,0,0,1,0,0,0,0)(0,0,0,1,0,0,0,0,0)(0,0,1,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0)(0,0,0,0,1,1,0,0,0)(0,0,0,0,2,0,0,0,0)
+PHI m=12 k=9 phi_neg=0 phi_min=176
 m=12 k=9 part=0/1 candidates=868 residue_sets=55 tiles=1098 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=16
+ARGMIN m=12 k=10 w=9 min_e=0 N_nonmax=9 r=1 2 3 4 5 6 7 8 9 11 B=(0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,1,0,0,0,0)(0,0,0,0,1,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,2)
+PHI m=12 k=10 phi_neg=0 phi_min=99
 m=12 k=10 part=0/1 candidates=1131 residue_sets=11 tiles=60 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=9
+ARGMIN m=12 k=11 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 8 9 10 11 B=(0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0)
+PHI m=12 k=11 phi_neg=0 phi_min=0
 m=12 k=11 part=0/1 candidates=1442 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=13 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)
+PHI m=13 k=1 phi_neg=0 phi_min=0
 m=13 k=1 part=0/1 candidates=13 residue_sets=12 tiles=12 strong_fail=0 min_e=0 bound_fail=0 bound_zero=12 min_w=0
+ARGMIN m=13 k=2 w=10 min_e=0 N_nonmax=10 r=1 2 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)(0,4)(1,3)(0,5)(1,4)(0,6)(1,5)
+PHI m=13 k=2 phi_neg=0 phi_min=100
 m=13 k=2 part=0/1 candidates=37 residue_sets=66 tiles=222 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
+ARGMIN m=13 k=3 w=5 min_e=0 N_nonmax=5 r=1 3 4 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,1,1)(0,2,0)(1,0,1)(2,0,0)(0,0,3)(0,1,2)(0,2,1)(0,3,0)
+PHI m=13 k=3 phi_neg=0 phi_min=30
 m=13 k=3 part=0/1 candidates=77 residue_sets=220 tiles=2164 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=5
+ARGMIN m=13 k=4 w=4 min_e=0 N_nonmax=4 r=1 3 5 6 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,0,2)(0,0,1,1)(0,0,2,0)(0,1,0,1)(0,1,1,0)(1,0,0,1)(1,1,0,0)(2,0,0,0)
+PHI m=13 k=4 phi_neg=0 phi_min=21
 m=13 k=4 part=0/1 candidates=137 residue_sets=495 tiles=13173 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=4
+ARGMIN m=13 k=5 w=10 min_e=0 N_nonmax=10 r=1 2 3 5 6 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,0,2)(0,0,0,1,1)(0,0,0,2,0)(0,0,1,0,1)(0,0,1,1,0)(0,1,0,1,0)(0,2,0,0,0)
+PHI m=13 k=5 phi_neg=0 phi_min=93
 m=13 k=5 part=0/1 candidates=221 residue_sets=792 tiles=48948 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
+ARGMIN m=13 k=6 w=9 min_e=0 N_nonmax=9 r=1 2 3 5 6 9 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,2,0)(0,0,0,1,1,0)(0,0,0,2,0,0)(0,1,0,0,1,0)(0,1,0,1,0,0)(0,2,0,0,0,0)
+PHI m=13 k=6 phi_neg=0 phi_min=84
 m=13 k=6 part=0/1 candidates=333 residue_sets=924 tiles=103704 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=9
+ARGMIN m=13 k=7 w=14 min_e=0 N_nonmax=14 r=1 2 3 4 5 6 7 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)(0,0,0,0,0,2,0)(0,0,0,0,1,1,0)(0,0,0,0,2,0,0)(0,0,0,1,1,0,0)(0,0,0,2,0,0,0)
+PHI m=13 k=7 phi_neg=0 phi_min=150
 m=13 k=7 part=0/1 candidates=477 residue_sets=792 tiles=116976 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=14
+ARGMIN m=13 k=8 w=19 min_e=0 N_nonmax=19 r=1 2 3 4 5 6 7 8 B=(0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,1)(0,0,0,0,0,0,1,0)(0,0,0,0,0,1,0,0)(0,0,0,0,1,0,0,0)(0,0,0,1,0,0,0,0)(0,0,1,0,0,0,0,0)(0,1,0,0,0,0,0,0)(1,0,0,0,0,0,0,0)(0,0,0,0,0,2,0,0)(0,0,0,0,1,1,0,0)(0,0,0,0,2,0,0,0)(0,0,0,1,1,0,0,0)
+PHI m=13 k=8 phi_neg=0 phi_min=217
 m=13 k=8 part=0/1 candidates=657 residue_sets=495 tiles=63615 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=19
+ARGMIN m=13 k=9 w=14 min_e=0 N_nonmax=14 r=1 2 3 4 5 6 7 8 9 B=(0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,1,0,0)(0,0,0,0,0,1,0,0,0)(0,0,0,0,1,0,0,0,0)(0,0,0,1,0,0,0,0,0)(0,0,1,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0)(0,0,0,0,0,2,0,0,0)(0,0,0,0,1,1,0,0,0)(0,0,0,0,2,0,0,0,0)
+PHI m=13 k=9 phi_neg=0 phi_min=158
 m=13 k=9 part=0/1 candidates=877 residue_sets=220 tiles=15592 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=14
+ARGMIN m=13 k=10 w=18 min_e=0 N_nonmax=18 r=1 2 3 4 5 6 7 8 9 10 B=(0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,1,0,0,0,0)(0,0,0,0,1,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,2,0,0,0,0)(0,0,0,0,1,1,0,0,0,0)
+PHI m=13 k=10 phi_neg=0 phi_min=216
 m=13 k=10 part=0/1 candidates=1141 residue_sets=66 tiles=1662 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=18
+ARGMIN m=13 k=11 w=10 min_e=0 N_nonmax=10 r=1 2 3 4 5 6 7 8 9 10 11 B=(0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,2,0,0,0,0,0)
+PHI m=13 k=11 phi_neg=0 phi_min=120
 m=13 k=11 part=0/1 candidates=1453 residue_sets=12 tiles=72 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
+ARGMIN m=13 k=12 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 8 9 10 11 12 B=(0,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0,0)
+PHI m=13 k=12 phi_neg=0 phi_min=0
 m=13 k=12 part=0/1 candidates=1817 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=14 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)(13)
+PHI m=14 k=1 phi_neg=0 phi_min=0
 m=14 k=1 part=0/1 candidates=14 residue_sets=13 tiles=6 strong_fail=0 min_e=0 bound_fail=0 bound_zero=6 min_w=0
+ARGMIN m=14 k=2 w=11 min_e=0 N_nonmax=11 r=1 8 B=(0,0)(0,1)(1,0)(1,1)(2,0)(2,1)(3,0)(3,1)(4,0)(4,1)(5,0)(5,1)(6,0)(7,0)
+PHI m=14 k=2 phi_neg=0 phi_min=118
 m=14 k=2 part=0/1 candidates=41 residue_sets=78 tiles=180 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=11
+ARGMIN m=14 k=3 w=7 min_e=0 N_nonmax=7 r=3 4 13 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,2,0)(1,0,1)(1,1,0)(2,0,0)(0,0,3)(1,0,2)(2,0,1)(2,1,0)(3,0,0)
+PHI m=14 k=3 phi_neg=0 phi_min=53
 m=14 k=3 part=0/1 candidates=86 residue_sets=286 tiles=2035 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=7
+ARGMIN m=14 k=4 w=7 min_e=0 N_nonmax=7 r=1 9 10 12 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,1,1)(0,0,2,0)(0,1,0,1)(0,1,1,0)(0,2,0,0)(1,0,0,1)(1,0,1,0)(2,0,0,0)(3,0,0,0)
+PHI m=14 k=4 phi_neg=0 phi_min=56
 m=14 k=4 part=0/1 candidates=153 residue_sets=715 tiles=16112 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=7
 STRONG-FAIL m=14 r=1 5 6 8 9 value=-1 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,0,2)(0,0,0,1,1)(0,0,0,2,0)(1,0,1,0,0)(0,0,0,0,3)(0,0,0,1,2)(0,0,0,2,1)(0,0,0,3,0)
 STRONG-FAIL m=14 r=1 5 7 8 9 value=-1 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,0,2)(0,0,0,1,1)(0,0,0,2,0)(1,1,0,0,0)(0,0,0,0,3)(0,0,0,1,2)(0,0,0,2,1)(0,0,0,3,0)
+ARGMIN m=14 k=5 w=8 min_e=0 N_nonmax=8 r=1 3 4 9 11 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,1,1,0)(0,0,2,0,0)(0,1,0,1,0)(0,1,1,0,0)(0,2,0,0,0)(1,0,0,1,0)(1,0,1,0,0)(2,0,0,0,0)
+PHI m=14 k=5 phi_neg=0 phi_min=73
 m=14 k=5 part=0/1 candidates=246 residue_sets=1287 tiles=78129 strong_fail=2 min_e=-1 bound_fail=0 bound_zero=0 min_w=8
 STRONG-FAIL m=14 r=1 5 6 7 8 9 value=-1 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,0,2)(0,0,0,0,1,1)(0,0,0,0,2,0)(0,0,0,0,0,3)(0,0,0,0,1,2)(0,0,0,0,2,1)(0,0,0,0,3,0)
+ARGMIN m=14 k=6 w=14 min_e=0 N_nonmax=14 r=1 2 3 4 5 8 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,1,1)(0,0,0,0,2,0)(0,0,0,1,0,1)(0,0,0,1,1,0)(0,0,1,0,0,1)(0,0,1,1,0,0)(0,0,2,0,0,0)
+PHI m=14 k=6 phi_neg=0 phi_min=152
 m=14 k=6 part=0/1 candidates=369 residue_sets=1716 tiles=235378 strong_fail=1 min_e=-1 bound_fail=0 bound_zero=0 min_w=14
+ARGMIN m=14 k=7 w=12 min_e=0 N_nonmax=12 r=1 2 3 5 6 9 13 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)(0,0,0,0,2,0,0)(0,0,0,1,1,0,0)(0,0,0,2,0,0,0)(0,1,0,0,1,0,0)(0,1,0,1,0,0,0)(0,2,0,0,0,0,0)
+PHI m=14 k=7 phi_neg=0 phi_min=129
 m=14 k=7 part=0/1 candidates=526 residue_sets=1716 tiles=404820 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=12
+ARGMIN m=14 k=8 w=17 min_e=0 N_nonmax=17 r=1 2 3 4 5 6 7 9 B=(0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,1)(0,0,0,0,0,0,1,0)(0,0,0,0,0,1,0,0)(0,0,0,0,1,0,0,0)(0,0,0,1,0,0,0,0)(0,0,1,0,0,0,0,0)(0,1,0,0,0,0,0,0)(1,0,0,0,0,0,0,0)(0,0,0,0,0,1,1,0)(0,0,0,0,0,2,0,0)(0,0,0,1,0,0,1,0)(0,0,0,1,0,1,0,0)(0,0,0,2,0,0,0,0)
+PHI m=14 k=8 phi_neg=0 phi_min=201
 m=14 k=8 part=0/1 candidates=721 residue_sets=1287 tiles=353196 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=17
+ARGMIN m=14 k=9 w=22 min_e=0 N_nonmax=22 r=1 2 3 4 5 6 7 8 9 B=(0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,1,0,0)(0,0,0,0,0,1,0,0,0)(0,0,0,0,1,0,0,0,0)(0,0,0,1,0,0,0,0,0)(0,0,1,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0)(0,0,0,0,0,1,1,0,0)(0,0,0,0,0,2,0,0,0)(0,0,0,0,1,1,0,0,0)(0,0,0,0,2,0,0,0,0)
+PHI m=14 k=9 phi_neg=0 phi_min=274
 m=14 k=9 part=0/1 candidates=958 residue_sets=715 tiles=145241 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=22
+ARGMIN m=14 k=10 w=16 min_e=0 N_nonmax=16 r=1 2 3 4 5 6 7 8 9 13 B=(0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,1,0,0,0,0)(0,0,0,0,1,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,2,0,0,0,0)(0,0,0,0,1,1,0,0,0,0)(0,0,0,0,2,0,0,0,0,0)
+PHI m=14 k=10 phi_neg=0 phi_min=197
 m=14 k=10 part=0/1 candidates=1241 residue_sets=286 tiles=27432 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=16
+ARGMIN m=14 k=11 w=20 min_e=0 N_nonmax=20 r=1 2 3 4 5 6 7 8 9 10 11 B=(0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,1,1,0,0,0,0)(0,0,0,0,0,2,0,0,0,0,0)
+PHI m=14 k=11 phi_neg=0 phi_min=260
 m=14 k=11 part=0/1 candidates=1574 residue_sets=78 tiles=2337 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=20
+ARGMIN m=14 k=12 w=11 min_e=0 N_nonmax=11 r=1 2 3 4 5 6 7 8 9 10 11 13 B=(0,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,0,2)
+PHI m=14 k=12 phi_neg=0 phi_min=143
 m=14 k=12 part=0/1 candidates=1961 residue_sets=13 tiles=84 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=11
+ARGMIN m=14 k=13 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 8 9 10 11 12 13 B=(0,0,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,0,0,1,0,0,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0,0,0)
+PHI m=14 k=13 phi_neg=0 phi_min=0
 m=14 k=13 part=0/1 candidates=2406 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0
+ARGMIN m=15 k=1 w=0 min_e=0 N_nonmax=0 r=1 B=(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)(13)(14)
+PHI m=15 k=1 phi_neg=0 phi_min=0
 m=15 k=1 part=0/1 candidates=15 residue_sets=14 tiles=8 strong_fail=0 min_e=0 bound_fail=0 bound_zero=8 min_w=0
+ARGMIN m=15 k=2 w=12 min_e=0 N_nonmax=12 r=1 2 B=(0,0)(0,1)(1,0)(0,2)(1,1)(0,3)(1,2)(0,4)(1,3)(0,5)(1,4)(0,6)(1,5)(0,7)(1,6)
+PHI m=15 k=2 phi_neg=0 phi_min=138
 m=15 k=2 part=0/1 candidates=45 residue_sets=91 tiles=232 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=12
+ARGMIN m=15 k=3 w=9 min_e=0 N_nonmax=9 r=1 4 5 B=(0,0,0)(0,0,1)(0,1,0)(1,0,0)(0,0,2)(0,1,1)(0,2,0)(1,0,1)(2,0,0)(0,1,2)(0,2,1)(0,3,0)(1,0,2)(2,0,1)(3,0,0)
+PHI m=15 k=3 phi_neg=0 phi_min=80
 m=15 k=3 part=0/1 candidates=95 residue_sets=364 tiles=3236 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=9
 STRONG-FAIL m=15 r=2 5 7 9 value=-1 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,0,2)(0,0,1,1)(0,0,2,0)(1,0,0,1)(2,0,0,0)(0,0,0,3)(0,0,1,2)(0,0,2,1)(0,0,3,0)(0,0,4,0)
+ARGMIN m=15 k=4 w=10 min_e=0 N_nonmax=10 r=1 3 4 10 B=(0,0,0,0)(0,0,0,1)(0,0,1,0)(0,1,0,0)(1,0,0,0)(0,0,1,1)(0,0,2,0)(0,1,0,1)(0,1,1,0)(0,2,0,0)(1,0,0,1)(1,0,1,0)(2,0,0,0)(0,0,3,0)(0,3,0,0)
+PHI m=15 k=4 phi_neg=0 phi_min=97
 m=15 k=4 part=0/1 candidates=169 residue_sets=1001 tiles=30644 strong_fail=1 min_e=-1 bound_fail=0 bound_zero=0 min_w=10
 STRONG-FAIL m=15 r=2 4 5 7 9 value=-1 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,0,2)(0,0,0,1,1)(0,0,0,2,0)(0,1,0,1,0)(0,0,0,0,3)(0,0,0,1,2)(0,0,0,2,1)(0,0,0,3,0)(0,0,0,4,0)
 STRONG-FAIL m=15 r=2 4 5 7 9 value=-1 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,0,2)(0,0,0,1,1)(0,0,0,2,0)(1,0,0,0,1)(0,0,0,0,3)(0,0,0,1,2)(0,0,0,2,1)(0,0,0,3,0)(0,0,0,4,0)
 STRONG-FAIL m=15 r=2 5 7 9 11 value=-1 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,2,0)(0,0,1,1,0)(0,0,2,0,0)(2,0,0,0,0)(0,0,0,3,0)(0,0,1,2,0)(0,0,2,1,0)(0,0,3,0,0)(0,0,4,0,0)
+ARGMIN m=15 k=5 w=12 min_e=0 N_nonmax=12 r=1 2 3 7 10 B=(0,0,0,0,0)(0,0,0,0,1)(0,0,0,1,0)(0,0,1,0,0)(0,1,0,0,0)(1,0,0,0,0)(0,0,0,2,0)(0,0,1,0,1)(0,0,2,0,0)(0,1,0,0,1)(0,1,0,1,0)(0,1,1,0,0)(0,2,0,0,0)(1,0,0,0,1)(1,0,0,1,0)
+PHI m=15 k=5 phi_neg=0 phi_min=127
 m=15 k=5 part=0/1 candidates=271 residue_sets=2002 tiles=190874 strong_fail=3 min_e=-1 bound_fail=0 bound_zero=0 min_w=12
 STRONG-FAIL m=15 r=2 4 5 7 9 11 value=-1 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,2,0)(0,0,0,1,1,0)(0,0,0,2,0,0)(0,0,0,0,3,0)(0,0,0,1,2,0)(0,0,0,2,1,0)(0,0,0,3,0,0)(0,0,0,4,0,0)
+ARGMIN m=15 k=6 w=12 min_e=0 N_nonmax=12 r=1 2 3 5 6 7 B=(0,0,0,0,0,0)(0,0,0,0,0,1)(0,0,0,0,1,0)(0,0,0,1,0,0)(0,0,1,0,0,0)(0,1,0,0,0,0)(1,0,0,0,0,0)(0,0,0,0,0,2)(0,0,0,0,1,1)(0,0,0,0,2,0)(0,0,0,1,1,0)(0,0,0,2,0,0)(0,1,0,0,0,1)(0,1,0,0,1,0)(0,2,0,0,0,0)
+PHI m=15 k=6 phi_neg=0 phi_min=131
 m=15 k=6 part=0/1 candidates=405 residue_sets=3003 tiles=728149 strong_fail=1 min_e=-1 bound_fail=0 bound_zero=0 min_w=12
+ARGMIN m=15 k=7 w=18 min_e=0 N_nonmax=18 r=1 2 3 4 5 6 7 B=(0,0,0,0,0,0,0)(0,0,0,0,0,0,1)(0,0,0,0,0,1,0)(0,0,0,0,1,0,0)(0,0,0,1,0,0,0)(0,0,1,0,0,0,0)(0,1,0,0,0,0,0)(1,0,0,0,0,0,0)(0,0,0,0,0,0,2)(0,0,0,0,0,1,1)(0,0,0,0,0,2,0)(0,0,0,0,1,1,0)(0,0,0,0,2,0,0)(0,0,0,1,1,0,0)(0,0,0,2,0,0,0)
+PHI m=15 k=7 phi_neg=0 phi_min=219
 m=15 k=7 part=0/1 candidates=575 residue_sets=3432 tiles=1588644 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=18
+ARGMIN m=15 k=8 w=15 min_e=0 N_nonmax=15 r=1 2 3 4 5 6 7 9 B=(0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,1)(0,0,0,0,0,0,1,0)(0,0,0,0,0,1,0,0)(0,0,0,0,1,0,0,0)(0,0,0,1,0,0,0,0)(0,0,1,0,0,0,0,0)(0,1,0,0,0,0,0,0)(1,0,0,0,0,0,0,0)(0,0,0,0,0,0,2,0)(0,0,0,0,0,1,1,0)(0,0,0,0,0,2,0,0)(0,0,0,1,0,0,1,0)(0,0,0,1,0,1,0,0)(0,0,0,2,0,0,0,0)
+PHI m=15 k=8 phi_neg=0 phi_min=180
 m=15 k=8 part=0/1 candidates=785 residue_sets=3003 tiles=1883084 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=15
+ARGMIN m=15 k=9 w=20 min_e=0 N_nonmax=20 r=1 2 3 4 5 6 7 8 9 B=(0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,1,0,0)(0,0,0,0,0,1,0,0,0)(0,0,0,0,1,0,0,0,0)(0,0,0,1,0,0,0,0,0)(0,0,1,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,2,0,0)(0,0,0,0,0,1,1,0,0)(0,0,0,0,0,2,0,0,0)(0,0,0,0,1,1,0,0,0)(0,0,0,0,2,0,0,0,0)
+PHI m=15 k=9 phi_neg=0 phi_min=258
 m=15 k=9 part=0/1 candidates=1039 residue_sets=2002 tiles=1137568 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=20
+ARGMIN m=15 k=10 w=25 min_e=0 N_nonmax=25 r=1 2 3 4 5 6 7 8 9 10 B=(0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,1,0,0,0,0)(0,0,0,0,1,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,2,0,0,0)(0,0,0,0,0,1,1,0,0,0)(0,0,0,0,0,2,0,0,0,0)(0,0,0,0,1,1,0,0,0,0)
+PHI m=15 k=10 phi_neg=0 phi_min=337
 m=15 k=10 part=0/1 candidates=1341 residue_sets=1001 tiles=337369 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=25
+ARGMIN m=15 k=11 w=18 min_e=0 N_nonmax=18 r=1 2 3 4 5 6 7 8 9 10 11 B=(0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,2,0,0,0,0)(0,0,0,0,0,1,1,0,0,0,0)(0,0,0,0,0,2,0,0,0,0,0)
+PHI m=15 k=11 phi_neg=0 phi_min=240
 m=15 k=11 part=0/1 candidates=1695 residue_sets=364 tiles=48424 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=18
+ARGMIN m=15 k=12 w=22 min_e=0 N_nonmax=22 r=1 2 3 4 5 6 7 8 9 10 11 12 B=(0,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,2,0,0,0,0,0)(0,0,0,0,0,1,1,0,0,0,0,0)
+PHI m=15 k=12 phi_neg=0 phi_min=308
 m=15 k=12 part=0/1 candidates=2105 residue_sets=91 tiles=3288 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=22
+ARGMIN m=15 k=13 w=12 min_e=0 N_nonmax=12 r=1 2 3 4 5 6 7 8 9 10 11 12 13 B=(0,0,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,0,0,1,0,0,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,2,0,0,0,0,0,0)
+PHI m=15 k=13 phi_neg=0 phi_min=168
 m=15 k=13 part=0/1 candidates=2575 residue_sets=14 tiles=98 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=12
+ARGMIN m=15 k=14 w=0 min_e=0 N_nonmax=0 r=1 2 3 4 5 6 7 8 9 10 11 12 13 14 B=(0,0,0,0,0,0,0,0,0,0,0,0,0,0)(0,0,0,0,0,0,0,0,0,0,0,0,0,1)(0,0,0,0,0,0,0,0,0,0,0,0,1,0)(0,0,0,0,0,0,0,0,0,0,0,1,0,0)(0,0,0,0,0,0,0,0,0,0,1,0,0,0)(0,0,0,0,0,0,0,0,0,1,0,0,0,0)(0,0,0,0,0,0,0,0,1,0,0,0,0,0)(0,0,0,0,0,0,0,1,0,0,0,0,0,0)(0,0,0,0,0,0,1,0,0,0,0,0,0,0)(0,0,0,0,0,1,0,0,0,0,0,0,0,0)(0,0,0,0,1,0,0,0,0,0,0,0,0,0)(0,0,0,1,0,0,0,0,0,0,0,0,0,0)(0,0,1,0,0,0,0,0,0,0,0,0,0,0)(0,1,0,0,0,0,0,0,0,0,0,0,0,0)(1,0,0,0,0,0,0,0,0,0,0,0,0,0)
+PHI m=15 k=14 phi_neg=0 phi_min=0
 m=15 k=14 part=0/1 candidates=3109 residue_sets=1 tiles=1 strong_fail=0 min_e=0 bound_fail=0 bound_zero=1 min_w=0

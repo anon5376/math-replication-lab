@@ -200,6 +200,21 @@ class NoteChecks(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 198)
 
+    def test_phi_counterexample(self):
+        """Section 14.1: Conjecture Phi fails for <19, 20, 22, 31, 33, 34>; the tile bound does not."""
+        from tile_check import phi, profile
+        m, a = 19, (20, 22, 31, 33, 34)
+        for order in ("deglex", "lex"):
+            w, nf = normal_forms(m, a, order)
+            B = set(nf)
+            self.assertEqual(phi(B, 5, m), -4)
+            self.assertEqual(profile(B, 5, m, tuple(x % m for x in a))[1], 5)
+            self.assertEqual(stats(m, a, order)["W"], 28)
+            missing = {x for x in [(0, 1, 1, 0, 0), (1, 0, 0, 1, 0)]}
+            self.assertEqual(len(B), 19)
+            self.assertTrue(missing.isdisjoint(B))
+            self.assertTrue(all(sum(t) <= 2 for t in B))
+
 
 if __name__ == "__main__":
     unittest.main()

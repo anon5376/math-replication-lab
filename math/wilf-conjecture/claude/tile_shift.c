@@ -21,7 +21,10 @@
  *            N_max the sum of mu over the maximal cells.  By Proposition T of NOTE.md the Wilf
  *            number of a semigroup with this tile whose largest Apéry element is the cell z is
  *            at least w(z).
- * Output: residue sets, tiles, failures of each test, the least e and the least w.
+ *   Phi:     Phi(B) = m(km - N_max) + sum_j j*mu_(j) - (k-1)m(m-1)/2 >= 0, the mu values sorted
+ *            decreasing (Conjecture Phi; it depends on the shape only and implies the tile bound).
+ * Output: residue sets, tiles, failures of each test, the least e and the least w, one tile attaining
+ * the least w (line ARGMIN), and the number of tiles with Phi < 0 and the least Phi (line PHI).
  * Exact integer arithmetic.
  *
  * Enumeration.  A cell x of a down-set of size m has prod (x_i + 1) <= m; these cells are the
@@ -54,6 +57,8 @@ static int dead_residues;               /* residues with used = 0 and alive = 0 
 
 static long long n_sets, n_tiles, n_fail, n_tight, min_e = 1LL << 60, max_e = -(1LL << 60);
 static long long n_fail_w, n_w0, min_w = 1LL << 60, printed;
+static char best_buf[32768];
+static long long phi_neg, phi_min = 1LL << 60;
 
 /* ---- candidates ---- */
 static int cmp_cells(const void *a, const void *b) {
@@ -160,9 +165,29 @@ static void finish(void) {
         long long wz = ee[m - 1 - maxres[a]] + (long long)k * m - nmax;
         if (wz < wlo) wlo = wz;
     }
+    {   /* Conjecture Phi: Phi(B) = m(km - N_max) + sum_j j*mu_(j) - (k-1)m(m-1)/2, mu_(0) >= mu_(1) >= ...
+           By the rearrangement inequality Phi <= m * w, so Phi >= 0 implies w >= 0 (NOTE.md, Section 14). */
+        static int cntv[MAXM * MAXM]; int mx = 0;
+        for (int v = 0; v < m; v++) { cntv[mu[v]]++; if (mu[v] > mx) mx = mu[v]; }
+        long long R = 0; int j = 0;
+        for (int val = mx; val >= 0; val--) while (cntv[val]) { R += (long long)j * val; j++; cntv[val]--; }
+        long long phi = (long long)m * ((long long)k * m - nmax) + R - (long long)(k - 1) * m * (m - 1) / 2;
+        if (phi > (long long)m * wlo) { fprintf(stderr, "Phi > m*w: rearrangement violated\n"); exit(1); }
+        if (phi < 0) { phi_neg++; print_tile("PHI-NEG", phi); }
+        if (phi < phi_min) phi_min = phi;
+    }
     if (wlo < 0) { n_fail_w++; print_tile("BOUND-FAIL", wlo); }
     if (wlo == 0) n_w0++;
-    if (wlo < min_w) min_w = wlo;
+    if (wlo < min_w) {                  /* remember one tile attaining the least w */
+        min_w = wlo;
+        int len = snprintf(best_buf, sizeof best_buf, "ARGMIN m=%d k=%d w=%lld min_e=%lld N_nonmax=%lld r=", m, k, wlo, lo, (long long)k * m - nmax);
+        for (int i = 0; i < k && len < (int)sizeof best_buf - 64; i++) len += snprintf(best_buf + len, sizeof best_buf - len, "%d ", r[i]);
+        len += snprintf(best_buf + len, sizeof best_buf - len, "B=");
+        for (int j = 0; j < nz && len < (int)sizeof best_buf - 256; j++) if (state[j] == 1) {
+            len += snprintf(best_buf + len, sizeof best_buf - len, "(");
+            for (int i = 0; i < k; i++) len += snprintf(best_buf + len, sizeof best_buf - len, "%d%s", Z[j][i], i + 1 < k ? "," : ")");
+        }
+    }
 }
 
 static void rec(int j, int size) {
@@ -216,6 +241,8 @@ int main(int argc, char **argv) {
         r[i]++;
         for (int t = i + 1; t < k; t++) r[t] = r[t - 1] + 1;
     }
+    if (n_tiles) printf("%s\n", best_buf);
+    printf("PHI m=%d k=%d phi_neg=%lld phi_min=%lld\n", m, k, phi_neg, n_tiles ? phi_min : 0);
     printf("m=%d k=%d part=%d/%d candidates=%d residue_sets=%lld tiles=%lld strong_fail=%lld min_e=%lld bound_fail=%lld bound_zero=%lld min_w=%lld\n",
            m, k, part, nparts, nz, n_sets, n_tiles, n_fail, n_tiles ? min_e : 0, n_fail_w, n_w0, n_tiles ? min_w : 0);
     return 0;

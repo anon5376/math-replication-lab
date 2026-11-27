@@ -10,11 +10,15 @@ criteria_pos_m20-70_Q12_c4m.txt           ./scan_criteria pos 20 70 12 4        
 criteria_rnd_m100-130_N50000_c4m.txt      ./scan_criteria rnd 100 130 50000 4      (seeded sample, not exhaustive)
 general_ray_k2_m3-200_Q40.txt             ./scan_general ray 2 3 200 40
 general_ray_k3_m4-120_Q1.txt              ./scan_general ray 3 4 120 1
-general_ray_k3_m4-120_Q40.txt             ./scan_general ray 3 4 120 40            (run as m = 4-95, 96-106, 107-114, 115-120; lines concatenated, totals summed)
+general_ray_k3_m4-120_Q40.txt             ./scan_general ray 3 4 120 40            (rerun with the extended scanner: each line now ends with the PP, Tstar, Tmin fields;
+                                                                                    the earlier fields are identical to the first run)
+general_ray_k4_m5-64_Q40.txt              ./scan_general ray 4 5 64 40
 general_ray_k5_m6-40_Q1.txt               ./scan_general ray 5 6 40 1
 general_ray_k5_m6-40_Q40.txt              ./scan_general ray 5 6 40 40             (total line recomputed from the per-m lines)
 general_ray_k8_m9-25_Q40.txt              ./scan_general ray 8 9 25 40
 general_ray_k6_m7-32_Q40.txt              ./scan_general ray 6 7 32 40
+general_ray_k5_m6-36_Q40_bounds.txt       ./scan_general ray 5 6 36 40             (extended scanner; the m = 6-36 prefixes of each line equal general_ray_k5_m6-40_Q40.txt)
+general_ray_k6_m7-30_Q40_bounds.txt       ./scan_general ray 6 7 30 40             (extended scanner; the m = 7-30 prefixes equal general_ray_k6_m7-32_Q40.txt)
 general_ray_k7_m8-28_Q40.txt              ./scan_general ray 7 8 28 40
 hrw_question_k3_m8-12_A3.txt              python3 -B hrw_question.py 3 8 12 3
 hrw_question_k4_m8-9_A2.txt               python3 -B hrw_question.py 4 8 9 2
@@ -36,6 +40,14 @@ uniform_rays_scan_m20-30.jsonl            python3 -B uniform_rays.py scan 20 30
 
 scan_criteria is built with: gcc -O2 -o scan_criteria scan_criteria.c ; scan_general with: gcc -O2 -o scan_general scan_general.c
 The scanner asserts Theorem A and the bounds of Theorems C, C+ and G (one window) on every semigroup it counts and exits on a violation.
-tile_shift_m2-15_all_k.txt                for m in $(seq 2 15); do for k in $(seq 1 $((m-1))); do ./tile_shift $m $k; done; done
-tile_check_tiles_m2-11.txt                python3 -B tile_check.py tiles 2 11
+tile_shift_m2-15_all_k.txt                for m in $(seq 2 15); do for k in $(seq 1 $((m-1))); do ./tile_shift $m $k; done; done   (rerun after the PHI and ARGMIN lines were added; the m= lines are unchanged)
+tile_check_tiles_m2-11.txt                python3 -B tile_check.py tiles 2 11                  (rerun after the PHI lines were added)
 tile_check_brute_and_semigroups.txt       python3 -B tile_check.py brute 2 9 ; python3 -B tile_check.py brute 3 8 ; python3 -B tile_check.py semigroups 16
+tile_shift_k3_m16-63.txt                  for m in $(seq 16 63); do ./tile_shift $m 3; done
+tile_shift_k4_m16-37.txt                  for m in $(seq 16 37); do ./tile_shift $m 4; done
+tile_shift_k5_m16-26.txt                  for m in $(seq 16 26); do ./tile_shift $m 5; done
+tile_shift_k6_m16-22.txt                  for m in $(seq 16 22); do ./tile_shift $m 6; done
+      The k = 3..6 runs were made with a scratch build identical to tile_shift.c except that it printed at most
+      five PHI-NEG lines per run; the only affected block (m = 19, k = 5) was rerun with tile_shift.c and replaced.
+      Each run was stopped after the last size listed; the per-size lines are complete.
+tile_check_tiles_k3_m16-21.txt            python3 -B tile_check.py tiles 16 21 3              (stopped after m = 21; identical to the C lines)

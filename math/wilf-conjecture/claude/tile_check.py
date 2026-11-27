@@ -3,7 +3,8 @@
 Standard library only, exact integers.  Shares no code with tile_shift.c: tiles are found by a
 different search, and e(theta) and the tile bound w are evaluated straight from their definitions.
 
-    python3 -B tile_check.py tiles 2 11      # every tile for m = 2..11, all k; same line format as tile_shift
+    python3 -B tile_check.py tiles 2 11      # every tile for m = 2..11, all k; same PHI and m= lines as tile_shift
+    python3 -B tile_check.py tiles 16 30 3   # only k = 3
     python3 -B tile_check.py brute 3 8       # the search against a brute-force list of all down-sets
     python3 -B tile_check.py semigroups 16   # Proposition T on every numerical semigroup of genus <= 16
 
@@ -96,11 +97,19 @@ def profile(B, k, m, r):
     return min(e), w
 
 
-def scan_tiles(m0, m1):
+def phi(B, k, m):
+    """Conjecture Phi: m(km - N_max) + sum_j j * mu_(j) - (k-1) m (m-1)/2, mu sorted decreasing."""
+    exits = {t: [i for i in range(k) if t[:i] + (t[i] + 1,) + t[i+1:] not in B] for t in B}
+    mu = sorted((sum(t[i] + 1 for i in exits[t]) for t in B), reverse=True)
+    nmax = sum(sum(t[i] + 1 for i in exits[t]) for t in B if len(exits[t]) == k)
+    return m * (k * m - nmax) + sum(j * v for j, v in enumerate(mu)) - (k - 1) * m * (m - 1) // 2
+
+
+def scan_tiles(m0, m1, ks=None):
     for m in range(m0, m1 + 1):
-        for k in range(1, m):
-            sets = nt = sf = bf = bz = 0
-            mine = minw = None
+        for k in (ks if ks else range(1, m)):
+            sets = nt = sf = bf = bz = pn = 0
+            mine = minw = minphi = None
             for r in itertools.combinations(range(1, m), k):
                 sets += 1
                 for B in tiles(k, m, r):
@@ -111,6 +120,11 @@ def scan_tiles(m0, m1):
                     bz += w == 0
                     mine = lo if mine is None else min(mine, lo)
                     minw = w if minw is None else min(minw, w)
+                    ph = phi(B, k, m)
+                    assert ph <= m * w                    # rearrangement: Phi <= m * w
+                    pn += ph < 0
+                    minphi = ph if minphi is None else min(minphi, ph)
+            print("PHI m=%d k=%d phi_neg=%d phi_min=%s" % (m, k, pn, minphi if minphi is not None else 0))
             print("m=%d k=%d residue_sets=%d tiles=%d strong_fail=%d min_e=%s bound_fail=%d bound_zero=%d min_w=%s"
                   % (m, k, sets, nt, sf, mine, bf, bz, minw), flush=True)
 
@@ -177,11 +191,11 @@ def semigroups(G):
 
 if __name__ == "__main__":
     mode = sys.argv[1]
-    if mode == "tiles":
-        scan_tiles(int(sys.argv[2]), int(sys.argv[3]))
+    if mode == "tiles":                    # tiles m0 m1 [k ...]
+        scan_tiles(int(sys.argv[2]), int(sys.argv[3]), [int(v) for v in sys.argv[4:]] or None)
     elif mode == "brute":
         brute(int(sys.argv[2]), int(sys.argv[3]))
     elif mode == "semigroups":
         semigroups(int(sys.argv[2]))
     else:
-        raise SystemExit("usage: tile_check.py tiles m0 m1 | brute k m | semigroups G")
+        raise SystemExit("usage: tile_check.py tiles m0 m1 [k ...] | brute k m | semigroups G")

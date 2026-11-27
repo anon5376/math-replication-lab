@@ -1,0 +1,12 @@
+PHI m=16 k=3 phi_neg=0 phi_min=39
+m=16 k=3 residue_sets=455 tiles=4068 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=6
+PHI m=17 k=3 phi_neg=0 phi_min=67
+m=17 k=3 residue_sets=560 tiles=8016 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=8
+PHI m=18 k=3 phi_neg=0 phi_min=99
+m=18 k=3 residue_sets=680 tiles=5772 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
+PHI m=19 k=3 phi_neg=0 phi_min=135
+m=19 k=3 residue_sets=816 tiles=13578 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=12
+PHI m=20 k=3 phi_neg=0 phi_min=175
+m=20 k=3 residue_sets=969 tiles=10244 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=14
+PHI m=21 k=3 phi_neg=0 phi_min=93
+m=21 k=3 residue_sets=1140 tiles=15846 strong_fail=0 min_e=0 bound_fail=0 bound_zero=0 min_w=10
