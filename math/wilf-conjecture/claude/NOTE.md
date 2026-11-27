@@ -169,7 +169,7 @@ and in particular
 
 **Corollary G1.** Wilf's inequality holds whenever d(d−1) ≤ (e−2)(m + 1 − 2d). This is the case if d ≤ e − 1 and m ≥ 3e − 4. Since Eliahou proved Wilf for 3e ≥ m, it follows that **every numerical semigroup with at most e − 1 gaps in [c − m, c) satisfies Wilf's conjecture**. Every gap h ≥ c − m is pseudo-Frobenius, so d ≤ t, and the hypothesis d ≤ e − 1 is weaker than the classical t ≤ e − 1.
 
-For fixed e the first condition allows d up to about √((e−2)m). The explicit ray S_q of §4 has d = 1 and type 9. The bound of Theorem C is at least the one-window bound of Theorem G (insert Lemma 3 for U = T into Theorem C), so Conjecture C is a theorem whenever d(d−1) ≤ (e−2)(m + 1 − 2d). Using (C1) with Lemma 3 instead of the proof above improves the one-window bound slightly, to W ≥ ((e−2)(m + 1 − 2d) − d(d−1)(1 − e/m))/2. Theorem G also holds with any minimal generator n in place of m (windows of length n): §§2–3 and Lemma 3 never use that m is the least generator. On the 93 141 semigroups of genus ≤ 20 this certifies only 6 more.
+For fixed e the first condition allows d up to about √((e−2)m). The explicit ray S_q of §4 has d = 1 and type 9. The bound of Theorem C is at least the one-window bound of Theorem G (insert Lemma 3 for U = T into Theorem C), so Conjecture C is a theorem whenever d(d−1) ≤ (e−2)(m + 1 − 2d). Using (C1) with Lemma 3 instead of the proof above improves the one-window bound slightly, to W ≥ ((e−2)(m + 1 − 2d) − d(d−1)(1 − e/m))/2. Theorem G also holds with any minimal generator n in place of m (windows of length n): §§2–3 and Lemma 3 never use that m is the least generator. On the 93 141 semigroups of genus ≤ 20 this certifies only 6 more (`census_extras.py`).
 
 The proof of Theorem G uses neither the residues nor the positions in the window. What it leaves is the range d ≳ √((e−2)m), where many cells have two or more of their chain tops in the last window; there one needs Theorem C itself, i.e. the positions.
 
@@ -263,12 +263,12 @@ Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box boun
 4. *Gap ↦ left element with h + s ∉ S.* Cannot beat the type (§6).
 5. *k interval partitions with one covering box per partition.* Recovers FGH for B only, since each maximal cell needs its own box.
 6. *Distinct residues of the chain tops alone (rearrangement over T).* Not enough for shapes near a simplex (§7.3); gives C+ and (C1), (C2) when combined with δ ≥ 1 off T.
-7. *Generators just below multiples of m, a_i = Q_i m − b_i.* If Σ b_i x_i ≤ m − 1 on B then W = Σ_{x,i} (Q* − Σ_j Q_j top_i(x)_j) + (m − 1) − kβ*, with Q* = max_B Σ Q_j x_j and β* the least Σ b_j t_j among cells attaining Q* (checked on 411 semigroups). Carries are maximal here, and I could not prove non-negativity from this formula.
+7. *Generators just below multiples of m, a_i = Q_i m − b_i.* If Σ b_i x_i ≤ m − 1 on B then W = Σ_{x,i} (Q* − Σ_j Q_j top_i(x)_j) + (m − 1) − kβ*, with Q* = max_B Σ Q_j x_j and β* the least Σ b_j t_j among cells attaining Q* (checked on 411 random semigroups in `test_claude.py`). Carries are maximal here, and I could not prove non-negativity from this formula.
 8. *Drop minimality and look for a negative weighted tile.* None found (§8).
 9. *Hill-climbing on residue quadruples for a tile with Φ < 0, m up to 210.* Uninformative: it finds values far above the exhaustive minima.
 10. *Scan a_i = 2m − b_i separately.* It is the same family as a_i = m + b_i; removed.
 11. *One box per heavy top plus chains elsewhere (FGH inside chain reversal), aiming at "d ≤ e − 1 ⟹ Wilf".* The cells directly above a box in the direction assigned to it lose an unbounded amount, so the interval partitions do not close. The counting Lemma 3 gives the result instead, for m ≥ 3e − 4.
-12. *Sharper constant for few gaps.* On all 93 141 semigroups of genus ≤ 20, W ≥ (e − 1 − d)·m whenever d ≤ e − 1 (least values (e−1−d)·e, attained at m = e). Theorem G gives about half of that for d = 1 and I have no proof of the sharper form.
+12. *Sharper constant for few gaps.* On all 90 515 semigroups of genus ≤ 20 with d ≤ e − 1, W ≥ (e − 1 − d)·m (`census_extras.py`; the least values are (e−1−d)·e, attained at m = e). Theorem G gives about half of that for d = 1 and I have no proof of the sharper form.
 
 ## 12. Open points
 
@@ -285,6 +285,7 @@ From `math/wilf-conjecture/claude/` (Python 3.10+ standard library; gcc for the 
 ```sh
 python3 -B -m unittest -v test_claude               # random comparison with ../wilf.py, the examples of §7, the ray, the equality families
 python3 -B tree_check.py 25                          # Theorems C and G on every semigroup of genus <= 25, from the definitions (about 3 minutes)
+python3 -B census_extras.py 20                       # attempt 12 and Theorem G with other bases, genus <= 20
 python3 -B apery_downset.py 23 47 51 78 80          # invariants and every term of Theorems A, B, C+
 python3 -B check_independent.py                      # two independent checkers vs ../wilf.py
 python3 -B uniform_rays.py check 22 5 6 7 8          # Corollary B2 on the explicit ray, q = 1..8

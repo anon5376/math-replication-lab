@@ -130,6 +130,39 @@ class NoteChecks(unittest.TestCase):
         self.assertEqual(s["window_gaps"][0], 6)
         self.assertGreaterEqual(s["gap_bound_twice"], 3 * (23 + 1 - 12) - 6 * 5)
 
+    def test_attempt7_formula(self):
+        """Generators just below multiples of m (attempt 7 of the note)."""
+        rng = random.Random(7)
+        tested = 0
+        for m in range(8, 40):
+            for _ in range(400):
+                k = rng.choice((2, 3, 4))
+                b = sorted(rng.sample(range(1, m), k))
+                Q = [rng.choice((2, 3)) for _ in b]
+                a = tuple(Qi * m - bi for Qi, bi in zip(Q, b))
+                if len(set(a)) < k:
+                    continue
+                w = apery_table(m, a)
+                if None in w or primitives(m, a, w) != [m] + sorted(a):
+                    continue
+                order = sorted(range(k), key=lambda i: a[i])
+                a_s = tuple(a[i] for i in order)
+                Qs = [Q[i] for i in order]
+                bs = [b[i] for i in order]
+                _, nf = normal_forms(m, a_s, "lex")
+                B = set(nf)
+                bv = lambda x: sum(bi * xi for bi, xi in zip(bs, x))
+                if any(bv(x) > m - 1 for x in B):
+                    continue
+                top = tops(B, k)
+                qd = lambda x: sum(Qi * xi for Qi, xi in zip(Qs, x))
+                Qstar = max(qd(x) for x in B)
+                beta = min(bv(x) for x in B if qd(x) == Qstar)
+                formula = sum(Qstar - qd(top(x, i)) for x in B for i in range(k)) + (m - 1) - k * beta
+                self.assertEqual(formula, stats(m, a_s, "lex")["W"])
+                tested += 1
+        self.assertEqual(tested, 411)
+
     def test_difference_packing_count(self):
         """Lemma S: N(k; p, n) counts {z : |z+| <= p, |z-| <= n} and exceeds C(p+n+k, k)."""
         from itertools import product

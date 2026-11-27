@@ -1,5 +1,6 @@
 File                                      Command (run from math/wilf-conjecture/claude)
 baseline_family.json                      python3 -B baseline_family.py
+census_extras_genus20.txt                 python3 -B census_extras.py 20
 check_independent.txt                     python3 -B check_independent.py
 coverage_m20_K5.json                      python3 -B coverage_exhaustive.py 20 5
 criteria_box_m6-19_K4_all.txt             ./scan_criteria box 6 19 4 0
