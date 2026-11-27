@@ -1,3 +1,4 @@
 genus 1..20: 93141 semigroups
 with d <= e-1: 90515 ; violations of W >= (e-1-d)m: 0 ; of W >= (e-1-d)e: 0
 Theorem G holds for every minimal generator as base; certified with base m: 61867 ; with the best base: 61873
+tile-free bound holds on all; its right side is negative on 178 ; one of least genus: (6, [5, 6, 7], 2)

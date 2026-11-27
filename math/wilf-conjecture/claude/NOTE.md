@@ -18,7 +18,7 @@ Notation throughout: S ≠ ℕ is a numerical semigroup with multiplicity m ≥ 
 | G | **W ≥ ((e−2)(m+1−2d) − d(d−1))/2, where d is the number of gaps in [c−m, c)**; more generally a sum over the windows [c−(j+1)m, c−jm) | proved |
 | G1 | **Wilf holds if d(d−1) ≤ (e−2)(m+1−2d)**; with Eliahou's theorem (3e ≥ m), Wilf holds whenever [c−m, c) has at most e−1 gaps | proved (second part uses Eliahou's theorem) |
 | S | For k ≥ 2 and L ≥ 2 the simplex {x : x_1+…+x_k ≤ L} is not a lattice tile; a tile containing it has strictly more cells, by an explicit margin | proved |
-| – | Conjecture C: the right side of Theorem C is ≥ 0 for every numerical semigroup (it is 0 on both known W = 0 families) | **conjectured**; proved without wraps (C3) and under G1's condition; true for all 1 179 596 semigroups of genus ≤ 25 and every semigroup scanned in §9 |
+| – | Conjecture C: the right side of Theorem C is ≥ 0 for every numerical semigroup (it is 0 on both known W = 0 families) | **conjectured**; proved without wraps (C3) and under G1's condition; true for all 1 179 596 semigroups of genus ≤ 25 and every semigroup scanned in §9 (46.5 million with e = 5, 32.5 million with e from 3 to 9) |
 | – | Conjecture Φ: the right side of C+ with T replaced by all maximal cells is ≥ 0 for every Apéry down-set | **conjectured**; no counterexample in the scans of §9 |
 | – | Wilf-type inequality for weighted down-set *tiles* without Apéry minimality (the closing question of Hellus–Rechenauer–Waldi) | **open**; no counterexample in §8 |
 
@@ -228,6 +228,21 @@ The third scan for m ≤ 26 (47 766 semigroups) is contained in the second. The 
 
 The fourth scan is aimed at Conjecture C. Along a ray ⟨m, qm + b_1, …, qm + b_4⟩ the Apéry down-set and the top window stop changing once q exceeds the longest factorization, so the bound of Theorem C is constant in q while W grows linearly; the bound is therefore smallest relative to W there. Its least value per multiplicity has local minima 5.76 at m = 25, 14.05 at m = 41 and 26.23 at m = 61, and does not approach 0 in this range. These three belong to one family, m = 2s² − 2s + 1 with residues (1, s, 2s − 1, 2s): for s = 3..12 (m up to 265, computed with `apery_downset.py`, not proved in general) it satisfies (G) with L = s − 1, ρ = 0, d = 4(s − 1), σ = (2/3)(s − 2)(s − 1)(2s − 3), so W = qσ, and the Theorem C bound grows from 1.23 (s = 3, the semigroup [13, 14, 16, 18, 19] at q = 1) to 182.6 (s = 12). The least Wilf numbers at m = 13 in the first scan and at m = 61 in the third are attained by its members with q = 1 ([13, 14, 16, 18, 19] and [61, 62, 67, 72, 73]).
 
+**Other embedding dimensions (an attempt to break Conjecture C).** `scan_general.c` evaluates Theorem C for any number of generators; it reproduces the five-generator scanner exactly on rays (m = 20..24). Every k-subset b of [1, m − 1] was taken as the residues of a ray ⟨m, Qm + b_1, …, Qm + b_k⟩, with Q = 40 (stabilized) and for some k also Q = 1:
+
+| e | multiplicities | Q | semigroups | G1 holds | Theorem C bound < 0 | W < 0 |
+|---|---|---|---|---|---|---|
+| 3 | 3..200 | 40 | 1 098 601 | 1 098 600 | 0 | 0 |
+| 4 | 4..120 | 40 | 7 627 637 | 7 626 797 | 0 | 0 |
+| 4 | 4..120 | 1 | 7 627 637 | 7 626 167 | 0 | 0 |
+| 6 | 6..40 | 40 | 3 797 877 | 3 741 793 | 0 | 0 |
+| 6 | 6..40 | 1 | 3 797 877 | 3 624 457 | 0 | 0 |
+| 7 | 7..32 | 40 | 3 354 296 | 3 119 653 | 0 | 0 |
+| 8 | 8..28 | 40 | 3 105 093 | 3 025 391 | 0 | 0 |
+| 9 | 9..25 | 40 | 2 042 755 | 1 536 497 | 0 | 0 |
+
+That is 32 451 773 further semigroups. In every file the bound of Theorem C reaches 0 only on the equality family m = e. Conjecture C survives; these are rays only, and bounded in m.
+
 These scans are bounded and say nothing beyond their ranges. With c > 4m and generators in (m, 2m) the least Wilf number for each m lies between 1.48m and 2.64m, always at depth 5 or 6, and the minimizers have Apéry down-sets that are truncated simplices, e.g. [25, 36, 42, 43, 44]: W = 37, 25 of the 35 cells of Δ_3, twelve maximal cells all ≥ c (so d = 12, where Corollary G1 needs d ≤ 6), Theorem C bound 15.56, Theorem C+ bound 8.24. The least value of Φ/m² per multiplicity is 0.33 at m = 25 and between 0.41 and 0.86 for the other m in 20..80.
 
 At m = 20 in the second box (`coverage_exhaustive.py`): 737 442 semigroups, 334 408 of type ≥ 5. Corollary G1 holds for 731 325 (328 291 of type ≥ 5); 55 503 are carry-free under one of the four orders (24 758 of type ≥ 5); 5 703 satisfy neither; Theorem C certifies all 737 442.
@@ -269,6 +284,7 @@ Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box boun
 10. *Scan a_i = 2m − b_i separately.* It is the same family as a_i = m + b_i; removed.
 11. *One box per heavy top plus chains elsewhere (FGH inside chain reversal), aiming at "d ≤ e − 1 ⟹ Wilf".* The cells directly above a box in the direction assigned to it lose an unbounded amount, so the interval partitions do not close. The counting Lemma 3 gives the result instead, for m ≥ 3e − 4.
 12. *Sharper constant for few gaps.* On all 90 515 semigroups of genus ≤ 20 with d ≤ e − 1, W ≥ (e − 1 − d)·m (`census_extras.py`; the least values are (e−1−d)·e, attained at m = e). Theorem G gives about half of that for d = 1 and I have no proof of the sharper form.
+13. *A bound that needs no tile.* Since D(top_i(x)) ≥ D(x) mod a_i, Theorem A gives m·W ≥ Σ_{w∈Ap} Σ_{i≥1} ((F + m − w) mod a_i) − (e−2)m(m−1)/2, in terms of the Apéry set and the generators only. It is an equality on both W = 0 families, but its right side is negative for 178 of the 93 141 semigroups of genus ≤ 20, the smallest being ⟨5, 6, 7⟩ (`census_extras.py`). Chains that stop early (ties) make it lose too much; it cannot replace Theorem C.
 
 ## 12. Open points
 
@@ -302,6 +318,8 @@ gcc -O2 -o scan_criteria scan_criteria.c
 ./scan_criteria box 6 19 4 0 ; ./scan_criteria box 20 26 5 4 ; ./scan_criteria pos 20 80 1 4
 ./scan_criteria pos 20 70 12 4                       # stabilized rays
 ./scan_criteria rnd 100 130 50000 4                  # seeded sample, not exhaustive
+gcc -O2 -o scan_general scan_general.c
+./scan_general ray 3 4 120 40 ; ./scan_general ray 6 7 32 40    # Theorem C for other embedding dimensions (see results/COMMANDS.txt)
 ```
 
 Outputs are in `results/`; `results/COMMANDS.txt` maps each file to the command that wrote it. Nothing was submitted or posted anywhere.

@@ -8,6 +8,11 @@
      every minimal generator; the script counts how often a base other than m certifies
      W >= 0 when m does not.
 
+  3. A tile-free lower bound (attempt 13): with M = F + m and a_1..a_k the generators above m,
+         m * W >= sum over Apéry w of sum_i ((M - w) mod a_i) - (e-2) m(m-1)/2.
+     It is asserted; the script counts how often its right side is negative (so it cannot
+     prove Wilf alone).
+
     python3 -B census_extras.py 20
 """
 import sys
@@ -25,7 +30,8 @@ def children(gaps, F):
     return out
 
 
-count = few = bad_m = bad_e = cert_m = cert_any = 0
+count = few = bad_m = bad_e = cert_m = cert_any = tilefree_neg = 0
+tilefree_example = None
 stack = [((1,), 1)]
 while stack:
     gaps, F = stack.pop()
@@ -56,6 +62,14 @@ while stack:
         best = b2 if best is None else max(best, b2)
     cert_m += bm >= 0
     cert_any += best >= 0
+    M = F + m
+    ap = [next(v for v in range(r, M + 1, m) if inS(v)) for r in range(m)]
+    tf2 = 2 * sum((M - w) % a for w in ap for a in gens[1:]) - (e - 2) * m * (m - 1)
+    assert 2 * m * W >= tf2, ("tile-free bound", gens)
+    if tf2 < 0:
+        tilefree_neg += 1
+        if tilefree_example is None or len(gaps) < tilefree_example[0]:
+            tilefree_example = (len(gaps), gens, W)
     if len(gaps) < G:
         stack.extend(children(gaps, F))
 
@@ -63,3 +77,5 @@ print("genus 1..%d: %d semigroups" % (G, count))
 print("with d <= e-1: %d ; violations of W >= (e-1-d)m: %d ; of W >= (e-1-d)e: %d" % (few, bad_m, bad_e))
 print("Theorem G holds for every minimal generator as base; certified with base m: %d ; with the best base: %d"
       % (cert_m, cert_any))
+print("tile-free bound holds on all; its right side is negative on %d ; one of least genus: %s"
+      % (tilefree_neg, tilefree_example))
