@@ -9,6 +9,10 @@ cd math/big-descents-132
 python3 all_ranks_certificate.py
 ```
 
+## Wilf’s conjecture on numerical semigroups
+
+[Open counterexample hunt](math/wilf-conjecture/README.md) for Wilf’s 1978 inequality. Includes a standalone exact Apéry verifier and a reproducible five-generator baseline. No counterexample found.
+
 ## 001 · Caiolo–Ferroni–Hoster, Conjecture 7.3
 
 **Status: exact arithmetic reproduced for one witness.** This is not a new disproof, a Lean replay, or a claim of priority. The matroid construction is credited to [Cinna Davis and GPT-6.2 Astra](https://github.com/1337isnot1337/solved-conjectures/pull/326), adapting [Bérczi, Coron, Eur and Li](https://arxiv.org/html/2610.17135v1). The statement and flag-to-polynomial formula are from [Caiolo, Ferroni and Hoster, Conjecture 7.3 and Theorem 4.9](https://arxiv.org/html/2605.28474v1).
