@@ -2,13 +2,14 @@ File                                      Command (run from math/wilf-conjecture
 baseline_family.json                      python3 -B baseline_family.py
 check_independent.txt                     python3 -B check_independent.py
 coverage_m20_K5.json                      python3 -B coverage_exhaustive.py 20 5
-hard_core_m20_K5.json                     python3 -B hard_core.py 20 5
 criteria_box_m6-19_K4_all.txt             ./scan_criteria box 6 19 4 0
 criteria_box_m20-26_K5_c4m.txt            ./scan_criteria box 20 26 5 4
-criteria_pos_m20-80_Q1_c4m.txt            ./scan_criteria pos 20 80 1 4
+criteria_pos_m20-80_Q1_c4m.txt            ./scan_criteria pos 20 80 1 4            (run as m = 20-50, 51-68, 69-80; lines concatenated, totals summed)
+criteria_pos_m20-70_Q12_c4m.txt           ./scan_criteria pos 20 70 12 4           (run as m = 20-50, 51-60, 61-66, 67-70; lines concatenated, totals summed)
 criteria_rnd_m100-130_N50000_c4m.txt      ./scan_criteria rnd 100 130 50000 4      (seeded sample, not exhaustive)
 hrw_question_k3_m8-12_A3.txt              python3 -B hrw_question.py 3 8 12 3
 hrw_question_k4_m8-9_A2.txt               python3 -B hrw_question.py 4 8 9 2
+nowrap_check.txt                          python3 -B nowrap_check.py
 shape_exhaustive_k2_m3-16.txt             python3 -B shape_tiles.py exhaustive 2 3 16
 shape_exhaustive_k3_m4-12.txt             python3 -B shape_tiles.py exhaustive 3 4 12
 shape_graded_k3_m10-70.txt                python3 -B shape_tiles.py graded 3 10 70
@@ -20,8 +21,9 @@ tiles_extended_k3_m8-11_q0-4.jsonl        python3 -B pseudo_tiles.py extended 3 
 tiles_extended_k3_m12-14_q0-3.jsonl       python3 -B pseudo_tiles.py extended 3 12 14 0 3
 tiles_extended_k4_m8-10_q0-2.jsonl        python3 -B pseudo_tiles.py extended 4 8 10 0 2
 tree_check_genus22.txt                    python3 -B tree_check.py 22
+tree_check_genus25.txt                    python3 -B tree_check.py 25
 uniform_ray_22_1_5_6_7.json               python3 -B uniform_rays.py check 22 5 6 7 8
 uniform_rays_scan_m20-30.jsonl            python3 -B uniform_rays.py scan 20 30
 
 scan_criteria is built with: gcc -O2 -o scan_criteria scan_criteria.c
-The scanner asserts Theorem A and the bounds C, C+, C2 on every semigroup it counts and exits on a violation.
+The scanner asserts Theorem A and the bounds of Theorems C, C+ and G (one window) on every semigroup it counts and exits on a violation.

@@ -10,14 +10,14 @@
  *   - Apéry table by relaxation, normal forms with the graded-lex tie-break (minimal length);
  *   - the down-set property and the identity  2mW = 2*sum D(top) - 3m(m-1)  are asserted;
  *   - type t (FGH covers t <= 4);
- *   - C  : 2*N0 <= 5m + 3                                   (Theorem C, k = 4)
+ *   - C  : m(5m+3) - 2*sum over Apery elements w >= c of (l(w)+4)(w-c+1) >= 0   (Theorem C, k = 4)
  *   - C+ : 2m(4m - N0) - 3m(m-1) + 2R >= 0                  (Theorem C+, R = rearrangement sum)
  *   - S  : the same expression with N0 replaced by the mu-mass of ALL maximal cells of the
  *          down-set (a quantity of the shape alone; S <= C+ always)
- *   - P  : at most 2 Apéry elements >= c, i.e. at most 2 pseudo-Frobenius numbers in [c-m, c)
- *          (Corollary C2 with e = 5; it implies C when m >= 9, which is asserted)
+ *   - G  : d(d-1) <= 3(m+1-2d), d = number of gaps in [c-m, c)   (Theorem G, one window, e = 5);
+ *          the bound 2W >= 3(m+1-2d) - d(d-1) is asserted
  * and the bound  2mW >= [C+ left side]  is asserted.  Output per multiplicity: counts, the
- * least W, and the least value of the C+ bound (as the integer 2m*bound) with its semigroup.
+ * least W, and the least values of the C, C+ and S bounds (as integers 2m*bound) with their semigroups.
  * Exact 64-bit integers.  Build: gcc -O2 -o scan_criteria scan_criteria.c
  */
 #include <stdio.h>
@@ -72,8 +72,8 @@ static int deglex_less(const int *x, const int *y) {
     return 0;
 }
 
-static long cnt, cnt_type5, cnt_notC, cnt_notC_type5, cnt_notCp, cnt_notCp_type5, cnt_notS, cnt_P, cnt_P_type5;
-static long bestW, bestWa[4], bestB, bestBa[4], bestB_W, bestS, bestSa[4], bestS_W;
+static long cnt, cnt_type5, cnt_notC, cnt_notC_type5, cnt_notCp, cnt_notCp_type5, cnt_notS, cnt_G, cnt_G_type5;
+static long bestW, bestWa[4], bestB, bestBa[4], bestB_W, bestS, bestSa[4], bestS_W, bestC, bestCa[4], bestC_W;
 static int qmin;
 
 static void consider(const long *a) {
@@ -126,11 +126,11 @@ static void consider(const long *a) {
         }
     }
     if (2 * m * W != 2 * sumD - 3L * m * (m - 1)) { fprintf(stderr, "identity fails\n"); exit(1); }
-    long N0 = 0, Nmax = 0;
+    long N0 = 0, Nmax = 0, sharp = 0;
     int ttop = 0;
     for (int r = 0; r < m; r++) {
         int deg = nf[r][0] + nf[r][1] + nf[r][2] + nf[r][3];
-        if (M - w[r] < m) { ttop++; N0 += mu[r]; if (mu[r] != deg + 4) { fprintf(stderr, "top-window cell not maximal\n"); exit(1); } }
+        if (M - w[r] < m) { ttop++; N0 += mu[r]; sharp += (long)mu[r] * (w[r] - c + 1); if (mu[r] != deg + 4) { fprintf(stderr, "top-window cell not maximal\n"); exit(1); } }
         if (mu[r] == deg + 4) Nmax += mu[r];          /* maximal cell of the down-set */
     }
     static int srt[MAXM];
@@ -138,8 +138,9 @@ static void consider(const long *a) {
     qsort(srt, m, sizeof(int), cmp_desc);
     long R = 0;
     for (int j = 0; j < m; j++) R += (long)j * srt[j];
-    long boundC = 2L * m * (4L * m - N0) - 3L * m * (m - 1);       /* = 2m * (Theorem C bound) */
-    long boundCp = boundC + 2 * R;                                 /* = 2m * (Theorem C+ bound) */
+    long boundCp = 2L * m * (4L * m - N0) - 3L * m * (m - 1) + 2 * R;   /* = 2m * (Theorem C+ bound) */
+    long boundC = (long)m * (5L * m + 3) - 2 * sharp;                   /* = 2m * (Theorem C bound)  */
+    if (2 * m * W < boundC) { fprintf(stderr, "Theorem C violated\n"); exit(1); }
     long boundS = 2L * m * (4L * m - Nmax) - 3L * m * (m - 1) + 2 * R;   /* shape-only */
     if (2 * m * W < boundCp || boundCp < boundS) { fprintf(stderr, "bound violated\n"); exit(1); }
     if (boundS < 0) cnt_notS++;
@@ -155,14 +156,14 @@ static void consider(const long *a) {
         type += maximal;
     }
     if (type >= 5) cnt_type5++;
-    if (ttop <= 2) {
-        cnt_P++; if (type >= 5) cnt_P_type5++;
-        if (m >= 9 && boundC < 0) { fprintf(stderr, "Corollary C2 violated\n"); exit(1); }
-    }
+    long boundG = 3L * (m + 1 - 2 * ttop) - (long)ttop * (ttop - 1);     /* = 2 * (Theorem G, one window) */
+    if (2 * W < boundG) { fprintf(stderr, "Theorem G violated\n"); exit(1); }
+    if (boundG >= 0) { cnt_G++; if (type >= 5) cnt_G_type5++; }
     if (boundC < 0) { cnt_notC++; if (type >= 5) cnt_notC_type5++; }
     if (boundCp < 0) { cnt_notCp++; if (type >= 5) cnt_notCp_type5++; }
     if (W < bestW) { bestW = W; memcpy(bestWa, a, sizeof bestWa); }
     if (boundCp < bestB) { bestB = boundCp; memcpy(bestBa, a, sizeof bestBa); bestB_W = W; }
+    if (boundC < bestC) { bestC = boundC; memcpy(bestCa, a, sizeof bestCa); bestC_W = W; }
 }
 
 int main(int argc, char **argv) {
@@ -172,10 +173,10 @@ int main(int argc, char **argv) {
     long P = atol(argv[4]);
     qmin = atoi(argv[5]);
     if (m1 > 255 || m0 < 2) { fprintf(stderr, "need 2 <= m <= 255 (exponents are packed in 8 bits)\n"); return 2; }
-    long T = 0, T5 = 0, TnC5 = 0, TnCp = 0, TnCp5 = 0, TnS = 0, TP = 0, TP5 = 0;
+    long T = 0, T5 = 0, TnC = 0, TnC5 = 0, TnCp = 0, TnCp5 = 0, TnS = 0, TG = 0, TG5 = 0;
     for (m = m0; m <= m1; m++) {
-        cnt = cnt_type5 = cnt_notC = cnt_notC_type5 = cnt_notCp = cnt_notCp_type5 = cnt_notS = cnt_P = cnt_P_type5 = 0;
-        bestW = bestB = bestS = 1L << 60;
+        cnt = cnt_type5 = cnt_notC = cnt_notC_type5 = cnt_notCp = cnt_notCp_type5 = cnt_notS = cnt_G = cnt_G_type5 = 0;
+        bestW = bestB = bestS = bestC = 1L << 60;
         long a[4];
         if (mode == 'b') {
             long hi = P * m;
@@ -207,19 +208,21 @@ int main(int argc, char **argv) {
                 consider(a);
             }
         }
-        T += cnt; T5 += cnt_type5; TnC5 += cnt_notC_type5; TnCp += cnt_notCp; TnCp5 += cnt_notCp_type5; TnS += cnt_notS; TP += cnt_P; TP5 += cnt_P_type5;
+        T += cnt; T5 += cnt_type5; TnC += cnt_notC; TnC5 += cnt_notC_type5; TnCp += cnt_notCp; TnCp5 += cnt_notCp_type5; TnS += cnt_notS; TG += cnt_G; TG5 += cnt_G_type5;
         if (cnt)
-            printf("m=%d count=%ld type>=5=%ld P=%ld P&type>=5=%ld notC=%ld notC&type>=5=%ld notC+=%ld notC+&type>=5=%ld notS=%ld "
-                   "minW=%ld at [%d,%ld,%ld,%ld,%ld] min(2m*C+bound)=%ld (W=%ld) at [%d,%ld,%ld,%ld,%ld] "
+            printf("m=%d count=%ld type>=5=%ld G=%ld G&type>=5=%ld notC=%ld notC&type>=5=%ld notC+=%ld notC+&type>=5=%ld notS=%ld "
+                   "minW=%ld at [%d,%ld,%ld,%ld,%ld] min(2m*Cbound)=%ld (W=%ld) at [%d,%ld,%ld,%ld,%ld] "
+                   "min(2m*C+bound)=%ld (W=%ld) at [%d,%ld,%ld,%ld,%ld] "
                    "min(2m*Sbound)=%ld (W=%ld) at [%d,%ld,%ld,%ld,%ld]\n",
-                   m, cnt, cnt_type5, cnt_P, cnt_P_type5, cnt_notC, cnt_notC_type5, cnt_notCp, cnt_notCp_type5, cnt_notS,
+                   m, cnt, cnt_type5, cnt_G, cnt_G_type5, cnt_notC, cnt_notC_type5, cnt_notCp, cnt_notCp_type5, cnt_notS,
                    bestW, m, bestWa[0], bestWa[1], bestWa[2], bestWa[3],
+                   bestC, bestC_W, m, bestCa[0], bestCa[1], bestCa[2], bestCa[3],
                    bestB, bestB_W, m, bestBa[0], bestBa[1], bestBa[2], bestBa[3],
                    bestS, bestS_W, m, bestSa[0], bestSa[1], bestSa[2], bestSa[3]);
         else printf("m=%d count=0\n", m);
         fflush(stdout);
     }
-    printf("total=%ld type>=5=%ld P=%ld P&type>=5=%ld notC&type>=5=%ld notC+=%ld notC+&type>=5=%ld notS=%ld\n",
-           T, T5, TP, TP5, TnC5, TnCp, TnCp5, TnS);
+    printf("total=%ld type>=5=%ld G=%ld G&type>=5=%ld notC=%ld notC&type>=5=%ld notC+=%ld notC+&type>=5=%ld notS=%ld\n",
+           T, T5, TG, TG5, TnC, TnC5, TnCp, TnCp5, TnS);
     return 0;
 }

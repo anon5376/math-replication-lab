@@ -1,9 +1,10 @@
-"""Lemma S of NOTE.md, finite part: the simplex {x in N^k : |x| <= L} is not a lattice tile.
+"""Lemma S of NOTE.md, brute-force re-check of three small cases.
 
-For L >= k >= 2 the note gives a proof.  The remaining cases with k <= 4 are
-(k, L) = (3, 2), (4, 2), (4, 3), where |simplex| = 10, 15, 35 is squarefree, so
-every abelian group of that order is cyclic and it suffices to test every
-r in (Z/m)^k for injectivity of x -> r.x mod m on the simplex.  Exhaustive.
+The note proves that the simplex {x in N^k : |x| <= L} is not a lattice tile for
+any k >= 2, L >= 2.  Here the cases (k, L) = (3, 2), (4, 2), (4, 3) are confirmed
+independently: |simplex| = 10, 15, 35 is squarefree, so every abelian group of
+that order is cyclic, and every r in (Z/m)^k is tested for injectivity of
+x -> r.x mod m on the simplex.  The L = 1 rows are positive controls (k! maps).
 """
 import itertools
 

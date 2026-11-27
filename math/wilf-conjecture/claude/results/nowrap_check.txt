@@ -1,0 +1,2 @@
+no-wrap semigroups checked: 4578 ; identity and non-negativity hold on all; right side = 0 on 189
+control [23, 47, 51, 78, 80]: m * (Theorem C bound with minres lengths) = 755

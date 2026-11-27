@@ -2,14 +2,14 @@
 
 For a multiplicity m this enumerates every 4-subset {a1<a2<a3<a4} of
 (m, K*m] with no a_i divisible by m, keeps those for which <m,a1..a4> has
-embedding dimension exactly 5 and conductor c > 4m, and classifies each by
+embedding dimension exactly 5 and conductor c > 4m, and counts
 
-  FGH   : type t <= e - 1 = 4           (Fröberg-Gottlieb-Häggkvist; known)
-  B     : carry-free normal forms       (Theorem B of NOTE.md; any of the four tie-breaks)
-  C     : 2*N0 <= 5m + 3                (Theorem C of NOTE.md with k = 4, minimal lengths)
+  type>=5 : type t >= 5, so the Fröberg-Gottlieb-Häggkvist criterion t <= e-1 does not apply
+  B       : carry-free normal forms under one of the four tie-breaks   (Theorem B)
+  G       : d(d-1) <= 3(m+1-2d), d = number of gaps in [c-m, c)         (Corollary G1, one window)
+  C       : the bound of Theorem C is >= 0
 
-and reports counts plus the least Wilf number in each cell.  Every identity
-and bound of NOTE.md is asserted inside apery_downset.stats on each instance.
+Every identity and bound of NOTE.md is asserted inside apery_downset.stats on each instance.
 """
 import json
 import sys
@@ -27,7 +27,6 @@ def apery_type(m, w):
 def work(args):
     m, K, a1 = args
     tot = Counter()
-    least = {}
     pool = [x for x in range(a1 + 1, K * m + 1) if x % m]
     for rest in combinations(pool, 3):
         a = (a1,) + rest
@@ -37,26 +36,27 @@ def work(args):
         s = stats(m, a, "deglex")
         if s["c"] <= 4 * m:
             continue
-        W = s["W"]
-        fgh = apery_type(m, w) <= 4
-        cf = s["carries"] == 0 or any(stats(m, a, o)["carries"] == 0 for o in ("lex", "revlex", "minres"))
-        topc = 2 * s["N0"] <= 5 * m + 3
-        key = ("FGH" if fgh else "-") + ("B" if cf else "-") + ("C" if topc else "-")
-        tot[key] += 1
-        if key not in least or W < least[key][0]:
-            least[key] = (W, [m] + list(a))
-    return tot, least
+        big = apery_type(m, w) >= 5
+        d = s["window_gaps"][0]
+        flags = dict(
+            B=s["carries"] == 0 or any(stats(m, a, o)["carries"] == 0 for o in ("lex", "revlex", "minres")),
+            G=d * (d - 1) <= 3 * (m + 1 - 2 * d),
+            C=s["sharpC_times_2m"] >= 0,
+        )
+        tot["semigroups"] += 1
+        tot["type>=5"] += big
+        for name, ok in flags.items():
+            tot[name] += ok
+            tot[name + " and type>=5"] += ok and big
+        tot["neither B nor G"] += not (flags["B"] or flags["G"])
+        tot["negative W"] += s["W"] < 0
+    return tot
 
 
 if __name__ == "__main__":
     m, K = int(sys.argv[1]), int(sys.argv[2])
     tot = Counter()
-    least = {}
     with Pool(4) as p:
-        for t, l in p.imap_unordered(work, [(m, K, a1) for a1 in range(m + 1, K * m + 1) if a1 % m], chunksize=1):
+        for t in p.imap_unordered(work, [(m, K, a1) for a1 in range(m + 1, K * m + 1) if a1 % m], chunksize=1):
             tot.update(t)
-            for key, v in l.items():
-                if key not in least or v[0] < least[key][0]:
-                    least[key] = v
-    print(json.dumps(dict(m=m, K=K, semigroups=sum(tot.values()), classes=dict(sorted(tot.items())),
-                          least_W={k: dict(W=v[0], generators=v[1]) for k, v in sorted(least.items())}), indent=1))
+    print(json.dumps(dict(m=m, K=K, **dict(sorted(tot.items()))), indent=1))

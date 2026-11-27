@@ -4,6 +4,8 @@
  "type>=5": 26717,
  "carry-free": 14010,
  "carry-free and type>=5": 10134,
+ "Corollary G1 (one window) applies": 41796,
+ "Corollary G1 (one window) applies and type>=5": 26714,
  "Theorem C applies": 41799,
  "Theorem C applies and type>=5": 26717,
  "Theorem C+ applies": 41799,

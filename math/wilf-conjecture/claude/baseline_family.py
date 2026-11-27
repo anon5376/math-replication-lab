@@ -4,7 +4,7 @@ Same lists as `../wilf.py sweep`: m in 19..55, q in {1,2,3}, offsets a<b<c<d in
 1..12, generators [m, qm+a, qm+b, (q+1)m+c, (q+1)m+d] with gcd 1; the same
 frontier filter (e = 5, 3e < m, g > 100, c > 4m, and g > 120 if m | c).
 For every frontier list: type, Theorem B (carry-free under one of four
-tie-breaks), Theorem C and C+ (minimal lengths).
+tie-breaks), Corollary G1, Theorem C and Theorem C+.
 """
 import json
 import os
@@ -39,11 +39,15 @@ if __name__ == "__main__":
                 tot["frontier"] += 1
                 big = apery_type(m, w) >= 5
                 cf = s["carries"] == 0 or any(stats(m, prim[1:], o)["carries"] == 0 for o in ("lex", "revlex", "minres"))
-                C = 2 * s["N0"] <= 5 * m + 3
+                d = s["window_gaps"][0]
+                G = d * (d - 1) <= 3 * (m + 1 - 2 * d)
+                C = s["sharpC_times_2m"] >= 0
                 Cp = 2 * m * (4 * m - s["N0"]) - 3 * m * (m - 1) + 2 * s["rearrangement"] >= 0
                 tot["type>=5"] += big
                 tot["carry-free"] += cf
                 tot["carry-free and type>=5"] += cf and big
+                tot["Corollary G1 (one window) applies"] += G
+                tot["Corollary G1 (one window) applies and type>=5"] += G and big
                 tot["Theorem C applies"] += C
                 tot["Theorem C applies and type>=5"] += C and big
                 tot["Theorem C+ applies"] += Cp

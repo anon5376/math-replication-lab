@@ -1,4 +1,4 @@
-# Apéry factorization down-sets and Wilf's conjecture: an exact slack formula and two criteria
+# Apéry factorization down-sets and Wilf's conjecture: an exact slack formula and the criteria it gives
 
 **Result type: THEOREM (sufficient criteria, fully proved). No counterexample. Wilf's conjecture for e = 5 is not settled here.**
 
@@ -13,16 +13,18 @@ Notation throughout: S ≠ ℕ is a numerical semigroup with multiplicity m ≥ 
 | A | **m·W = Σ_{x∈B} Σ_{i≤k} D(top_i(x)) − (k−1)·m(m−1)/2** | proved; exact slack of Zhai's bound W ≥ −(e−2)(m−1)/2 |
 | B | W = Σ δ(top) + (anti-carries) − (carries); carry-free normal forms ⟹ W ≥ 0 | proved |
 | B2 | Explicit rays ⟨m, qm+r_1, …, qm+r_k⟩: W = q·σ − k·ρ ≥ 0 for all q ≥ 1 under a finite hypothesis (G) | proved; e.g. ⟨22, 22q+1, 22q+5, 22q+6, 22q+7⟩, type 9 |
-| C | W ≥ (em+e−2)/2 − Σ_{w∈Ap, w≥c} (ℓ(w)+e−1), ℓ = least factorization length | proved |
-| C2 | **Wilf holds if the window [c−m, c) contains at most (e−1)/2 gaps and m ≥ (e−2)²; always if F is its only gap** | proved |
+| C | **W ≥ (em+e−2)/2 − (1/m)·Σ_{w∈Ap, w≥c} (ℓ(w)+e−1)(w−c+1)**, ℓ = least factorization length; only the Apéry elements in [c, c+m) enter | proved |
 | C+ | m·W ≥ m·(km − N_T) + R(B) − (k−1)·m(m−1)/2, R a rearrangement sum of the shape | proved |
-| S | The simplex {x : x_1+…+x_k ≤ L} is not a lattice tile for L ≥ k ≥ 2, nor for (k,L) = (3,2), (4,2), (4,3) | proved (first part), exhaustive computation (three cases) |
+| G | **W ≥ ((e−2)(m+1−2d) − d(d−1))/2, where d is the number of gaps in [c−m, c)**; more generally a sum over the windows [c−(j+1)m, c−jm) | proved |
+| G1 | **Wilf holds if d(d−1) ≤ (e−2)(m+1−2d)**; with Eliahou's theorem (3e ≥ m), Wilf holds whenever [c−m, c) has at most e−1 gaps | proved (second part uses Eliahou's theorem) |
+| S | For k ≥ 2 and L ≥ 2 the simplex {x : x_1+…+x_k ≤ L} is not a lattice tile; a tile containing it has strictly more cells, by an explicit margin | proved |
+| – | Conjecture C: the right side of Theorem C is ≥ 0 for every numerical semigroup (it is 0 on both known W = 0 families) | **conjectured**; proved without wraps (C3) and under G1's condition; true for all 1 179 596 semigroups of genus ≤ 25 and every semigroup scanned in §9 |
 | – | Conjecture Φ: the right side of C+ with T replaced by all maximal cells is ≥ 0 for every Apéry down-set | **conjectured**; no counterexample in the scans of §9 |
 | – | Wilf-type inequality for weighted down-set *tiles* without Apéry minimality (the closing question of Hellus–Rechenauer–Waldi) | **open**; no counterexample in §8 |
 
-What the criteria reach (exact counts in §9): on all 34 776 387 semigroups with e = 5 in the exhaustive scans, the right side of C+ is non-negative, so Wilf follows from C+ alone on each of them; 24 592 298 of those have type ≥ 5, where the classical criterion t ≤ e − 1 does not apply.
+What the criteria reach (exact counts in §9): Theorem C certifies W ≥ 0 for every one of the 34 776 387 semigroups with e = 5 in the first three exhaustive scans, for 11 731 460 more on stabilized rays, and for every numerical semigroup of genus ≤ 25. Corollary G1, a closed formula in m, e and the number of gaps in the last window, certifies 34 685 075 of the 34 776 387. Of these semigroups 24 592 298 have type ≥ 5, where the classical criterion t ≤ e − 1 does not apply.
 
-What they do not reach: C+ is a lower bound, not Wilf. Its right side is negative for some down-sets that are not tiles (§7), so a proof along this route must use the tiling arithmetic of the whole Apéry set, not only its shape. That is the first remaining obstacle (§12).
+What they do not reach: these are lower bounds, not Wilf. Theorem G needs d ≲ √((e−2)m), and the semigroups with the smallest Wilf numbers have d near m/2. Theorem C would give Wilf for all semigroups if the Apéry elements in [c, c+m) could never crowd the top of that window (Conjecture C); I have no proof of that, and shape alone does not give it (§7). That is the first remaining obstacle (§12).
 
 ## 1. Conventions and edge cases
 
@@ -110,31 +112,66 @@ Explicit instance (hypothesis (G) checked by two independent routines in `unifor
 
 For q ≥ 3 these lie outside every solved range listed in §10 (m = 22, 3e < m, c > 4m, m ∤ c, g = 49q > 100, type 9 > e − 1, n > 12, and 2g ≠ F + t so not almost symmetric). They are an infinite family in the carry-free class, but their Wilf numbers are also immediate from (1), so they illustrate the class and do not need the theorem. `uniform_rays.py scan 20 30` lists how many (m; r) satisfy (G) with τ ≥ 5.
 
-## 5. Theorem C: few heavy chain tops
+## 5. Theorems C and G: few heavy chain tops, few gaps in the last windows
 
 Let T = {t ∈ B : a·t ≥ c} = {t : δ(t) = 0}. Each t ∈ T is a maximal cell of B, because a·(t + e_i) ≥ c + m + 1 > M; hence μ(t) = |t| + k. As integers, T is Ap ∩ [c, c + m) = {h + m : h a gap, h ≥ c − m}. Every gap h ≥ c − m is pseudo-Frobenius (h + s ≥ c for s ∈ S∖{0}), so |T| is both the number of gaps in [c − m, c) and the number of pseudo-Frobenius numbers there. Put N_T = Σ_{t∈T} (|t| + k).
 
-**Theorem C+.** Let μ_0 ≥ μ_1 ≥ … ≥ μ_{m−1} be the decreasing rearrangement of (μ(t))_{t∈B} and R(B) = Σ_j j·μ_j. Then
+**Theorem C.** Let ℓ(w) be the least number of minimal generators in a factorization of w. Then
+
+    W ≥ (em + e − 2)/2 − (1/m)·Σ_{w ∈ Ap, w ≥ c} (ℓ(w) + e − 1)·(w − c + 1).
+
+Each Apéry element of the threshold interval [c, c + m) is weighted by its position w − c + 1 ∈ [1, m]. In terms of gaps: the sum runs over the gaps h ≥ c − m, with w = h + m and (w − c + 1)/m = 1 − (F − h)/m.
+
+*Proof.* By Theorem A, m·W = Σ_t μ(t)D(t) − (k−1)m(m−1)/2. For t ∉ T, D(t) ≥ m. For t ∈ T, μ(t) = |t| + k and m − D(t) = a·t − c + 1. So Σ_t μ(t)D(t) ≥ km² − Σ_{t∈T} (|t| + k)(a·t − c + 1). With the `deglex` order |t| = ℓ(a·t). ∎
+
+Weaker forms, with d = |T| the number of gaps in [c − m, c):
+
+- *(C1)* The positions a·t − c + 1 are d distinct integers in [1, m] and |t| + k ≥ e, so Σ_T (|t| + k)(a·t − c + 1) ≤ m·N_T − e·d(d−1)/2, and W ≥ (em + e − 2)/2 − N_T + e·d(d−1)/(2m).
+- *(C2)* If every ℓ(w) ≤ λ, then W ≥ (em + e − 2)/2 − (λ + e − 1)·d·(1 − (d−1)/(2m)). One may take λ = min(m − 1, ⌊(c + m − 1)/a_1⌋) ≤ q, with a_1 the least generator above m: the box [0, x] ⊂ B has at least |x| + 1 cells, and a_1|x| ≤ a·x ≤ c + m − 1.
+
+Equality: Theorem C is an equality for e = 2 and for ⟨m, qm+1, …, qm+m−1⟩.
+
+**Conjecture C.** For every numerical semigroup, Σ_{w ∈ Ap, w ≥ c} (ℓ(w) + e − 1)(w − c + 1) ≤ m(em + e − 2)/2. By Theorem C this implies Wilf's conjecture. It only involves the Apéry elements in [c, c + m) and their shortest factorizations. Equivalently: the μ-weighted mean over T of the deficit D(t) = c + m − 1 − a·t is at least m − m(em + e − 2)/(2N_T). Since N_T ≤ km, this can fail only if more than (k+1)/(2k) of all chain tops lie in the window (N_T > ((k+1)m + k − 1)/2) and, in addition, those Apéry elements crowd the top of the window (mean deficit below (k−1)(m−1)/(2k)). In [25, 36, 42, 43, 44], N_T = 84 of 100 and the mean deficit is 10.6 against a threshold of 5.95. Evidence in §9; I have no proof. The mechanism that seems to prevent crowding: for many chain tops to lie in the window the generators must be nearly equal, and then distinct cells of the same length have weights that differ by small integer combinations, which either coincide (a tie, removing cells from B) or spread over a range much longer than d.
+
+**Proposition C3 (Conjecture C holds without wraps).** Under the hypothesis of Corollary B1 (every Apéry element has a factorization x with Σ x_i r_i ≤ m − 1) the bound of Theorem C is ≥ 0.
+
+*Proof.* Use the `minres` normal forms; their lengths are at least the minimal ones, so it suffices to show m((k+1)m + k − 1)/2 ≥ Σ_{t∈T} μ(t)(a·t − c + 1) for this B. Here a·x = mλ(x) + r·x with r·x ≤ m − 1 the residue. Write M = mq + f and ρ = m − 1 − f. Then T = T_q ∪ T_{q−1}, where T_q is the set of cells of level q (all have r·t ≤ f) and T_{q−1} the set of cells of level q − 1 with r·t ≥ f + 1; the position a·t − c + 1 is m − f + r·t on T_q and r·t − f on T_{q−1}. Lemma 2 for the weight vector r gives Σ_t μ(t)·r·t = (k+1)m(m−1)/2, and Σ_t μ(t) = km. Substituting,
+
+    m((k+1)m + k − 1)/2 − Σ_{t∈T} μ(t)(a·t − c + 1) = Σ_{t∉T} μ(t)(1 + r·t) − ρ·μ(T_q) + (f + 1)·μ(T_{q−1}).
+
+Let R be the ρ cells with r·x ≥ f + 1. For x ∈ R every top_i(x) has r-value ≥ r·x, so it lies in R: it is in T_{q−1} or outside T, never in T_q. These kρ pairs contribute at least kρ(f + 1) to the first and third terms, and they show μ(T_q) ≤ km − kρ. So the right side is at least kρ(f + 1) − ρk(m − ρ) = 0. ∎
+
+So Conjecture C is proved in two ranges: without wraps (C3), and when d(d−1) ≤ (e−2)(m + 1 − 2d) (below). The identity in the proof was checked on 4 578 random no-wrap semigroups (`nowrap_check.py`).
+
+**Theorem C+ (rearrangement).** Let μ_0 ≥ μ_1 ≥ … ≥ μ_{m−1} be the decreasing rearrangement of (μ(t))_{t∈B} and R(B) = Σ_j j·μ_j. Then
 
     m·W ≥ m·(km − N_T) + R(B) − (k−1)·m(m−1)/2.
 
 *Proof.* In (A′), δ(t) ≥ 1 for t ∉ T, and Σ_{t∉T} μ(t) = km − N_T. D̄ is a bijection onto {0, …, m−1}, so Σ_t μ(t)D̄(t) ≥ Σ_j j·μ_j by the rearrangement inequality. ∎
 
-**Theorem C.** Dropping R ≥ 0: W ≥ (em + e − 2)/2 − N_T. With the `deglex` order |nf(w)| is the least factorization length ℓ(w), so
+Neither of C and C+ implies the other; C+ is also an equality on the two families above.
 
-    W ≥ (em + e − 2)/2 − Σ_{w ∈ Ap, w ≥ c} (ℓ(w) + e − 1).
+**Lemma 3 (chain tops cannot share many cells).** For every U ⊆ B, the number of pairs (x, i) with top_i(x) ∈ U satisfies
 
-**Corollary C2.** Let t_top ≥ 1 be the number of gaps of S in [c − m, c), a_1 the least generator above m, and λ* = min(m − 1, ⌊(c + m − 1)/a_1⌋). Then W ≥ (em + e − 2)/2 − t_top·(λ* + e − 1). Hence Wilf's inequality holds if
+    μ(U) = Σ_{t∈U} μ(t) ≤ m + (k−1)·|U| + |U|(|U|−1)/2.
 
-- t_top = 1 (then W ≥ (e−2)(m−1)/2), or
-- 2·t_top ≤ e − 1 and m ≥ (e−2)², or
-- t_top·(q + e − 1) ≤ (em + e − 2)/2.
+*Proof.* Let I(x) = {i : top_i(x) ∈ U}, so μ(U) = Σ_x |I(x)|. For x ∈ U use |I(x)| ≤ 1 + (k−1). For x ∉ U with I(x) ≠ ∅ use r ≤ 1 + r(r−1)/2 for integers r ≥ 1. So μ(U) ≤ m + (k−1)|U| + Σ_{x∉U} C(|I(x)|, 2). If x ∉ U and i ≠ j lie in I(x), then t = top_i(x) = x + s·e_i and t′ = top_j(x) = x + s′·e_j with s, s′ ≥ 1, so t ≠ t′ and t − t′ = s·e_i − s′·e_j. The pair {t, t′} determines i, s and hence x = t − s·e_i. So distinct (x, {i, j}) give distinct 2-subsets of U, and the last sum is at most C(|U|, 2). ∎
 
-*Proof.* For x ∈ B the box [0, x] ⊂ B has Π(x_i + 1) ≥ |x| + 1 cells, so |x| ≤ m − 1; also a_1·|x| ≤ a·x ≤ c + m − 1, and (m+1)|x| ≤ (q+1)m − 1 gives |x| ≤ q. The three cases are arithmetic: (e−1)(m + e − 2) ≤ em + e − 2 iff m ≥ (e−2)². ∎
+**Theorem G (gaps in the last windows).** For j ≥ 0 let D_j be the number of integers in [c − (j+1)m, c − jm) that are not in S (negative integers count as non-members), and d = D_0 the number of gaps in [c − m, c). Then, for any set J of indices j ≥ 0,
 
-The type t counts all pseudo-Frobenius numbers; t_top only those in the last window. FGH needs t ≤ e − 1; C2 needs t_top ≤ (e−1)/2 and puts no condition on t. Neither implies the other. S_q above has t = 9, t_top = 1.
+    W ≥ Σ_{j∈J} [ (e−2)(m − D_j) − D_j(D_j − 1)/2 ] − (e−2)(m−1)/2,
 
-Equality: C+ is an equality for e = 2 and for ⟨m, qm+1, …, qm+m−1⟩.
+and in particular
+
+    W ≥ ( (e−2)(m + 1 − 2d) − d(d−1) ) / 2.
+
+*Proof.* By (A′), m·W ≥ m·Σ_t μ(t)δ(t) − (k−1)m(m−1)/2, because Σ_t μ(t)D̄(t) ≥ 0 and Σ_t D̄(t) = m(m−1)/2. Let U_j = {t ∈ B : δ(t) ≤ j}. Then Σ_t μ(t)δ(t) = Σ_{j≥0} μ({t : δ(t) > j}) = Σ_{j≥0} (km − μ(U_j)), every term is ≥ 0, and by Lemma 3 the j-th term is at least (k−1)(m − |U_j|) − C(|U_j|, 2). Finally |U_j| = D_j: δ(t) ≤ j means a·t + jm ≥ c, i.e. the one integer v of the class of a·t in [c − (j+1)m, c − jm) satisfies v < a·t, i.e. v ∉ S. ∎
+
+**Corollary G1.** Wilf's inequality holds whenever d(d−1) ≤ (e−2)(m + 1 − 2d). This is the case if d ≤ e − 1 and m ≥ 3e − 4. Since Eliahou proved Wilf for 3e ≥ m, it follows that **every numerical semigroup with at most e − 1 gaps in [c − m, c) satisfies Wilf's conjecture**. Every gap h ≥ c − m is pseudo-Frobenius, so d ≤ t, and the hypothesis d ≤ e − 1 is weaker than the classical t ≤ e − 1.
+
+For fixed e the first condition allows d up to about √((e−2)m). The explicit ray S_q of §4 has d = 1 and type 9. The bound of Theorem C is at least the one-window bound of Theorem G (insert Lemma 3 for U = T into Theorem C), so Conjecture C is a theorem whenever d(d−1) ≤ (e−2)(m + 1 − 2d). Using (C1) with Lemma 3 instead of the proof above improves the one-window bound slightly, to W ≥ ((e−2)(m + 1 − 2d) − d(d−1)(1 − e/m))/2. Theorem G also holds with any minimal generator n in place of m (windows of length n): §§2–3 and Lemma 3 never use that m is the least generator. On the 93 141 semigroups of genus ≤ 20 this certifies only 6 more.
+
+The proof of Theorem G uses neither the residues nor the positions in the window. What it leaves is the range d ≳ √((e−2)m), where many cells have two or more of their chain tops in the last window; there one needs Theorem C itself, i.e. the positions.
 
 ## 6. Reflection in boxes (Hellus–Rechenauer–Waldi) and where matchings stop
 
@@ -156,13 +193,15 @@ Ties versus collisions at the boundary. If t + e_i ∉ B because a·t + a_i equa
 
 ## 8. Realizability
 
-**Lemma S.** For L ≥ k ≥ 2 there is no homomorphism φ from ℤ^k to a group of order |Δ_L| that is injective on Δ_L = {x ∈ ℕ^k : |x| ≤ L}.
+**Lemma S (difference packing).** Let P, Q ⊂ ℕ^k with P + Q ⊆ B. Then the differences x − y (x ∈ P, y ∈ Q) are pairwise incongruent modulo the lattice Λ = {z : a·z ≡ 0 mod m}, so |P − Q| ≤ m. Consequently, for k ≥ 2 and L ≥ 2 the simplex Δ_L = {x ∈ ℕ^k : |x| ≤ L} is not the Apéry down-set of any numerical semigroup, and more precisely
 
-*Proof.* Suppose φ is bijective on Δ_L. Let |y| = L + 1 with all y_i ≥ 1, and let x ∈ Δ_L with φ(x) = φ(y). If x_i ≥ 1 then φ(x − e_i) = φ(y − e_i) with both in Δ_L, so x = y, impossible. Hence x = 0 and φ(y) = 0. For L ≥ k both (L−k+2, 1, 1, …, 1) and (L−k+1, 2, 1, …, 1) are such y, so φ(e_1 − e_2) = 0, contradicting injectivity on {e_1, e_2}. ∎
+    Δ_h ⊆ B  ⟹  m ≥ N(k; ⌈h/2⌉, ⌊h/2⌋),   N(k; p, n) = Σ_{j=0}^{k} C(k,j)·C(n,j)·C(p+k−j, k−j) > C(p+n+k, k) = |Δ_{p+n}|   (k ≥ 2, p, n ≥ 1).
 
-For (k, L) = (3,2), (4,2), (4,3) the order 10, 15, 35 is squarefree, so the group is cyclic; `simplex_tile.py` tests all 1000, 50 625 and 1 500 625 residue vectors and finds none injective (controls L = 1 give k! as expected). So for 2 ≤ k ≤ 4 the simplex Δ_L, L ≥ 2, is never an Apéry down-set.
+*Proof.* If x − y ≡ x′ − y′ then x + y′ ≡ x′ + y, both in B, so x + y′ = x′ + y. For P = Δ_p, Q = Δ_n: P + Q = Δ_{p+n} and P − Q = {z ∈ ℤ^k : |z⁺| ≤ p, |z⁻| ≤ n}. Counting by the j coordinates that are negative gives N(k; p, n). By Vandermonde, C(p+n+k, k) = Σ_j C(n,j)·C(p+k, k−j). The ratio of the j-th terms is ρ_j = C(k,j)·C(p+k−j, k−j)/C(p+k, k−j) = Π_{i=1}^{j} f_i with f_i = (k−i+1)(p+i)/(i(p+k−i+1)). Here f_i − 1 has the sign of p(k+1−2i) and f_i·f_{k+1−i} = 1, so ρ_j = ρ_{k−j} ≥ 1 for all j, and ρ_1 = k(p+1)/(p+k) > 1. The j = 1 term is present because n ≥ 1. ∎
 
-Consequence. For unit weights the slack in Lemma 2 is σ(B) = Σ_{x,i} (L − |top_i(x)|), L the largest length in B, and σ(B) = 0 iff B = Δ_L. (If every chain top has length L, then walking from 0 along the support of any x with |x| = L stays in B.) So for 2 ≤ k ≤ 4 every lattice-tile down-set other than Δ_0, Δ_1 has σ ≥ 1; in B2 this is why W grows linearly along a ray.
+The same argument works for any lattice tile, with any quotient group. For k = 4: a tile containing Δ_2, Δ_3, Δ_4, Δ_5 has m ≥ 21, 55, 131, 255, while |Δ_h| = 15, 35, 70, 126. In particular no down-set tile lies between Δ_4 and Δ_5, and none between Δ_{L−1} and Δ_L for any L ≥ 5 (k = 4): for h = L − 1 from 4 to 14 by evaluating N, and for h ≥ 15 because the j = 2 term alone, 6·C(⌊h/2⌋, 2)·C(⌈h/2⌉ + 2, 2), exceeds C(h+5, 4). (`simplex_tile.py` re-checks three small cases by brute force.)
+
+Consequence. For unit weights the slack in Lemma 2 is σ(B) = Σ_{x,i} (L − |top_i(x)|), L the largest length in B, and σ(B) = 0 iff B = Δ_L. (If every chain top has length L, then walking from 0 along the support of any x with |x| = L stays in B.) So for k ≥ 2 every lattice-tile down-set other than Δ_0, Δ_1 has σ ≥ 1; in B2 this is why W grows linearly along a ray.
 
 **Tiles without minimality.** A weighted tile is (B, a): B a down-set of size m, a ∈ ℤ^k, a·x mod m bijective on B (so B tiles ℤ^k by a lattice with cyclic quotient). Theorems A, B, C, C+ hold for weighted tiles with all a_i > m, with c and g replaced by max_B a·x − m + 1 and Σ_B ⌊a·x/m⌋. Hellus–Rechenauer–Waldi ask whether k·Σ_B ⌊(max − a·x)/m⌋ ≥ Σ_B ⌊a·x/m⌋ holds whenever B tiles ℤ^k by a lattice and all a_i ≥ m. Exhaustive tests over tiles with cyclic quotient, exact arithmetic (`pseudo_tiles.py`, `hrw_question.py`), all with zero violations:
 
@@ -172,29 +211,32 @@ Consequence. For unit weights the slack in Lemma 2 is σ(B) = Σ_{x,i} (L − |t
 
 So in these ranges weight-minimality is not what makes the inequality true; the tiling is. This is evidence about an open question, not a theorem.
 
-**Conjecture Φ.** For a down-set B put N_max = Σ over maximal cells of μ, and Φ(B) = m(km − N_max) + R(B) − (k−1)m(m−1)/2. Since T ⊂ maximal cells, C+ gives m·W ≥ Φ(B). Conjecture: Φ(B) ≥ 0 for every Apéry normal-form down-set (`deglex`). This is a statement about the shape of a lattice tile with no weights in it, and it implies Wilf. It is an equality on both known equality families and fails for non-tiles (§7.3). Evidence: §9 (every scanned semigroup); the 16 down-sets with Φ < 0 of size ≤ 16 (k = 2) or ≤ 12 (k = 3) admit no bijective residue vector; and the graded tiles of ℤ/m for all generator triples with m ≤ 70 (854 694 tiles) and quadruples with m ≤ 34 (271 580 tiles) have Φ > 0 (`shape_tiles.py`). Heuristic limit: a tile sandwiched between Δ_{L−1} and Δ_L with L large would have Φ < 0, so the conjecture needs such near-perfect tiles not to exist; for k = 2 they do not (tiles are L-shapes), for k ≥ 3 this is a degree–diameter question for Cayley digraphs of ℤ/m that I did not resolve.
+**Conjecture Φ.** For a down-set B put N_max = Σ over maximal cells of μ, and Φ(B) = m(km − N_max) + R(B) − (k−1)m(m−1)/2. Since T ⊂ maximal cells, C+ gives m·W ≥ Φ(B). Conjecture: Φ(B) ≥ 0 for every Apéry normal-form down-set (`deglex`). This is a statement about the shape of a lattice tile with no weights in it, and it implies Wilf. It is an equality on both known equality families and fails for non-tiles (§7.3). Evidence: §9 (every scanned semigroup); the 16 down-sets with Φ < 0 of size ≤ 16 (k = 2) or ≤ 12 (k = 3) admit no bijective residue vector; and the graded tiles of ℤ/m for all generator triples with m ≤ 70 (854 694 tiles) and quadruples with m ≤ 34 (271 580 tiles) have Φ > 0 (`shape_tiles.py`). Heuristic limit: a tile sandwiched between Δ_{L−1} and Δ_L with L large would have Φ < 0, so the conjecture needs such near-perfect tiles not to exist. Lemma S shows they do not exist for L ≥ 5 when k = 4; it says nothing yet about tiles that are close to a weighted simplex with unequal weights.
 
 ## 9. Bounded computations
 
-All exact integer arithmetic. "type ≥ 5" means the FGH criterion does not apply. C, C+ use minimal lengths. P means at most two gaps in [c − m, c), the hypothesis of C2 for e = 5 apart from m ≥ 9. Φ is the conjectured shape bound. Counts are of semigroups with embedding dimension exactly 5 (redundant lists are discarded).
+All exact integer arithmetic. Counts are of semigroups with embedding dimension exactly 5 (redundant lists are discarded). "type ≥ 5" means the FGH criterion does not apply. "G holds" means d(d−1) ≤ 3(m+1−2d), the one-window condition of Corollary G1 for e = 5. "C < 0" counts semigroups where the bound of Theorem C is negative (a failure of Conjecture C); "C+ < 0" and "Φ < 0" likewise for Theorem C+ and Conjecture Φ. Minimal lengths (`deglex`) throughout.
 
-| Exhaustive scan (`scan_criteria.c`) | semigroups | type ≥ 5 | P | P and type ≥ 5 | C fails, type ≥ 5 | C+ fails | Φ < 0 | least W |
-|---|---|---|---|---|---|---|---|---|
-| m = 6..19, every 4-subset of (m, 4m] without multiples of m, any conductor | 715 736 | 297 147 | 439 479 | 127 531 | 2 256 | 0 | 0 | 3 at [6, 7, 15, 16, 17] |
-| m = 20..26, every 4-subset of (m, 5m] without multiples of m, c > 4m | 10 814 803 | 6 025 009 | 7 589 044 | 3 641 876 | 2 192 | 0 | 0 | 37 at [25, 36, 42, 43, 44] |
-| m = 20..80, every 4-subset of (m, 2m), c > 4m | 23 293 614 | 18 291 278 | 7 740 376 | 4 433 630 | 412 | 0 | 0 | 37 at [25, 36, 42, 43, 44] |
+| Exhaustive scan (`scan_criteria.c`) | semigroups | type ≥ 5 | G holds | G holds, type ≥ 5 | C < 0 | C+ < 0 | Φ < 0 | least W | least Theorem C bound |
+|---|---|---|---|---|---|---|---|---|---|
+| m = 6..19, every 4-subset of (m, 4m] without multiples of m, any conductor | 715 736 | 297 147 | 700 991 | 283 249 | 0 | 0 | 0 | 3 at [6, 7, 15, 16, 17] | 0.50 at [6, 11, 19, 20, 21] |
+| m = 20..26, every 4-subset of (m, 5m] without multiples of m, c > 4m | 10 814 803 | 6 025 009 | 10 787 079 | 5 997 285 | 0 | 0 | 0 | 37 at [25, 36, 42, 43, 44] | 5.76 at [25, 51, 54, 57, 58] |
+| m = 20..80, every 4-subset of (m, 2m), c > 4m | 23 293 614 | 18 291 278 | 23 243 588 | 18 241 252 | 0 | 0 | 0 | 37 at [25, 36, 42, 43, 44] | 10.68 at [22, 31, 40, 41, 43] |
+| m = 20..70, every 4-subset of (12m, 13m) (stabilized rays), c > 4m | 11 731 460 | 9 860 132 | 11 715 018 | 9 843 690 | 0 | 0 | 0 | 240 at [25, 301, 304, 307, 308] | 5.76 at [25, 301, 304, 307, 308] |
 
-The third scan for m ≤ 26 (47 766 semigroups) is contained in the second. In total 34 776 387 distinct semigroups with e = 5, of which 24 592 298 have type ≥ 5; Theorem C+ certifies W ≥ 0 for every one of them, and Φ ≥ 0 on every one. No negative Wilf number occurs. A seeded pseudo-random sample (m = 100..130, 50 000 lists per m with a_i ∈ (m, 3m), c > 4m: 1 393 214 lists with e = 5, 1 234 743 of type ≥ 5) shows the same: C, C+ and Φ never fail and the least W is 3.97m. It is a sample, not a scan, and random lists are far from extremal.
+The third scan for m ≤ 26 (47 766 semigroups) is contained in the second. The first three scans cover 34 776 387 distinct semigroups, 24 592 298 of type ≥ 5. On every one of them the bound of Theorem C is positive, so Theorem C alone certifies W ≥ 0; the closed formula of Corollary G1 certifies 34 685 075 of them (24 501 833 of type ≥ 5). No negative Wilf number occurs. A seeded pseudo-random sample (m = 100..130, 50 000 lists per m with a_i ∈ (m, 3m), c > 4m: 1 393 214 lists with e = 5, 1 234 743 of type ≥ 5) shows the same: G holds for all but 26, C, C+ and Φ are never negative, and the least W is 3.97m. It is a sample, not a scan, and random lists are far from extremal.
 
-At m = 20 in the second box (`coverage_exhaustive.py`, `hard_core.py`): 737 442 semigroups, 334 408 of type ≥ 5; 55 503 are carry-free under one of the four orders (24 758 of type ≥ 5); 72 are covered by none of FGH, B, C. Those 72 are listed in `results/hard_core_m20_K5.json` (depth 5 to 14, genus 55 to 188, W from 38 to 148), and C+ covers all of them.
+The fourth scan is aimed at Conjecture C. Along a ray ⟨m, qm + b_1, …, qm + b_4⟩ the Apéry down-set and the top window stop changing once q exceeds the longest factorization, so the bound of Theorem C is constant in q while W grows linearly; the bound is therefore smallest relative to W there. Its least value per multiplicity has local minima 5.76 at m = 25, 14.05 at m = 41 and 26.23 at m = 61, and does not approach 0 in this range. These three belong to one family, m = 2s² − 2s + 1 with residues (1, s, 2s − 1, 2s): for s = 3..12 (m up to 265, computed with `apery_downset.py`, not proved in general) it satisfies (G) with L = s − 1, ρ = 0, d = 4(s − 1), σ = (2/3)(s − 2)(s − 1)(2s − 3), so W = qσ, and the Theorem C bound grows from 1.23 (s = 3, the semigroup [13, 14, 16, 18, 19] at q = 1) to 182.6 (s = 12). The least Wilf numbers at m = 13 in the first scan and at m = 61 in the third are attained by its members with q = 1 ([13, 14, 16, 18, 19] and [61, 62, 67, 72, 73]).
 
-These scans are bounded and say nothing beyond their ranges. With c > 4m the least Wilf number for each m lies between 1.48m and 2.64m, always at depth 5 or 6, and the minimizers have Apéry down-sets that are truncated simplices, e.g. [25, 36, 42, 43, 44]: W = 37, 25 of the 35 cells of Δ_3, twelve maximal cells all ≥ c, C+ bound 8.24. The least value of Φ/m² per multiplicity is 0.33 at m = 25 and between 0.41 and 0.86 for the other m in 20..80; it does not decay in this range.
+These scans are bounded and say nothing beyond their ranges. With c > 4m and generators in (m, 2m) the least Wilf number for each m lies between 1.48m and 2.64m, always at depth 5 or 6, and the minimizers have Apéry down-sets that are truncated simplices, e.g. [25, 36, 42, 43, 44]: W = 37, 25 of the 35 cells of Δ_3, twelve maximal cells all ≥ c (so d = 12, where Corollary G1 needs d ≤ 6), Theorem C bound 15.56, Theorem C+ bound 8.24. The least value of Φ/m² per multiplicity is 0.33 at m = 25 and between 0.41 and 0.86 for the other m in 20..80.
+
+At m = 20 in the second box (`coverage_exhaustive.py`): 737 442 semigroups, 334 408 of type ≥ 5. Corollary G1 holds for 731 325 (328 291 of type ≥ 5); 55 503 are carry-free under one of the four orders (24 758 of type ≥ 5); 5 703 satisfy neither; Theorem C certifies all 737 442.
 
 Other checks:
 
-- Lemma 2, Theorems A and B and the bounds C, C+, C2 are asserted inside `apery_downset.stats` on every call; `scan_criteria.c` asserts Theorem A, the bound C+ and Corollary C2 on every semigroup it counts. The invariants (m, e, c, g, n, W) agree with `../wilf.py` on 17 589 random semigroups with e from 2 to 7 under two tie-breaks (`test_claude.py`).
-- Repository baseline family (`baseline_family.py` reproduces its counts: 54 099 lists, 41 799 beyond its filters): all 41 799 satisfy the hypothesis of Theorem C; 26 717 of them have type ≥ 5; 14 010 are carry-free under one of the four orders (10 134 of type ≥ 5). The control [23, 47, 51, 78, 80] has type 10, no carries, and W = 86 + 9 − 0 = 95 by Theorem B.
-- `tree_check.py`, independent of everything else here: on all 258 581 numerical semigroups of genus ≤ 22 (any e; the per-genus counts 1, 2, 4, 7, 12, 23, …, 103 246 match the known sequence), the bounds of Theorem C and Corollary C2 hold, with every quantity computed from the definitions. The hypothesis of C2 (first two cases) holds for 15 485 of them.
+- Lemma 2, Lemma 3, Theorems A, B, G and the bounds C, C+ are asserted inside `apery_downset.stats` on every call; `scan_criteria.c` asserts Theorem A and the bounds of Theorems C, C+ and G (one window) on every semigroup it counts. The invariants (m, e, c, g, n, W) agree with `../wilf.py` on 17 589 random semigroups with e from 2 to 7 under two tie-breaks (`test_claude.py`).
+- Repository baseline family (`baseline_family.py` reproduces its counts: 54 099 lists, 41 799 beyond its filters): Theorem C certifies all 41 799; the closed formula of Corollary G1 certifies 41 796 of them; 26 717 have type ≥ 5 (26 714 of these satisfy G1); 14 010 are carry-free under one of the four orders (10 134 of type ≥ 5). The control [23, 47, 51, 78, 80] has type 10, no carries, and W = 86 + 9 − 0 = 95 by Theorem B.
+- `tree_check.py`, independent of everything else here: on all 1 179 596 numerical semigroups of genus ≤ 25 (any e; the per-genus counts 1, 2, 4, 7, 12, 23, …, 467 224 match the known sequence), with every quantity computed from the definitions, the bounds of Theorems C and G hold, **the bound of Theorem C is ≥ 0 for every one**, and Theorem G certifies W ≥ 0 for 798 606 with one window and 802 402 with all windows. 1 145 086 of them have at most e − 1 gaps in [c − m, c).
 - `check_independent.py`: direct membership DP and an independent certificate checker agree with `../wilf.py verify` and with `apery_downset.py` on the control (m, e, c, g, n, W) = (23, 5, 170, 117, 53, 95) and on 18 further semigroups.
 
 ## 10. Prior work and the scope of the exclusion filters
@@ -207,10 +249,11 @@ Accessed 2026-11-27 through fetch agents (arXiv HTML) and the PDF text they save
 - Delgado–Eliahou–Fromentin, arXiv:2310.07742 (HTML read in full by a fetch agent): g ≤ 100; g ≤ 120 only when m divides c. Their list of known cases has m ≤ 19 (Kliem–Stump), so the m ≤ 18 filter is conservative, and it has e ≤ 3 and c ≤ 3m only.
 - Bruns–García-Sánchez–O'Neill–Wilburne, arXiv:1903.04342 (abstract and §§1–4 start read by a fetch agent): m ≤ 18; uses e > t ⟹ Wilf.
 - conjectures.io source23 (c ≤ 4m): page says "Approved 12 Oct 2026", Lean verification "Passed"; the Lean source and review were not read, and the page cites arXiv:1703.01761, which is the c ≤ 3m paper. source22 (e = 4): "Solved elsewhere", "Withdrawn"; no citation for the prior proof on the page, and none of the papers above lists e = 4 as known. Both are treated as reported, not verified.
+- Dhayni, arXiv:1610.08726 (HTML §§1–4 read by a fetch agent): sufficient conditions of the form w_{m−1} ≥ w_1 + w_α with (2 + (α−3)/q)e ≥ m, m − e ≤ 5, (2 + 1/q)e ≥ m; the index α is free and no condition counts Apéry elements above the conductor.
 - Marashdeh, arXiv:2608.12531 (first third read): W = (e − t − 1)n + σ + Θ; no theorem with hypothesis t ≥ e other than a reduction to a conjecture.
-- Filters missing from the README list that matter for a hunt: type t ≤ e − 1 (FGH); n ≤ 12 (Eliahou–Marín-Aragón); m | c with 4e ≥ m (Eliahou, cited by Delgado–Eliahou–Fromentin and by Marashdeh); almost symmetric semigroups. By C2, add: at most (e−1)/2 gaps in [c − m, c). By C, add: Σ_{w∈Ap, w≥c} (ℓ(w) + e − 1) ≤ (em + e − 2)/2.
+- Filters missing from the README list that matter for a hunt: type t ≤ e − 1 (FGH); n ≤ 12 (Eliahou–Marín-Aragón); m | c with 4e ≥ m (Eliahou, cited by Delgado–Eliahou–Fromentin and by Marashdeh); almost symmetric semigroups. By G1, add: d(d−1) ≤ (e−2)(m+1−2d) with d the number of gaps in [c − m, c); in particular d ≤ e − 1. By C, add: Σ_{w∈Ap, w≥c} (ℓ(w) + e − 1)(w − c + 1) ≤ m(em + e − 2)/2, which no semigroup in §9 violates.
 
-Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box bound are known. I did not find Theorem A as an equality, Theorems B, C, C+, Corollaries B2, C2 or Lemma S in the sources above or in five targeted web searches; that is a negative search, not a proof of novelty. They are short consequences of Zhai's reversal once the top is kept and the residue bijection is used.
+Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box bound are known. I did not find Theorem A as an equality, Theorems B, C, C+, G, Corollaries B2, G1 or Lemma 3 in the sources above or in seven targeted web searches; that is a negative search, not a proof of novelty. They are short consequences of Zhai's reversal once the top is kept. Lemma S is a standard packing argument (the difference set of a set that embeds in a group must embed too); I did not look for its first appearance.
 
 ## 11. Attempt log
 
@@ -219,18 +262,20 @@ Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box boun
 3. *Pay for each cell's carries at that cell.* False (§7.2).
 4. *Gap ↦ left element with h + s ∉ S.* Cannot beat the type (§6).
 5. *k interval partitions with one covering box per partition.* Recovers FGH for B only, since each maximal cell needs its own box.
-6. *Distinct residues of the chain tops alone (rearrangement over T).* Not enough for shapes near a simplex (§7.3); gives C+ when combined with δ ≥ 1 off T.
+6. *Distinct residues of the chain tops alone (rearrangement over T).* Not enough for shapes near a simplex (§7.3); gives C+ and (C1), (C2) when combined with δ ≥ 1 off T.
 7. *Generators just below multiples of m, a_i = Q_i m − b_i.* If Σ b_i x_i ≤ m − 1 on B then W = Σ_{x,i} (Q* − Σ_j Q_j top_i(x)_j) + (m − 1) − kβ*, with Q* = max_B Σ Q_j x_j and β* the least Σ b_j t_j among cells attaining Q* (checked on 411 semigroups). Carries are maximal here, and I could not prove non-negativity from this formula.
 8. *Drop minimality and look for a negative weighted tile.* None found (§8).
 9. *Hill-climbing on residue quadruples for a tile with Φ < 0, m up to 210.* Uninformative: it finds values far above the exhaustive minima.
 10. *Scan a_i = 2m − b_i separately.* It is the same family as a_i = m + b_i; removed.
+11. *One box per heavy top plus chains elsewhere (FGH inside chain reversal), aiming at "d ≤ e − 1 ⟹ Wilf".* The cells directly above a box in the direction assigned to it lose an unbounded amount, so the interval partitions do not close. The counting Lemma 3 gives the result instead, for m ≥ 3e − 4.
+12. *Sharper constant for few gaps.* On all 93 141 semigroups of genus ≤ 20, W ≥ (e − 1 − d)·m whenever d ≤ e − 1 (least values (e−1−d)·e, attained at m = e). Theorem G gives about half of that for d = 1 and I have no proof of the sharper form.
 
 ## 12. Open points
 
-1. First obstacle: prove Σ_t μ(t)D(t) ≥ (k−1)m(m−1)/2 when most of the μ-mass lies on T. C+ handles every semigroup scanned but is false for general shapes; the missing input is a quantitative statement that lattice tiles are far from simplices (Conjecture Φ or a weaker form).
-2. The Hellus–Rechenauer–Waldi tile question, now with the data of §8.
-3. Lemma S for k ≥ 5 and 2 ≤ L < k (not needed here).
-4. Whether Theorems A–C+ are in the literature in another form.
+1. First obstacle: Conjecture C. Equivalently, show that Σ_{t∈T} (|t| + k)(a·t − c + 1) ≤ m((k+1)m + k − 1)/2, i.e. that the Apéry elements of [c, c + m) cannot both carry most of the chain tops and crowd the top of that window. What is proved: the no-wrap case (C3), the case d(d−1) ≤ (e−2)(m + 1 − 2d) (Lemma 3), the bounds (C1), (C2) from distinct positions, and the non-existence of unit-weight near-simplices (Lemma S). What is missing is a weighted version of Lemma S: a quantitative statement that many nearly-equal-weight cells cannot have pairwise distinct residues packed into a short interval.
+2. Whether W ≥ (e − 1 − d)·m for d ≤ e − 1 (attempt 12).
+3. Conjecture Φ (the weight-free variant) and the Hellus–Rechenauer–Waldi tile question, with the data of §8.
+4. Whether Theorems A–G are in the literature in another form.
 5. No Lean formalization was attempted: no Lean toolchain is installed in this container.
 
 ## 13. Reproduce
@@ -239,20 +284,22 @@ From `math/wilf-conjecture/claude/` (Python 3.10+ standard library; gcc for the 
 
 ```sh
 python3 -B -m unittest -v test_claude               # random comparison with ../wilf.py, the examples of §7, the ray, the equality families
-python3 -B tree_check.py 22                          # Theorem C and Corollary C2 on every semigroup of genus <= 22, from the definitions
+python3 -B tree_check.py 25                          # Theorems C and G on every semigroup of genus <= 25, from the definitions (about 3 minutes)
 python3 -B apery_downset.py 23 47 51 78 80          # invariants and every term of Theorems A, B, C+
 python3 -B check_independent.py                      # two independent checkers vs ../wilf.py
 python3 -B uniform_rays.py check 22 5 6 7 8          # Corollary B2 on the explicit ray, q = 1..8
 python3 -B uniform_rays.py scan 20 30
-python3 -B simplex_tile.py                           # Lemma S, finite part
+python3 -B nowrap_check.py                           # Proposition C3 on random no-wrap semigroups
+python3 -B simplex_tile.py                           # Lemma S, brute-force re-check of three small cases
 python3 -B pseudo_tiles.py classify 3 4 11 2         # tiles with and without Apéry minimality
 python3 -B pseudo_tiles.py extended 4 8 10 0 2
 python3 -B hrw_question.py 3 8 12 3
 python3 -B shape_tiles.py exhaustive 3 4 12 ; python3 -B shape_tiles.py graded 4 8 34
-python3 -B baseline_family.py                        # the repository family through Theorems B, C, C+
-python3 -B coverage_exhaustive.py 20 5 ; python3 -B hard_core.py 20 5
+python3 -B baseline_family.py                        # the repository family through Theorems B, C, C+ and Corollary G1
+python3 -B coverage_exhaustive.py 20 5
 gcc -O2 -o scan_criteria scan_criteria.c
 ./scan_criteria box 6 19 4 0 ; ./scan_criteria box 20 26 5 4 ; ./scan_criteria pos 20 80 1 4
+./scan_criteria pos 20 70 12 4                       # stabilized rays
 ./scan_criteria rnd 100 130 50000 4                  # seeded sample, not exhaustive
 ```
 

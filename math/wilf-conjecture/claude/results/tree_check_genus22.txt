@@ -1,2 +1,5 @@
 genus 1..22: semigroups 258581 (by genus [1, 2, 4, 7, 12, 23, 39, 67, 118, 204, 343, 592, 1001, 1693, 2857, 4806, 8045, 13467, 22464, 37396, 62194, 103246])
-Theorem C and Corollary C2 bounds hold on all; hypothesis of C2 (bullets 1-2) holds on 15485 ; least W 0
+bounds of Theorem C (with its weakenings) and Theorem G hold on all; least W 0
+Theorem C certifies W >= 0 on 258581 ; least value of 2m*(Theorem C bound): 0 for the gap set (1,)
+Theorem G certifies W >= 0: one window on 172143 ; all windows on 173146
+semigroups with at most e-1 gaps in [c-m, c): 251147 ; of these with W >= 0: 251147

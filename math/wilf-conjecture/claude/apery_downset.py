@@ -139,16 +139,39 @@ def stats(m, a, tiebreak="lex"):
     # Theorem B: W = sum delta(top) + anticarries - carries
     assert W == sum_delta_top + anti - carries
     T = [x for x in B if D[x] < m]                # Apéry elements >= c
+    # Lemma 3 (NOTE.md): for U_j = {t : delta(t) <= j}, mu(U_j) <= m + (k-1)|U_j| + C(|U_j|, 2).
+    # Theorem G: W >= sum_j [(k-1)(m - D_j) - C(D_j, 2)]^+ - (k-1)(m-1)/2, D_j = |U_j| = number of
+    # integers in [c-(j+1)m, c-jm) that are not in S.
+    gap_bound2 = -(k - 1) * (m - 1)               # twice the Theorem G bound, all windows
+    window_gaps = []
+    for j in range(max(delta.values()) + 1):
+        U = [t for t in B if delta[t] <= j]
+        Dj = len(U)
+        assert Dj == sum(1 for v in range(c - (j + 1) * m, c - j * m) if v < 0 or v < w[v % m])
+        assert sum(mu[t] for t in U) <= m + (k - 1) * Dj + Dj * (Dj - 1) // 2
+        window_gaps.append(Dj)
+        gap_bound2 += max(0, 2 * (k - 1) * (m - Dj) - Dj * (Dj - 1))
+    d = window_gaps[0]
+    assert d == len(T)
+    # Theorem C: 2mW >= m((k+1)m + k - 1) - 2 * sum_{t in T} mu(t) * (a.t - c + 1),
+    # and its weakening (C2): the same with mu <= lmax + k and the d values a.t - c + 1 distinct in [1, m].
+    sharpC = m * ((k + 1) * m + k - 1) - 2 * sum(mu[t] * (wt[t] - c + 1) for t in T)
+    lmax = max(sum(t) for t in T)
+    boundH = m * ((k + 1) * m + k - 1) - (lmax + k) * d * (2 * m - d + 1)
+    assert 2 * m * W >= sharpC >= boundH
+    assert 2 * W >= gap_bound2 >= (k - 1) * (m + 1 - 2 * d) - d * (d - 1)
     assert all(mu[t] == sum(t) + k for t in T)    # each is maximal in B
-    # Corollary C2 (NOTE.md): every normal form has length <= min(m-1, floor(M / min a)).
+    # Lengths (NOTE.md, (C2)): every normal form has length <= min(m-1, floor(M / min a)).
     lam = min(m - 1, M // min(a))
     assert all(sum(x) <= lam for x in B)
     assert 2 * W >= (k + 1) * m + k - 1 - 2 * len(T) * (lam + k)
-    # Theorem C and its refinement C+ (both proved in NOTE.md), checked on every instance:
+    # Theorem C+ (rearrangement form), checked on every instance:
     assert 2 * m * W >= 2 * m * (k * m - sum(mu[t] for t in T)) - (k - 1) * m * (m - 1) + 2 * rearr
     return dict(m=m, e=k + 1, c=c, g=g, n=n, W=W, q=-(-c // m), rho=(-c) % m,
                 sum_delta_top=sum_delta_top, anticarries=anti, carries=carries,
                 topwindow=len(T), N0=sum(sum(t) + k for t in T), rearrangement=rearr,
+                window_gaps=window_gaps, gap_bound_twice=gap_bound2,
+                sharpC_times_2m=sharpC, boundH_times_2m=boundH,
                 maximal=sum(all(x[:i] + (x[i] + 1,) + x[i+1:] not in B for i in range(k)) for x in B),
                 generators=[m] + list(a))
 

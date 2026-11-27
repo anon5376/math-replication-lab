@@ -36,7 +36,7 @@ class NoteChecks(unittest.TestCase):
         self.assertEqual((s["sum_delta_top"], s["anticarries"], s["carries"]), (86, 9, 0))
 
     def test_random_against_repository_verifier(self):
-        """Lemma 2, Theorems A, B, C, C+, C2 are asserted inside stats();
+        """Lemmas 2 and 3 and Theorems A, B, C, C+, G are asserted inside stats();
         the invariants are compared with ../wilf.py."""
         random.seed(1)
         count, dims = 0, set()
@@ -101,10 +101,52 @@ class NoteChecks(unittest.TestCase):
                 s = stats(m, tuple(q * m + r for r in range(1, m)), "deglex")
                 k = m - 1
                 self.assertEqual(s["W"], 0)
-                # Theorem C+ is an equality here
+                # Theorems C+ and C are equalities here
                 self.assertEqual(2 * m * (k * m - s["N0"]) - (k - 1) * m * (m - 1) + 2 * s["rearrangement"], 0)
+                self.assertEqual(s["sharpC_times_2m"], 0)
         s = stats(7, (30,), "deglex")
-        self.assertEqual((s["W"], s["N0"], s["rearrangement"]), (0, 7, 0))
+        self.assertEqual((s["W"], s["N0"], s["rearrangement"], s["sharpC_times_2m"]), (0, 7, 0, 0))
+
+    def test_theorem_C_example(self):
+        # [25,36,42,43,44]: W = 37, twelve Apéry elements >= c, Theorem C bound 15.56, mean deficit 10.58
+        s = stats(25, (36, 42, 43, 44), "deglex")
+        self.assertEqual((s["W"], s["window_gaps"][0], s["N0"]), (37, 12, 84))
+        self.assertEqual(s["sharpC_times_2m"], 778)          # 778 / 50 = 15.56
+        self.assertLess(s["boundH_times_2m"], 0)             # the closed form (C2) does not reach it
+        self.assertLess(s["gap_bound_twice"], 0)             # nor does Theorem G
+
+
+    def test_theorem_G(self):
+        # explicit ray: one gap in [c-m, c) for q >= 2, so W >= (e-2)(m-1)/2
+        for q in range(2, 6):
+            s = stats(22, tuple(22 * q + r for r in (1, 5, 6, 7)), "deglex")
+            self.assertEqual(s["window_gaps"][0], 1)
+            self.assertGreaterEqual(2 * s["W"], 3 * 21)
+        # the one-window bound is an equality for e = 2
+        s = stats(7, (30,), "deglex")
+        self.assertEqual((s["window_gaps"][0], s["gap_bound_twice"], s["W"]), (1, 0, 0))
+        # control: 6 gaps in [147, 170); the bound is 3*(24-12) - 30 = 6 <= 2W
+        s = stats(23, (47, 51, 78, 80), "deglex")
+        self.assertEqual(s["window_gaps"][0], 6)
+        self.assertGreaterEqual(s["gap_bound_twice"], 3 * (23 + 1 - 12) - 6 * 5)
+
+    def test_difference_packing_count(self):
+        """Lemma S: N(k; p, n) counts {z : |z+| <= p, |z-| <= n} and exceeds C(p+n+k, k)."""
+        from itertools import product
+        from math import comb
+
+        def N(k, p, n):
+            return sum(comb(k, j) * comb(n, j) * comb(p + k - j, k - j) for j in range(k + 1))
+
+        for k, p, n in ((2, 1, 1), (2, 2, 1), (3, 2, 2), (4, 2, 1), (4, 2, 2), (3, 3, 2)):
+            brute = sum(1 for z in product(range(-n, p + 1), repeat=k)
+                        if sum(v for v in z if v > 0) <= p and -sum(v for v in z if v < 0) <= n)
+            self.assertEqual(N(k, p, n), brute)
+        for k in range(2, 13):
+            for p in range(1, 21):
+                for n in range(1, p + 1):
+                    self.assertGreater(N(k, p, n), comb(p + n + k, k))
+        self.assertEqual([N(4, (h + 1) // 2, h // 2) for h in (2, 3, 4, 5)], [21, 55, 131, 255])
 
 
 if __name__ == "__main__":
