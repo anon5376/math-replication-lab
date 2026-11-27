@@ -1,0 +1,14 @@
+k=2 m=3 downsets=3 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=4 downsets=5 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=5 downsets=7 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=6 downsets=11 with_Phi<0=1 of_which_cyclic_tiles=0
+k=2 m=7 downsets=15 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=8 downsets=22 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=9 downsets=30 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=10 downsets=42 with_Phi<0=1 of_which_cyclic_tiles=0
+k=2 m=11 downsets=56 with_Phi<0=2 of_which_cyclic_tiles=0
+k=2 m=12 downsets=77 with_Phi<0=5 of_which_cyclic_tiles=0
+k=2 m=13 downsets=101 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=14 downsets=135 with_Phi<0=0 of_which_cyclic_tiles=0
+k=2 m=15 downsets=176 with_Phi<0=1 of_which_cyclic_tiles=0
+k=2 m=16 downsets=231 with_Phi<0=2 of_which_cyclic_tiles=0

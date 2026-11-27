@@ -1,0 +1,2 @@
+k=4 m=8 weights in [m,2m]^k: {'tiles': 6, 'compatible': 144, 'incompatible': 39222, 'bad_compatible': 0, 'bad_incompatible': 0}  
+k=4 m=9 weights in [m,2m]^k: {'tiles': 84, 'compatible': 5472, 'incompatible': 834528, 'bad_compatible': 0, 'bad_incompatible': 0}  

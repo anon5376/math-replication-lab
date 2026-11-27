@@ -1,0 +1,11 @@
+{
+ "lists": 54099,
+ "frontier": 41799,
+ "type>=5": 26717,
+ "carry-free": 14010,
+ "carry-free and type>=5": 10134,
+ "Theorem C applies": 41799,
+ "Theorem C applies and type>=5": 26717,
+ "Theorem C+ applies": 41799,
+ "negative W": 0
+}

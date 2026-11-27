@@ -1,0 +1,2 @@
+genus 1..22: semigroups 258581 (by genus [1, 2, 4, 7, 12, 23, 39, 67, 118, 204, 343, 592, 1001, 1693, 2857, 4806, 8045, 13467, 22464, 37396, 62194, 103246])
+Theorem C and Corollary C2 bounds hold on all; hypothesis of C2 (bullets 1-2) holds on 15485 ; least W 0

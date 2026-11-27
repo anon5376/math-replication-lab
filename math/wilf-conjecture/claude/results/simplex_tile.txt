@@ -1,0 +1,5 @@
+k=2 L=1 m=3 residue_vectors_tested=9 injective=2
+k=3 L=1 m=4 residue_vectors_tested=64 injective=6
+k=3 L=2 m=10 residue_vectors_tested=1000 injective=0
+k=4 L=2 m=15 residue_vectors_tested=50625 injective=0
+k=4 L=3 m=35 residue_vectors_tested=1500625 injective=0

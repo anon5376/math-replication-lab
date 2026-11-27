@@ -1,0 +1,5 @@
+k=3 m=8 weights in [m,3m]^k: {'tiles': 18, 'compatible': 672, 'incompatible': 87762, 'bad_compatible': 0, 'bad_incompatible': 0}  
+k=3 m=9 weights in [m,3m]^k: {'tiles': 33, 'compatible': 2016, 'incompatible': 224331, 'bad_compatible': 0, 'bad_incompatible': 0}  
+k=3 m=10 weights in [m,3m]^k: {'tiles': 75, 'compatible': 2976, 'incompatible': 691599, 'bad_compatible': 0, 'bad_incompatible': 0}  
+k=3 m=11 weights in [m,3m]^k: {'tiles': 132, 'compatible': 11040, 'incompatible': 1595004, 'bad_compatible': 0, 'bad_incompatible': 0}  
+k=3 m=12 weights in [m,3m]^k: {'tiles': 210, 'compatible': 8640, 'incompatible': 3272610, 'bad_compatible': 0, 'bad_incompatible': 0}  
