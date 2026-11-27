@@ -1,0 +1,3 @@
+brute k=2 m=9: 222 (down-set, residue vector) pairs, search and brute force agree
+brute k=3 m=8: 2928 (down-set, residue vector) pairs, search and brute force agree
+semigroups of genus <= 16 with e >= 2: 11769; W = sum mu*delta + e(theta*) and W >= w on all, for deglex and lex normal forms; least W - w = 0 at [2, 3] (deglex)

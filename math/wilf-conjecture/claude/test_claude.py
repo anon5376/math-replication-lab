@@ -181,6 +181,25 @@ class NoteChecks(unittest.TestCase):
                     self.assertGreater(N(k, p, n), comb(p + n + k, k))
         self.assertEqual([N(4, (h + 1) // 2, h // 2) for h in (2, 3, 4, 5)], [21, 55, 131, 255])
 
+    def test_tile_bound(self):
+        """Section 14: Proposition T and the failing strong inequality."""
+        import itertools
+        from tile_check import tiles, profile
+        # the semigroup where anti-carries < carries: W = 49 < 50 = sum of delta over the chain tops
+        s = stats(14, (22, 23, 48, 49, 57, 61), "deglex")
+        self.assertEqual((s["W"], s["sum_delta_top"], s["anticarries"], s["carries"]), (49, 50, 0, 1))
+        # every tile of size 7: 198 tiles, the bound w is >= 0 and vanishes only for k = 1 and k = 6
+        count = 0
+        for k in range(1, 7):
+            for r in itertools.combinations(range(1, 7), k):
+                for B in tiles(k, 7, r):
+                    lo, w = profile(B, k, 7, r)
+                    self.assertGreaterEqual(lo, 0)          # the strong inequality still holds at this size
+                    self.assertGreaterEqual(w, 0)
+                    self.assertEqual(w == 0, k in (1, 6))
+                    count += 1
+        self.assertEqual(count, 198)
+
 
 if __name__ == "__main__":
     unittest.main()

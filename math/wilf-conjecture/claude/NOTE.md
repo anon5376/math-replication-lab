@@ -21,6 +21,10 @@ Notation throughout: S ≠ ℕ is a numerical semigroup with multiplicity m ≥ 
 | – | Conjecture C: the right side of Theorem C is ≥ 0 for every numerical semigroup (it is 0 on both known W = 0 families) | **conjectured**; proved without wraps (C3) and under G1's condition; true for all 1 179 596 semigroups of genus ≤ 25 and every semigroup scanned in §9 (46.5 million with e = 5, 32.5 million with e from 3 to 9) |
 | – | Conjecture Φ: the right side of C+ with T replaced by all maximal cells is ≥ 0 for every Apéry down-set | **conjectured**; no counterexample in the scans of §9 |
 | – | Wilf-type inequality for weighted down-set *tiles* without Apéry minimality (the closing question of Hellus–Rechenauer–Waldi) | **open**; no counterexample in §8 |
+| T | W = Σ_t μ(t)·δ(t) + e(θ*) and **W ≥ w(B, r)**, a number computed from the tile alone (no generator sizes) | proved (§14) |
+| T1 | Wilf's inequality for every numerical semigroup of multiplicity m ≤ 15, by checking w ≥ 0 on all 7 693 362 tiles of those sizes | proved, computer-assisted (§14); **not new**: the literature has m ≤ 19 |
+| – | Strong tile inequality e(θ) ≥ 0 for all shifts θ (it would give W ≥ Σ δ(top), "anti-carries ≥ carries") | **false**: holds for all 476 792 tiles with m ≤ 13, fails for 3 tiles with m = 14 and 5 with m = 15, and for the semigroup ⟨14, 22, 23, 48, 49, 57, 61⟩ (§14) |
+| – | Conjecture T: w(B, r) ≥ 0 for every tile of every size (implies Wilf) | **conjectured**; true for m ≤ 15 |
 
 What the criteria reach (exact counts in §9): Theorem C certifies W ≥ 0 for every one of the 34 776 387 semigroups with e = 5 in the first three exhaustive scans, for 11 731 460 more on stabilized rays, and for every numerical semigroup of genus ≤ 25. Corollary G1, a closed formula in m, e and the number of gaps in the last window, certifies 34 685 075 of the 34 776 387. Of these semigroups 24 592 298 have type ≥ 5, where the classical criterion t ≤ e − 1 does not apply.
 
@@ -286,6 +290,8 @@ Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box boun
 12. *Sharper constant for few gaps.* On all 90 515 semigroups of genus ≤ 20 with d ≤ e − 1, W ≥ (e − 1 − d)·m (`census_extras.py`; the least values are (e−1−d)·e, attained at m = e). Theorem G gives about half of that for d = 1 and I have no proof of the sharper form.
 13. *A bound that needs no tile.* Since D(top_i(x)) ≥ D(x) mod a_i, Theorem A gives m·W ≥ Σ_{w∈Ap} Σ_{i≥1} ((F + m − w) mod a_i) − (e−2)m(m−1)/2, in terms of the Apéry set and the generators only. It is an equality on both W = 0 families, but its right side is negative for 178 of the 93 141 semigroups of genus ≤ 20, the smallest being ⟨5, 6, 7⟩ (`census_extras.py`). Chains that stop early (ties) make it lose too much; it cannot replace Theorem C.
 
+14. *A weight-free inequality on tiles (§14).* Dropping δ from (A′) leaves a statement about the tile and one shift of its residues. The form for all shifts held on every tile with m ≤ 13 and on 13 500 random semigroups with m ≤ 150, and is false from m = 14 on, including for ⟨14, 22, 23, 48, 49, 57, 61⟩ at its own shift. Adding the term km − N_max (chain tops that are not maximal cells lie at least m below the top) gives the bound w of Proposition T, which is ≥ 0 on all tiles with m ≤ 15.
+
 ## 12. Open points
 
 1. First obstacle: Conjecture C. Equivalently, show that Σ_{t∈T} (|t| + k)(a·t − c + 1) ≤ m((k+1)m + k − 1)/2, i.e. that the Apéry elements of [c, c + m) cannot both carry most of the chain tops and crowd the top of that window. What is proved: the no-wrap case (C3), the case d(d−1) ≤ (e−2)(m + 1 − 2d) (Lemma 3), the bounds (C1), (C2) from distinct positions, and the non-existence of unit-weight near-simplices (Lemma S). What is missing is a weighted version of Lemma S: a quantitative statement that many nearly-equal-weight cells cannot have pairwise distinct residues packed into a short interval.
@@ -293,6 +299,7 @@ Novelty. Lemma 1, Lemma 2 as an inequality, the target identity and the box boun
 3. Conjecture Φ (the weight-free variant) and the Hellus–Rechenauer–Waldi tile question, with the data of §8.
 4. Whether Theorems A–G are in the literature in another form.
 5. No Lean formalization was attempted: no Lean toolchain is installed in this container.
+6. Conjecture T (§14), and how far the finite check of Corollary T1 can be pushed. The number of tiles grows by a factor between 3 and 5 per unit of m (5 951 619 at m = 15). A multiplicity beyond the published range (m ≥ 20, to be confirmed against the literature) would be a new case of Wilf's conjecture; it has not been run.
 
 ## 13. Reproduce
 
@@ -320,6 +327,68 @@ gcc -O2 -o scan_criteria scan_criteria.c
 ./scan_criteria rnd 100 130 50000 4                  # seeded sample, not exhaustive
 gcc -O2 -o scan_general scan_general.c
 ./scan_general ray 3 4 120 40 ; ./scan_general ray 6 7 32 40    # Theorem C for other embedding dimensions (see results/COMMANDS.txt)
+gcc -O2 -o tile_shift tile_shift.c
+for m in $(seq 2 15); do for k in $(seq 1 $((m-1))); do ./tile_shift $m $k; done; done   # §14: every tile of size m (under a minute)
+python3 -B tile_check.py tiles 2 11 ; python3 -B tile_check.py brute 3 8 ; python3 -B tile_check.py semigroups 16   # independent re-check of §14
 ```
 
 Outputs are in `results/`; `results/COMMANDS.txt` maps each file to the command that wrote it. Nothing was submitted or posted anywhere.
+
+## 14. Tiles of a fixed multiplicity: a bound for W that uses no generator sizes
+
+Added after §§1–13; it uses Theorem A only.
+
+**Tiles.** A *tile of size m with k directions* is a pair (B, r): B ⊂ ℕ^k a down-set with |B| = m containing the unit vectors, r_1 < … < r_k integers in [1, m − 1], and ρ(x) = r·x mod m a bijection B → ℤ/m. For a fixed m and k there are finitely many. For a tile put, as before, μ(t) = Σ_{i : t+e_i ∉ B} (t_i + 1), and for a shift θ ∈ {0, …, m − 1}
+
+    e(θ) = [ (k+1)·m(m−1)/2 − Σ_{t∈B} μ(t)·((ρ(t) + θ) mod m) ] / m.
+
+Let N_max be the sum of μ over the maximal cells of B, and
+
+    w(B, r) = (km − N_max) + min { e(m − 1 − ρ(z)) : z a maximal cell of B }.
+
+**Proposition T.** Let S have multiplicity m and minimal generators m < a_1 < … < a_k, let B be its down-set of normal forms for any monomial tie-break, r_i = a_i mod m, and x* the cell with a·x* = max Ap. Then:
+
+1. (B, r) is a tile (after ordering the coordinates by residue);
+2. W = Σ_t μ(t)·δ(t) + e(θ*), with θ* = m − 1 − ρ(x*) and δ(t) = ⌊(a·x* − a·t)/m⌋;
+3. W ≥ (km − N_max) + e(θ*) ≥ w(B, r).
+
+*Proof.* (1) Lemma 1; the a_i are distinct Apéry elements with the single factorization e_i, so the residues are distinct and non-zero and e_i ∈ B. (2) D̄(t) = D(t) mod m = (ρ(x*) − ρ(t)) mod m, and (ρ(t) + θ*) mod m = m − 1 − D̄(t). So Σ_t μ(t)·((ρ(t) + θ*) mod m) = km(m − 1) − Σ_t μ(t)D̄(t) and m·e(θ*) = Σ_t μ(t)D̄(t) − (k−1)m(m−1)/2; now use (A′). (3) If t is not maximal, some t + e_i lies in B, so D(t) ≥ a_i > m and δ(t) ≥ 1; hence Σ_t μ(t)δ(t) ≥ km − N_max. The cell x* is maximal, because a·(x* + e_i) exceeds every Apéry element. ∎
+
+In the language of Theorem B, e(θ*) is (anti-carries) − (carries). For every shift, e(θ) = #{(x, i) : σ_θ(top_i(x)) < σ_θ(x)} − Σ_x (⌊r·x/m⌋ − Σ_i ⌊r_i x_i/m⌋), with σ_θ(x) = (ρ(x) + θ) mod m (checked on the 2 709 tiles with 3 ≤ m ≤ 9). Also e(θ + 1) = e(θ) + μ(t_θ) − k, where t_θ is the cell with ρ = m − 1 − θ.
+
+**Corollary T1 (a finite criterion for one multiplicity).** If w(B, r) ≥ 0 for every tile of size m with k directions, then every numerical semigroup of multiplicity m and embedding dimension k + 1 satisfies Wilf's inequality, and W is at least the least such w.
+
+**Computation.** `tile_shift.c` enumerates every tile of size m with k directions and evaluates e(θ) for all θ and w. For m = 2, …, 15 and every k from 1 to m − 1:
+
+| m | residue sets | tiles | tiles with some e(θ) < 0 | tiles with w < 0 | k for which w = 0 occurs | least w for 2 ≤ k ≤ m − 2 |
+|---|---|---|---|---|---|---|
+| 2 | 1 | 1 | 0 | 0 | 1 | – |
+| 3 | 3 | 3 | 0 | 0 | 1, 2 | – |
+| 4 | 7 | 7 | 0 | 0 | 1, 3 | 1 |
+| 5 | 15 | 23 | 0 | 0 | 1, 4 | 2 |
+| 6 | 31 | 50 | 0 | 0 | 1, 5 | 3 |
+| 7 | 63 | 198 | 0 | 0 | 1, 6 | 2 |
+| 8 | 127 | 518 | 0 | 0 | 1, 7 | 4 |
+| 9 | 255 | 1 910 | 0 | 0 | 1, 8 | 2 |
+| 10 | 511 | 5 799 | 0 | 0 | 1, 9 | 4 |
+| 11 | 1 023 | 25 110 | 0 | 0 | 1, 10 | 6 |
+| 12 | 2 047 | 77 032 | 0 | 0 | 1, 11 | 6 |
+| 13 | 4 095 | 366 141 | 0 | 0 | 1, 12 | 4 |
+| 14 | 8 191 | 1 264 951 | 3 | 0 | 1, 13 | 7 |
+| 15 | 16 383 | 5 951 619 | 5 | 0 | 1, 14 | 9 |
+
+In total 32 752 residue sets and 7 693 362 tiles; w ≥ 0 on every one. By Corollary T1:
+
+- **Wilf's inequality holds for every numerical semigroup of multiplicity m ≤ 15.** This is a computer-assisted proof and it is **not a new result**: the literature covers m ≤ 19 (§10). What is different is the method: a finite list of tiles per multiplicity, no Kunz cone, no generator sizes.
+- For m ≤ 15, W ≥ 1 for every numerical semigroup with 3 ≤ e ≤ m − 1 (the bound w vanishes only for k = 1 and k = m − 1), and more precisely W ≥ the last column.
+
+Checks. `tile_check.py` shares no code with the C program: a different search, and e(θ), w evaluated from the definitions. Its search agrees with a brute-force list of all down-sets (k = 2, m = 9: 222 pairs; k = 3, m = 8: 2 928 pairs); its per-(m, k) lines for m = 2..11 (55 lines: residue sets, tiles, failures, least e, least w) are identical to those of `tile_shift.c`; and on all 11 769 numerical semigroups of genus ≤ 16 with e ≥ 2 it confirms W = Σ μδ + e(θ*) and W ≥ w for two tie-breaks. For m = 12..15 the tile counts rest on the C program alone.
+
+**A stronger statement that fails.** *Strong tile inequality:* e(θ) ≥ 0 for every tile and every shift θ. Equivalent forms: Σ_{x∈B} Σ_i σ(top_i(x)) ≤ (k+1)·Σ_{x∈B} σ(x) for every cyclic shift σ of the residue labelling (a sub-linear version of Lemma 2); or anti-carries ≥ carries for every shift. With Proposition T it would give W ≥ Σ_{x,i} δ(top_i(x)) ≥ 0 for all semigroups, with no weights at all. It holds for all 476 792 tiles with m ≤ 13 and is an equality (min_θ e = 0) for many of them, and it is **false**: three tiles with m = 14 and five with m = 15 have min_θ e = −1 (listed in `results/tile_shift_m2-15_all_k.txt`). The failure occurs for a real semigroup at its own shift:
+
+    S = ⟨14, 22, 23, 48, 49, 57, 61⟩:  c = 56, g = 41, W = 49,  Σ_{x,i} δ(top_i(x)) = 50,  anti-carries 0,  carries 1.
+
+Its down-set is the triangle {i·e_1 + j·e_2 : i + j ≤ 3} on the generators 22, 23 (residues 8, 9: the four cells of degree 3 have the consecutive residues 10, 11, 12, 13) together with four further unit vectors. So W ≥ Σ δ(top) is false in general.
+
+**Conjecture T.** w(B, r) ≥ 0 for every tile of every size. By Proposition T it implies Wilf's conjecture; it is a statement about finitely many objects for each m. Proved for m ≤ 15 by the table. It is neither weaker nor stronger than Conjecture C in an obvious way: w credits a full m only to chain tops that are not maximal cells (plus their residue deficit), while Theorem C credits m to every chain top outside the last window but needs the generator sizes to know that window.
+

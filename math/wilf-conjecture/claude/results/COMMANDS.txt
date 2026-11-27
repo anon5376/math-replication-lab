@@ -36,3 +36,6 @@ uniform_rays_scan_m20-30.jsonl            python3 -B uniform_rays.py scan 20 30
 
 scan_criteria is built with: gcc -O2 -o scan_criteria scan_criteria.c ; scan_general with: gcc -O2 -o scan_general scan_general.c
 The scanner asserts Theorem A and the bounds of Theorems C, C+ and G (one window) on every semigroup it counts and exits on a violation.
+tile_shift_m2-15_all_k.txt                for m in $(seq 2 15); do for k in $(seq 1 $((m-1))); do ./tile_shift $m $k; done; done
+tile_check_tiles_m2-11.txt                python3 -B tile_check.py tiles 2 11
+tile_check_brute_and_semigroups.txt       python3 -B tile_check.py brute 2 9 ; python3 -B tile_check.py brute 3 8 ; python3 -B tile_check.py semigroups 16
